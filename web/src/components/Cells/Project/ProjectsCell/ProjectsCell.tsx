@@ -28,7 +28,7 @@ export const Failure = ({ error }: CellFailureProps) => (
 export const Success = ({ projects }: CellSuccessProps<ProjectsQuery>) => {
   return (
     <>
-      <div className="bg-white shadow overflow-hidden sm:rounded-md">
+      <div className="overflow-hidden border border-gray-300 bg-white sm:rounded-md">
         <ul className="divide-y divide-gray-200">
           {projects.map((project) => (
             <li key={project.id}>
@@ -36,11 +36,11 @@ export const Success = ({ projects }: CellSuccessProps<ProjectsQuery>) => {
                 to={routes.project({ id: project.id })}
                 className="block hover:bg-gray-50"
               >
-                <div className="px-4 py-4 flex items-center sm:px-6">
+                <div className="flex items-center px-4 py-4 sm:px-6">
                   <div className="min-w-0 flex-1 sm:flex sm:items-center sm:justify-between">
                     <div className="truncate">
                       <div className="flex text-base">
-                        <p className="font-semibold text-indigo-600 truncate">
+                        <p className="truncate font-semibold text-indigo-600">
                           {project.title}
                         </p>
                       </div>

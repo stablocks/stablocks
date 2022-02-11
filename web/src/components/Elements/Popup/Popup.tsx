@@ -33,7 +33,7 @@ const Popup = ({
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog
           as="div"
-          className="fixed inset-0 z-50 overflow-y-auto"
+          className="fixed inset-0 z-[100] overflow-y-auto"
           onClose={closePopup}
         >
           <div className="min-h-screen px-4 text-center">
@@ -65,7 +65,7 @@ const Popup = ({
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="relative inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-gray-100 shadow-xl rounded-2xl">
+              <div className="relative my-8 inline-block w-full max-w-md transform overflow-hidden rounded-2xl bg-gray-100 p-6 text-left align-middle transition-all">
                 <Dialog.Title
                   as="h3"
                   className={`${
@@ -77,7 +77,7 @@ const Popup = ({
                 {(closeButton || !buttons) && (
                   <button
                     onClick={closePopup}
-                    className="absolute top-4 right-4 p-2 rounded-full border border-gray-300 shadow-sm bg-white hover:bg-gray-50"
+                    className="absolute top-4 right-4 rounded-full border border-gray-300 bg-white p-2 hover:bg-gray-50"
                   >
                     <XIcon className="h-4  w-4" />
                   </button>
@@ -94,7 +94,7 @@ const Popup = ({
                 </div>
 
                 {buttons && (
-                  <div className="mt-4 text-right space-x-2">
+                  <div className="mt-4 space-x-2 text-right">
                     <MenuButtonGroup buttons={buttons} />
                   </div>
                 )}

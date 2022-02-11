@@ -24,10 +24,7 @@ const MenuButtonGroup = ({ buttons }: MenuButtonGroupProps) => {
       {buttons.map(
         (button, i) =>
           (button.roles ? hasRole(button.roles) : true) && (
-            <span
-              key={i}
-              className="relative z-0 inline-flex shadow-sm rounded-md"
-            >
+            <span key={i} className="relative z-0 inline-flex rounded-md">
               <button
                 onClick={button.onClick}
                 type="button"
@@ -37,19 +34,19 @@ const MenuButtonGroup = ({ buttons }: MenuButtonGroupProps) => {
                     : 'border-gray-300 bg-white text-gray-700 hover:bg-gray-50 focus:border-indigo-500'
                 } ${
                   button.children ? 'rounded-l-md' : 'rounded-md'
-                } relative inline-flex items-center justify-center px-4 py-2 border text-sm font-medium space-x-1 w-full focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500`}
+                } relative inline-flex w-full items-center justify-center space-x-1 border px-4 py-2 text-sm font-medium focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500`}
               >
                 {button.icon && <button.icon className="h-4 w-4" />}
                 <span>{button.label}</span>
               </button>
               {button.children && button.children.length > 0 && (
-                <Menu as="span" className="-ml-px relative block">
+                <Menu as="span" className="relative -ml-px block">
                   <Menu.Button
                     className={`${
                       button.main
                         ? 'btn-primary border-l-indigo-400'
                         : 'border-gray-300 bg-white text-gray-500 hover:bg-gray-50'
-                    } relative inline-flex items-center px-2 py-2 border rounded-r-md text-sm font-medium focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500`}
+                    } relative inline-flex items-center rounded-r-md border px-2 py-2 text-sm font-medium focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500`}
                   >
                     <span className="sr-only">Open options</span>
                     <ChevronDownIcon className="h-5 w-5" aria-hidden="true" />
@@ -63,7 +60,7 @@ const MenuButtonGroup = ({ buttons }: MenuButtonGroupProps) => {
                     leaveFrom="transform opacity-100 scale-100"
                     leaveTo="transform opacity-0 scale-95"
                   >
-                    <Menu.Items className="origin-top-right absolute right-0 mt-2 -mr-1 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <Menu.Items className="absolute right-0 mt-2 -mr-1 w-56 origin-top-right rounded-md border border-gray-300 bg-white  focus:outline-none">
                       <div className="py-1">
                         {button.children.map((item, i) => (
                           <Menu.Item key={i}>
@@ -74,7 +71,7 @@ const MenuButtonGroup = ({ buttons }: MenuButtonGroupProps) => {
                                   active
                                     ? 'bg-gray-100 text-gray-900'
                                     : 'text-gray-700'
-                                } block px-4 py-2 text-sm w-full`}
+                                } block w-full px-4 py-2 text-sm`}
                               >
                                 {item.label}
                               </button>

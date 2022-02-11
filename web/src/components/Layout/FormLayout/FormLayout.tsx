@@ -40,10 +40,10 @@ export const FormSection = ({
   children,
 }: FormSectionProps) => {
   return (
-    <div>
+    <div className="pt-8">
       {title && (
-        <div>
-          <h3 className="text-lg leading-6 font-medium text-gray-900">
+        <div className="mb-6">
+          <h3 className="text-lg font-medium leading-6 text-gray-900">
             {title}
           </h3>
           {description && (
@@ -54,7 +54,7 @@ export const FormSection = ({
       <div
         className={`${
           !singleLine ? 'sm:grid-cols-6 ' : ''
-        }mt-6 grid grid-cols-1 gap-y-6 gap-x-4`}
+        }grid grid-cols-1 gap-y-6 gap-x-4`}
       >
         {children}
       </div>
@@ -85,7 +85,7 @@ const FormLayout = ({
         <div className="flex justify-end">
           <Submit
             disabled={loading}
-            className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
           >
             Save
           </Submit>

@@ -8,15 +8,16 @@
     ]
   },
   "devDependencies": {
-    "@redwoodjs/core": "^0.42.0"
+    "@redwoodjs/core": "^0.44.1"
   },
   "scripts": {
     "postgres:up": "docker-compose up -d",
     "postgres:down": "docker-compose down",
-    "postgres-test:up": "docker-compose -f docker-compose-test.yml up -d",
-    "postgres-test:down": "docker-compose -f docker-compose-test.yml down",
     "dev": "yarn postgres:up && yarn rw dev",
-    "test": "yarn postgres-test:down && yarn postgres-test:up && yarn rw test"
+    "test": "yarn postgres:down && yarn postgres:up && yarn rw test",
+    "migrate": "yarn rw prisma migrate dev",
+    "cleanup": "rm -rf {node_modules}; rm -rf packages/*/{node_modules,dist,build}",
+    "regenerate-lock": "npm run cleanup && rm yarn.lock && yarn install"
   },
   "eslintConfig": {
     "extends": "@redwoodjs/eslint-config",

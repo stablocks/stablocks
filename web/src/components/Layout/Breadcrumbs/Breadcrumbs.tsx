@@ -23,7 +23,7 @@ const Breadcrumbs = ({ breadcrumbs, currentCrumbLabel }: BreadcrumbsProps) => {
           className="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700"
         >
           <ChevronLeftIcon
-            className="flex-shrink-0 -ml-1 mr-1 h-5 w-5 text-gray-400"
+            className="-ml-1 mr-1 h-5 w-5 flex-shrink-0 text-gray-400"
             aria-hidden="true"
           />
           Back
@@ -31,12 +31,12 @@ const Breadcrumbs = ({ breadcrumbs, currentCrumbLabel }: BreadcrumbsProps) => {
       </nav>
       {pathname !== '/' && (
         <nav className="hidden sm:flex" aria-label="Breadcrumb">
-          <ol className="flex items-center space-x-4">
+          <ol className="flex flex-wrap items-center space-x-4">
             <li>
               <div>
                 <Link to="/" className="text-gray-400 hover:text-gray-500">
                   <HomeIcon
-                    className="flex-shrink-0 h-5 w-5"
+                    className="h-5 w-5 flex-shrink-0"
                     aria-hidden="true"
                   />
                   <span className="sr-only">Home</span>
@@ -47,12 +47,12 @@ const Breadcrumbs = ({ breadcrumbs, currentCrumbLabel }: BreadcrumbsProps) => {
               <li key={i}>
                 <div className="flex items-center">
                   <ChevronRightIcon
-                    className="mr-4 flex-shrink-0 h-5 w-5 text-gray-400"
+                    className="mr-4 h-5 w-5 flex-shrink-0 text-gray-400"
                     aria-hidden="true"
                   />
                   <Link
                     to={breadcrumb.to}
-                    className="text-sm font-medium rounded-sm text-gray-500 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="rounded-sm text-sm font-medium text-gray-500 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   >
                     {breadcrumb.title}
                   </Link>
@@ -63,7 +63,7 @@ const Breadcrumbs = ({ breadcrumbs, currentCrumbLabel }: BreadcrumbsProps) => {
             <li>
               <div className="flex items-center">
                 <ChevronRightIcon
-                  className="mr-4 flex-shrink-0 h-5 w-5 text-gray-400"
+                  className="mr-4 h-5 w-5 flex-shrink-0 text-gray-400"
                   aria-hidden="true"
                 />
                 <span
