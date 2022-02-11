@@ -9,31 +9,33 @@ generator client {
 }
 
 model Organization {
-  id           Int      @id @default(autoincrement())
+  id               String   @id @default(cuid())
   // General information
-  name         String
-  website      String?
-  logo         String?
-  email        String?
-  address      String?
-  addressTwo   String?
-  city         String?
-  state        String?
-  zipCode      Int?
+  name             String
+  website          String?
+  logo             String?
+  email            String?
+  address          String?
+  addressTwo       String?
+  city             String?
+  state            String?
+  zipCode          Int?
   // Module toggles
-  recruiting   Boolean  @default(true)
-  crm          Boolean  @default(true)
-  marketing    Boolean  @default(true)
-  sales        Boolean  @default(true)
-  finance      Boolean  @default(true)
-  hr           Boolean  @default(true)
-  helpdesk     Boolean  @default(true)
-  projects     Boolean  @default(true)
+  recruiting       Boolean  @default(true)
+  crm              Boolean  @default(true)
+  marketing        Boolean  @default(true)
+  sales            Boolean  @default(true)
+  finance          Boolean  @default(true)
+  hr               Boolean  @default(true)
+  helpdesk         Boolean  @default(true)
+  projects         Boolean  @default(true)
   // Chat settings
-  chatGreeting String?
+  chatGreeting     String?
+  // Integrations
+  plaidAccessToken String?
   // Times
-  updatedAt    DateTime @updatedAt
-  createdAt    DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  createdAt        DateTime @default(now())
 }
 
 model User {

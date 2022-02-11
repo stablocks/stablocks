@@ -1,18 +1,26 @@
-import { Link, routes } from '@redwoodjs/router'
+import { useState } from 'react'
 import PageTitle from 'src/components/Layout/PageTitle'
+import PlaidLinkCell from 'src/components/Cells/Plaid/PlaidLinkCell'
+import { RiAddLine } from 'react-icons/ri'
 
 const FinancePage = () => {
+  const [addAccount, setAddAccount] = useState(false)
   return (
     <>
-      <PageTitle title="Finance" />
+      <PageTitle
+        title="Finance"
+        buttons={[
+          {
+            label: 'Add Account',
+            onClick: () => setAddAccount(true),
+            roles: ['admin', 'financeAdmin'],
+            main: true,
+            icon: RiAddLine,
+          },
+        ]}
+      />
 
-      <p>
-        Find me in <code>./web/src/pages/FinancePage/FinancePage.tsx</code>
-      </p>
-      <p>
-        My default route is named <code>finance</code>, link to me with `
-        <Link to={routes.finance()}>Finance</Link>`
-      </p>
+      {addAccount && <PlaidLinkCell setIsOpen={setAddAccount} />}
     </>
   )
 }
