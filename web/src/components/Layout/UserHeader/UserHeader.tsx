@@ -56,7 +56,7 @@ const UserHeader = ({
                   alt={name}
                 />
                 <span
-                  className="absolute inset-0 shadow-inner rounded-full"
+                  className="absolute inset-0 rounded-full shadow-inner"
                   aria-hidden="true"
                 />
               </div>
@@ -86,7 +86,7 @@ const UserHeader = ({
           </div>
         </div>
         {buttons && buttons.length && (
-          <div className="mt-6 flex flex-col-reverse justify-stretch space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-x-reverse sm:space-y-0 sm:space-x-2 md:mt-0 md:flex-row md:space-x-2">
+          <div className="justify-stretch mt-6 flex flex-col-reverse space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-y-0 sm:space-x-2 sm:space-x-reverse md:mt-0 md:flex-row md:space-x-2">
             <MenuButtonGroup buttons={buttons} />
           </div>
         )}

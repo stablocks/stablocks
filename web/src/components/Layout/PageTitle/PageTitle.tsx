@@ -31,9 +31,14 @@ const PageTitle = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  const metaTitle =
+    breadcrumbs?.length > 0
+      ? `${title} | ${breadcrumbs[breadcrumbs.length - 1].title}`
+      : title
+
   return (
     <>
-      <MetaTags title={title} />
+      <MetaTags title={metaTitle} />
 
       <div className="page-title mb-12">
         <Breadcrumbs
@@ -42,13 +47,13 @@ const PageTitle = ({
         />
 
         <div className="mt-2 md:flex md:items-center md:justify-between">
-          <div className="flex-1 min-w-0">
-            <h1 className="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
+          <div className="min-w-0 flex-1">
+            <h1 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl">
               {title}
             </h1>
           </div>
           {buttons && buttons.length && (
-            <div className="mt-4 flex-shrink-0 flex space-x-2 md:mt-0 md:ml-4">
+            <div className="mt-4 flex flex-shrink-0 space-x-2 md:mt-0 md:ml-4">
               <MenuButtonGroup buttons={buttons} />
             </div>
           )}

@@ -23,10 +23,6 @@ const timeTag = (datetime) => {
   )
 }
 
-const checkboxInputTag = (checked) => {
-  return <input type="checkbox" checked={checked} disabled />
-}
-
 const User = ({ user }) => {
   const [editUserOpen, setEditUserOpen] = useState(false)
 
@@ -68,7 +64,7 @@ const User = ({ user }) => {
           {
             label: 'Edit',
             icon: PencilAltIcon,
-            onClick: () => setEditUserOpen(true),
+            onClick: () => navigate(routes.editEmployee({ id: user.id })),
             roles: ['admin'],
           },
           {
@@ -92,14 +88,14 @@ const User = ({ user }) => {
         <EditUserCell id={user.id} />
       </Popup>
 
-      <div className="mt-8 mx-auto grid grid-cols-1 gap-6 lg:grid-flow-col-dense lg:grid-cols-3">
-        <div className="space-y-6 lg:col-start-1 lg:col-span-2">
+      <div className="mx-auto mt-8 grid grid-cols-1 gap-6 lg:grid-flow-col-dense lg:grid-cols-3">
+        <div className="space-y-6 lg:col-span-2 lg:col-start-1">
           <section aria-labelledby="applicant-information-title">
-            <div className="bg-white shadow sm:rounded-lg">
+            <div className="rounded-lg border border-gray-300 bg-white">
               <div className="px-4 py-5 sm:px-6">
                 <h2
                   id="applicant-information-title"
-                  className="text-lg leading-6 font-medium text-gray-900"
+                  className="text-lg font-medium leading-6 text-gray-900"
                 >
                   Information
                 </h2>
@@ -112,9 +108,9 @@ const User = ({ user }) => {
         </div>
         <section
           aria-labelledby="timeline-title"
-          className="lg:col-start-3 lg:col-span-1"
+          className="lg:col-span-1 lg:col-start-3"
         >
-          <div className="bg-white px-4 py-5 shadow sm:rounded-lg sm:px-6">
+          <div className="rounded-lg border border-gray-300 bg-white px-4 py-5 sm:px-6">
             <h2
               id="timeline-title"
               className="text-lg font-medium text-gray-900"
@@ -126,10 +122,10 @@ const User = ({ user }) => {
             <div className="mt-6 flow-root">
               <ul className="-mb-8"></ul>
             </div>
-            <div className="mt-6 flex flex-col justify-stretch">
+            <div className="justify-stretch mt-6 flex flex-col">
               <button
                 type="button"
-                className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                className="inline-flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
               >
                 Advance to offer
               </button>

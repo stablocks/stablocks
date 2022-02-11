@@ -34,8 +34,8 @@ const OrganizationForm = (props) => {
           label="Website"
           value={props.organization?.website}
         >
-          <div className="prepend-field flex rounded-md shadow-sm">
-            <span className="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
+          <div className="prepend-field flex rounded-md">
+            <span className="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-sm text-gray-500">
               https://
             </span>
             <TextField

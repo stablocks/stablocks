@@ -23,10 +23,10 @@ const OnboardingPage = () => {
   return (
     <>
       <MetaTags title="Onboarding" />
-      <div className="flex justify-center h-full py-12 md:py-16 px-4 md:px-12">
-        <div className="max-w-5xl w-full mx-auto">
-          <div className="pb-5 mb-5 border-b border-gray-200">
-            <h3 className="text-3xl leading-6 font-bold text-gray-900">
+      <main className="flex h-full justify-center py-12 px-4 md:py-16 md:px-12">
+        <div className="mx-auto w-full max-w-5xl">
+          <div className="mb-5 border-b border-gray-200 pb-5">
+            <h3 className="text-3xl font-bold leading-6 text-gray-900">
               Stablocks Onboarding
             </h3>
           </div>
@@ -45,9 +45,9 @@ const OnboardingPage = () => {
                   )}
                 </div>
               </div>
-              <div className="mt-5 md:mt-0 md:col-span-2">
+              <div className="mt-5 md:col-span-2 md:mt-0">
                 {!organization ? (
-                  <div className="shadow rounded-md overflow-hidden">
+                  <div className="overflow-hidden rounded-md border border-gray-300">
                     <NewOrganization />
                   </div>
                 ) : (
@@ -72,7 +72,7 @@ const OnboardingPage = () => {
                   <h3 className="text-lg font-medium leading-6 text-gray-900">
                     Personal Information
                   </h3>
-                  {organization && !userCount && (
+                  {organization && userCount === 0 && (
                     <p className="mt-1 text-sm text-gray-600">
                       You will be setup as the initial admin of the
                       organization.
@@ -80,14 +80,14 @@ const OnboardingPage = () => {
                   )}
                 </div>
               </div>
-              <div className="mt-5 md:mt-0 md:col-span-2">
-                {organization && !userCount ? (
-                  <div className="shadow rounded-md overflow-hidden">
+              <div className="mt-5 md:col-span-2 md:mt-0">
+                {organization && userCount === 0 ? (
+                  <div className="overflow-hidden rounded-md border border-gray-300">
                     <NewFirstUser />
                   </div>
                 ) : (
                   <div className="flex px-4 sm:px-0 md:justify-end">
-                    {userCount && (
+                    {userCount > 0 && (
                       <BadgeCheckIcon className="h-8 w-8 text-green-600" />
                     )}
                   </div>
@@ -102,22 +102,22 @@ const OnboardingPage = () => {
             </div>
           </div>
 
-          {organization && userCount && (
+          {organization && userCount > 0 && (
             <div className="flex justify-end">
               <Link
                 to={routes.login()}
-                className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
               >
                 Login
                 <ArrowNarrowRightIcon
-                  className="h-5 w-5 ml-2"
+                  className="ml-2 h-5 w-5"
                   aria-hidden="true"
                 />
               </Link>
             </div>
           )}
         </div>
-      </div>
+      </main>
     </>
   )
 }

@@ -1,9 +1,0 @@
-version: '3.7'
-services:
-  db-test:
-    image: postgres
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-    ports:
-      - 5434:5432

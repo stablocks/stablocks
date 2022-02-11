@@ -6,10 +6,11 @@ import { toast } from '@redwoodjs/web/toast'
 import { navigate, routes } from '@redwoodjs/router'
 
 import UserForm from 'src/components/Essentials/User/UserForm'
+import Loader from 'src/components/Elements/Loader'
 
 export const QUERY = gql`
   query EditUserById($id: String!) {
-    user: user(id: $id) {
+    user(id: $id) {
       id
       firstName
       middleName
@@ -44,7 +45,7 @@ const UPDATE_USER_MUTATION = gql`
   }
 `
 
-export const Loading = () => <div>Loading...</div>
+export const Loading = () => <Loader />
 
 export const Failure = ({ error }: CellFailureProps) => (
   <div className="rw-cell-error">{error.message}</div>

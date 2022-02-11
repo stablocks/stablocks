@@ -42,9 +42,9 @@ const DescriptionListItem = ({
   }
 
   return (
-    <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+    <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
       <dt className="text-sm font-medium text-gray-500">{field.label}</dt>
-      <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+      <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
         {!editing ? (
           <div className="flex items-center justify-between">
             <span>
@@ -78,8 +78,8 @@ const DescriptionListItem = ({
               <ConditionalWrapper
                 condition={field?.prepend ? true : false}
                 wrapper={(children) => (
-                  <div className="prepend-field flex rounded-md shadow-sm">
-                    <span className="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-600 text-sm">
+                  <div className="prepend-field flex rounded-md">
+                    <span className="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-sm text-gray-600">
                       {field?.prepend}
                     </span>
                     {children}
