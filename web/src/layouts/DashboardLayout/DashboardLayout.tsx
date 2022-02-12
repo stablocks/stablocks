@@ -2,8 +2,8 @@ import { Fragment, useContext, useEffect, useState } from 'react'
 import { useAuth } from '@redwoodjs/auth'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import {
-  BellIcon,
   MenuAlt2Icon,
+  SparklesIcon,
   UserCircleIcon,
   XIcon,
 } from '@heroicons/react/outline'
@@ -18,7 +18,10 @@ import {
 import { AppContext } from 'src/components/Providers/AppProviderCell'
 import Navigation from 'src/components/Layout/Navigation'
 import Popup from 'src/components/Elements/Popup'
+import SearchPopup from 'src/components/Layout/SearchPopup'
+import ReleasesCell from 'src/components/Cells/ReleasesCell'
 import Logo from 'src/lib/logo.svg'
+import config from 'src/../package.json'
 
 import '@reach/skip-nav/styles.css'
 
@@ -33,10 +36,13 @@ type DashboardLayoutProps = {
 const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   const { pathname } = useLocation()
   const { currentUser, logOut, hasRole } = useAuth()
-  const { search } = useContext(AppContext)
+  const { organization, search } = useContext(AppContext)
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [releasesOpen, setReleasesOpen] = useState(false)
 
   const [logoutOpen, setLogoutOpen] = useState(false)
+
+  const [searchIsOpen, setSearchIsOpen] = useState(false)
 
   const userNavigation = [
     {
@@ -159,7 +165,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
           </div>
         </div>
 
-        <div className="flex min-h-full flex-col md:pl-64">
+        <div className="flex min-h-screen w-full flex-col md:pl-64">
           <div className="sticky top-0 z-[70] flex h-16 flex-shrink-0 border-b border-gray-300 bg-white">
             <button
               type="button"
@@ -170,36 +176,40 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
               <MenuAlt2Icon className="h-6 w-6" aria-hidden="true" />
             </button>
             <div className="flex flex-1 justify-between px-4">
-              <div className="flex flex-1">
+              <div className="relative flex flex-1">
                 {search && (
-                  <form className="flex w-full md:ml-0" action="#" method="GET">
-                    <label htmlFor="search-field" className="sr-only">
-                      Search {search.label}
-                    </label>
-                    <div className="relative w-full text-gray-400 focus-within:text-gray-600">
-                      <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center">
-                        <SearchIcon className="h-5 w-5" aria-hidden="true" />
-                      </div>
-                      <input
-                        id="search-field"
-                        className="block h-full w-full border-transparent py-2 pl-8 pr-3 text-gray-900 placeholder-gray-500 focus:border-transparent focus:placeholder-gray-400 focus:outline-none focus:ring-0 sm:text-sm"
-                        placeholder={`Search ${search.label}`}
-                        type="search"
-                        name="search"
-                        autoComplete="off"
-                      />
-                    </div>
-                  </form>
+                  <>
+                    <button
+                      className="flex w-full items-center text-gray-400 md:ml-0"
+                      onClick={() => setSearchIsOpen(true)}
+                    >
+                      <SearchIcon className="h-5 w-5" aria-hidden="true" />
+                      <span className="py-2 px-3 text-sm text-gray-500">{`Search ${search.label}`}</span>
+                    </button>
+                    <SearchPopup
+                      isOpen={searchIsOpen}
+                      setIsOpen={setSearchIsOpen}
+                    />
+                  </>
                 )}
               </div>
               <div className="ml-4 flex items-center md:ml-6">
                 <button
                   type="button"
+                  onClick={() => setReleasesOpen(true)}
                   className="rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
+                  <span className="sr-only">View updates</span>
+                  <SparklesIcon className="h-6 w-6" aria-hidden="true" />
                 </button>
+
+                <Popup
+                  isOpen={releasesOpen}
+                  setIsOpen={setReleasesOpen}
+                  title="Latest updates"
+                >
+                  <ReleasesCell />
+                </Popup>
 
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
@@ -282,8 +292,22 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
             </div>
           </div>
 
-          <main id="main" className="min-h-full">
-            <div className="min-h-full p-6 pb-20 md:px-12">{children}</div>
+          <main id="main" className="flex w-full flex-1 flex-col">
+            <div className="w-full flex-1 p-6 pb-20 md:px-12">{children}</div>
+            <footer className="py-1">
+              <p className="text-center text-xs text-gray-600">
+                Powered by{' '}
+                <a
+                  href="https://stablocks.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline hover:no-underline"
+                >
+                  Stablocks
+                </a>{' '}
+                for {organization.name} | v{config.version}
+              </p>
+            </footer>
           </main>
         </div>
       </div>

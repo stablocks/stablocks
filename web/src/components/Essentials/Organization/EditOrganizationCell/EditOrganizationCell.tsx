@@ -24,7 +24,7 @@ export const QUERY = gql`
   }
 `
 const UPDATE_ORGANIZATION_MUTATION = gql`
-  mutation UpdateOrganizationMutation($input: UpdateOrganizationInput!) {
+  mutation UpdateOrganizationTwoMutation($input: UpdateOrganizationInput!) {
     updateOrganization(input: $input) {
       id
       name

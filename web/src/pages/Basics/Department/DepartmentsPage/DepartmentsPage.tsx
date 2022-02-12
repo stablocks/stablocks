@@ -9,7 +9,6 @@ const DepartmentsPage = () => {
         search={{ label: 'departments', type: 'department' }}
       />
 
-      <h1>DepartmentsPage</h1>
       <p>
         Find me in{' '}
         <code>./web/src/pages/DepartmentsPage/DepartmentsPage.tsx</code>
