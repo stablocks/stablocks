@@ -11,7 +11,7 @@ button {
 }
 
 main,
-#headlessui-portal-root,
+#headlessui-portal-root form:not(.search-form),
 #chat-container {
   label {
     @apply block mb-1 text-sm font-medium text-gray-700;
