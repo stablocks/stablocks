@@ -10,6 +10,7 @@ export const QUERY = gql`
     appProvider {
       organization {
         name
+        website
       }
       userCount
     }
@@ -28,6 +29,7 @@ export interface SearchItem {
 interface AppContextValue {
   organization?: {
     name: string
+    website?: string
   }
   userCount: number
   search?: SearchItem
