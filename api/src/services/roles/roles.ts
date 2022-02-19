@@ -2,14 +2,13 @@ import type { Prisma } from '@prisma/client'
 import type { ResolverArgs } from '@redwoodjs/graphql-server'
 
 import { db } from 'src/lib/db'
+import { requireAuth } from 'src/lib/auth'
 
-export const roles = () => {
-  return db.role.findMany()
-}
+export const role = ({ userId }: Prisma.RoleWhereUniqueInput) => {
+  requireAuth({ roles: ['admin'] })
 
-export const role = ({ id }: Prisma.RoleWhereUniqueInput) => {
   return db.role.findUnique({
-    where: { id },
+    where: { userId },
   })
 }
 
@@ -18,6 +17,8 @@ interface CreateRoleArgs {
 }
 
 export const createRole = ({ input }: CreateRoleArgs) => {
+  requireAuth({ roles: ['admin'] })
+
   return db.role.create({
     data: input,
   })
@@ -28,6 +29,8 @@ interface UpdateRoleArgs extends Prisma.RoleWhereUniqueInput {
 }
 
 export const updateRole = ({ id, input }: UpdateRoleArgs) => {
+  requireAuth({ roles: ['admin'] })
+
   return db.role.update({
     data: input,
     where: { id },

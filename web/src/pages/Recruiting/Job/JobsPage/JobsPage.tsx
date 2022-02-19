@@ -1,22 +1,32 @@
-import { Link, routes } from '@redwoodjs/router'
-import PageTitle from 'src/components/Layout/PageTitle'
+import PageTitle from 'src/ui/PageTitle'
+import Popup from 'src/components/Elements/Popup'
+import NewJob from 'src/components/Recruiting/Job/NewJob'
+import JobsCell from 'src/components/Recruiting/Job/JobsCell'
+import { PlusSmIcon } from '@heroicons/react/outline'
 
 const JobsPage = () => {
+  const [isNewOpen, setIsNewOpen] = React.useState(false)
+
   return (
     <>
       <PageTitle
         title="Jobs"
-        breadcrumbs={[{ title: 'Recruiting', to: routes.recruiting() }]}
         search={{ label: 'jobs', type: 'job' }}
+        buttons={[
+          {
+            label: 'New Job',
+            icon: PlusSmIcon,
+            onClick: () => setIsNewOpen(true),
+            main: true,
+          },
+        ]}
       />
 
-      <p>
-        Find me in <code>./web/src/pages/JobsPage/JobsPage.tsx</code>
-      </p>
-      <p>
-        My default route is named <code>jobs</code>, link to me with `
-        <Link to={routes.jobs()}>Jobs</Link>`
-      </p>
+      <Popup isOpen={isNewOpen} setIsOpen={setIsNewOpen} title="New job">
+        <NewJob setOpen={setIsNewOpen} />
+      </Popup>
+
+      <JobsCell />
     </>
   )
 }

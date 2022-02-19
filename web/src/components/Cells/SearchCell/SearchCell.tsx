@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction, useEffect } from 'react'
 import { Link, routes } from '@redwoodjs/router'
 
 import type { FindSearchQuery } from 'types/graphql'
-import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
+import type { CellSuccessProps } from '@redwoodjs/web'
 
 export const QUERY = gql`
   query FindSearchQuery($type: String!, $query: String!) {
@@ -34,12 +34,15 @@ function classNames(...classes: string[]) {
 
 function createTo(type: string, value: string) {
   const paths = [
-    // { type: 'company', to: routes.company({ id: value }) },
-    // { type: 'contact', to: routes.contact({ id: value }) },
+    { type: 'application', to: routes.application({ id: value }) },
+    { type: 'company', to: routes.company({ id: value }) },
+    { type: 'contact', to: routes.contact({ id: value }) },
+    { type: 'department', to: routes.department({ id: value }) },
     { type: 'employee', to: routes.employee({ id: value }) },
-    // { type: 'expense', to: routes.expense({ id: value }) },
-    // { type: 'income', to: routes.income({ id: value }) },
-    // { type: 'job', to: routes.job({ id: value }) },
+    { type: 'expense', to: routes.expense({ id: value }) },
+    { type: 'income', to: routes.income({ id: value }) },
+    { type: 'invoice', to: routes.invoice({ id: parseInt(value) }) },
+    { type: 'job', to: routes.job({ id: value }) },
     { type: 'project', to: routes.project({ id: value }) },
     { type: 'task', to: routes.task({ id: value }) },
     { type: 'ticket', to: routes.ticket({ id: parseInt(value) }) },
@@ -52,10 +55,11 @@ function createTo(type: string, value: string) {
   return thePath.to
 }
 
-export const Success = ({
-  search,
-  setEmptyResult,
-}: CellSuccessProps<FindSearchQuery>) => {
+interface SearchSuccessProps extends CellSuccessProps<FindSearchQuery> {
+  setEmptyResult: Dispatch<SetStateAction<boolean>>
+}
+
+export const Success = ({ search, setEmptyResult }: SearchSuccessProps) => {
   useEffect(() => {
     setEmptyResult(false)
   }, [setEmptyResult])

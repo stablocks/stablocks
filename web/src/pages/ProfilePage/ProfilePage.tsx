@@ -1,6 +1,6 @@
 import { useAuth } from '@redwoodjs/auth'
 import { Redirect, routes } from '@redwoodjs/router'
-import PageTitle from 'src/components/Layout/PageTitle'
+import PageTitle from 'src/ui/PageTitle'
 import TabMenu from 'src/components/Elements/TabMenu'
 
 const ProfilePage = () => {

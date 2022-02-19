@@ -1,6 +1,6 @@
 export const schema = gql`
   type Invoice {
-    id: String!
+    id: Int!
     contact: Contact!
     contactId: String!
     currency: String!
@@ -17,7 +17,7 @@ export const schema = gql`
 
   type Query {
     invoices: [Invoice!]! @requireAuth
-    invoice(id: String!): Invoice @requireAuth
+    invoice(id: Int!): Invoice @requireAuth
   }
 
   input CreateInvoiceInput {
@@ -42,8 +42,7 @@ export const schema = gql`
 
   type Mutation {
     createInvoice(input: CreateInvoiceInput!): Invoice! @requireAuth
-    updateInvoice(id: String!, input: UpdateInvoiceInput!): Invoice!
-      @requireAuth
-    deleteInvoice(id: String!): Invoice! @requireAuth
+    updateInvoice(id: Int!, input: UpdateInvoiceInput!): Invoice! @requireAuth
+    deleteInvoice(id: Int!): Invoice! @requireAuth
   }
 `

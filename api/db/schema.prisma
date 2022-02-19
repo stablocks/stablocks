@@ -102,14 +102,14 @@ model Income {
   date      DateTime
   currency  String
   invoice   Invoice? @relation(fields: [invoiceId], references: [id])
-  invoiceId String?  @unique
+  invoiceId Int?     @unique
   // Times
   updatedAt DateTime @updatedAt
   createdAt DateTime @default(now())
 }
 
 model Invoice {
-  id          String        @id @default(cuid())
+  id          Int           @id @default(autoincrement())
   contact     Contact       @relation(fields: [contactId], references: [id])
   contactId   String
   currency    String        @default("USD")
@@ -132,7 +132,7 @@ model InvoiceItem {
   rate        Int
   description String?
   invoice     Invoice  @relation(fields: [invoiceId], references: [id])
-  invoiceId   String
+  invoiceId   Int
   // Times
   updatedAt   DateTime @updatedAt
   createdAt   DateTime @default(now())

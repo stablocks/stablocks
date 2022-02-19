@@ -1,6 +1,6 @@
 import { routes } from '@redwoodjs/router'
-import PageTitle from 'src/components/Layout/PageTitle'
-import TasksCell from 'src/components/Cells/Task/TasksCell'
+import PageTitle from 'src/ui/PageTitle'
+import TasksCell from 'src/components/Projects/Task/TasksCell'
 
 const TasksPage = () => {
   return (

@@ -1,6 +1,6 @@
-import EditTicketCell from 'src/components/Cells/Ticket/EditTicketCell'
+import EditTicketCell from 'src/components/Helpdesk/Ticket/EditTicketCell'
 
-const EditTicketPage = ({ id }: { id: string }) => {
+const EditTicketPage = ({ id }: { id: number }) => {
   return <EditTicketCell id={id} />
 }
 
