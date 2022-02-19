@@ -1,4 +1,4 @@
-import EditProjectCell from 'src/components/Cells/Project/EditProjectCell'
+import EditProjectCell from 'src/components/Projects/Project/EditProjectCell'
 
 const EditProjectPage = ({ id }: { id: string }) => {
   return <EditProjectCell id={id} />

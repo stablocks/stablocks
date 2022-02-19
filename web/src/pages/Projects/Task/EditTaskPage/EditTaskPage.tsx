@@ -1,4 +1,4 @@
-import EditTaskCell from 'src/components/Cells/Task/EditTaskCell'
+import EditTaskCell from 'src/components/Projects/Task/EditTaskCell'
 
 const EditTaskPage = ({ id }: { id: string }) => {
   return <EditTaskCell id={id} />

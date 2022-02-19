@@ -6,7 +6,7 @@ export const schema = gql`
     rate: Int!
     description: String
     invoice: Invoice!
-    invoiceId: String!
+    invoiceId: Int!
     updatedAt: DateTime!
     createdAt: DateTime!
   }
@@ -21,7 +21,7 @@ export const schema = gql`
     units: Int!
     rate: Int!
     description: String
-    invoiceId: String!
+    invoiceId: Int!
   }
 
   input UpdateInvoiceItemInput {
@@ -29,7 +29,7 @@ export const schema = gql`
     units: Int
     rate: Int
     description: String
-    invoiceId: String
+    invoiceId: Int
   }
 
   type Mutation {

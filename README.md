@@ -15,8 +15,8 @@ Stablocks seeks to provide an integrated suite of software modules for growing c
   - [ ] Marketing
   - [ ] Sales
 - [ ] Finance and accounting
-- [ ] HR
   - [ ] Payroll
+- [ ] HR
   - [ ] Onboarding
 - [ ] Recruiting
   - [ ] Job posting and application management

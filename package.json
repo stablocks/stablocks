@@ -16,8 +16,8 @@
     "dev": "yarn postgres:up && yarn rw dev",
     "test": "yarn postgres:down && yarn postgres:up && yarn rw test",
     "migrate": "yarn rw prisma migrate dev",
-    "cleanup": "rm -rf {node_modules}; rm -rf packages/*/{node_modules,dist,build}",
-    "regenerate-lock": "npm run cleanup && rm yarn.lock && yarn install"
+    "cleanup": "rm -rf api/node_modules && rm -rf web/node_modules && rm -rf node_modules",
+    "regenerate-lock": "npm run cleanup && rm -rf yarn.lock && yarn install"
   },
   "eslintConfig": {
     "extends": "@redwoodjs/eslint-config",

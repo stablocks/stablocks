@@ -1,6 +1,6 @@
 export const schema = gql`
   type Organization {
-    id: Int!
+    id: String!
     name: String!
     website: String
     logo: String
@@ -30,22 +30,7 @@ export const schema = gql`
   input CreateOrganizationInput {
     name: String!
     website: String
-    logo: String
-    email: String
-    address: String
-    addressTwo: String
-    city: String
-    state: String
-    zipCode: Int
-    recruiting: Boolean
-    crm: Boolean
-    marketing: Boolean
-    sales: Boolean
-    finance: Boolean
-    hr: Boolean
-    helpdesk: Boolean
-    projects: Boolean
-    chatGreeting: String
+    # logo: String
   }
 
   input UpdateOrganizationInput {

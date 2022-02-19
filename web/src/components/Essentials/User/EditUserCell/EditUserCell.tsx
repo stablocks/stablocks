@@ -6,7 +6,7 @@ import { toast } from '@redwoodjs/web/toast'
 import { navigate, routes } from '@redwoodjs/router'
 
 import UserForm from 'src/components/Essentials/User/UserForm'
-import Loader from 'src/components/Elements/Loader'
+import Loader from 'src/ui/Loader'
 
 export const QUERY = gql`
   query EditUserById($id: String!) {

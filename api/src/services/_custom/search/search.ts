@@ -17,11 +17,20 @@ type QueryOption = {
 
 const queryOptions: QueryOption[] = [
   {
+    id: 'application',
+    fields: ['id'],
+    title: 'id',
+  },
+  {
     id: 'company',
+    fields: ['id', 'name', 'website'],
+    title: ['name'],
+  },
+  {
+    id: 'contact',
     fields: ['id', 'firstName', 'lastName', 'email'],
     title: ['firstName', 'lastName'],
   },
-  { id: 'contact', fields: ['id', 'name', 'website'], title: ['name'] },
   { id: 'department', fields: ['id', 'name', 'email'], title: ['name'] },
   {
     id: 'employee',
@@ -43,6 +52,7 @@ const queryOptions: QueryOption[] = [
   },
   { id: 'expense', fields: ['id', 'name'], title: ['name'] },
   { id: 'income', fields: ['id', 'name'], title: ['name'] },
+  { id: 'invoice', fields: ['id'], title: ['id'] },
   { id: 'job', fields: ['id', 'title', 'description'], title: ['title'] },
   { id: 'organization', subSearches: ['employee', 'department'] },
   { id: 'project', fields: ['id', 'title', 'description'], title: ['title'] },

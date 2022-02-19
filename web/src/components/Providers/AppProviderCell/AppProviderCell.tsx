@@ -10,6 +10,14 @@ export const QUERY = gql`
     appProvider {
       organization {
         name
+        recruiting
+        crm
+        marketing
+        sales
+        finance
+        hr
+        helpdesk
+        projects
       }
       userCount
     }
@@ -28,6 +36,14 @@ export interface SearchItem {
 interface AppContextValue {
   organization?: {
     name: string
+    recruiting: boolean
+    crm: boolean
+    marketing: boolean
+    sales: boolean
+    finance: boolean
+    hr: boolean
+    helpdesk: boolean
+    projects: boolean
   }
   userCount: number
   search?: SearchItem

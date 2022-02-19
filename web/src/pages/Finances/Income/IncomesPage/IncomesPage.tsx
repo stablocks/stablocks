@@ -1,22 +1,35 @@
-import { Link, routes } from '@redwoodjs/router'
-import PageTitle from 'src/components/Layout/PageTitle'
+import { useState } from 'react'
+import { routes } from '@redwoodjs/router'
+import PageTitle from 'src/ui/PageTitle'
+import Popup from 'src/components/Elements/Popup'
+import NewIncome from 'src/components/Finance/Income/NewIncome'
+import IncomesCell from 'src/components/Finance/Income/IncomesCell'
+import { PlusSmIcon } from '@heroicons/react/outline'
 
 const IncomesPage = () => {
+  const [isNewOpen, setIsNewOpen] = useState(false)
+
   return (
     <>
       <PageTitle
         title="Income"
         breadcrumbs={[{ title: 'Finance', to: routes.finance() }]}
         search={{ label: 'income', type: 'income' }}
+        buttons={[
+          {
+            label: 'New Income',
+            icon: PlusSmIcon,
+            onClick: () => setIsNewOpen(true),
+            main: true,
+          },
+        ]}
       />
 
-      <p>
-        Find me in <code>./web/src/pages/IncomesPage/IncomesPage.tsx</code>
-      </p>
-      <p>
-        My default route is named <code>incomes</code>, link to me with `
-        <Link to={routes.incomes()}>Incomes</Link>`
-      </p>
+      <Popup isOpen={isNewOpen} setIsOpen={setIsNewOpen} title="New income">
+        <NewIncome setOpen={setIsNewOpen} />
+      </Popup>
+
+      <IncomesCell />
     </>
   )
 }

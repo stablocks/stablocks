@@ -1,22 +1,22 @@
-import { Link, routes } from '@redwoodjs/router'
-import PageTitle from 'src/components/Layout/PageTitle'
+import { navigate, routes } from '@redwoodjs/router'
+import PageTitle from 'src/ui/PageTitle'
+import { RiSettings3Line } from 'react-icons/ri'
 
 const OrganizationPage = () => {
   return (
     <>
       <PageTitle
         title="Organization"
+        buttons={[
+          {
+            label: 'Settings',
+            icon: RiSettings3Line,
+            onClick: () => navigate(routes.organizationSettings()),
+            roles: ['admin'],
+          },
+        ]}
         search={{ label: 'the organization', type: 'organization' }}
       />
-
-      <p>
-        Find me in{' '}
-        <code>./web/src/pages/OrganizationPage/OrganizationPage.tsx</code>
-      </p>
-      <p>
-        My default route is named <code>organization</code>, link to me with `
-        <Link to={routes.organization()}>Organization</Link>`
-      </p>
     </>
   )
 }

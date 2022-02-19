@@ -1,9 +1,6 @@
-import { FieldError, Label, TextField, NumberField } from '@redwoodjs/forms'
+import { FieldError, Label, TextField } from '@redwoodjs/forms'
 import { useAuth } from '@redwoodjs/auth'
-import FormLayout, {
-  FormSection,
-  FormFields,
-} from 'src/components/layout/FormLayout'
+import FormLayout, { FormSection, FormFields } from 'src/ui/Form/FormLayout'
 
 const UserForm = (props) => {
   const { hasRole } = useAuth()

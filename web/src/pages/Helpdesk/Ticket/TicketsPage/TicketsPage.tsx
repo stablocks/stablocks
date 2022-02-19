@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { routes } from '@redwoodjs/router'
-import PageTitle from 'src/components/Layout/PageTitle'
+import PageTitle from 'src/ui/PageTitle'
 import Popup from 'src/components/Elements/Popup'
-import NewTicket from 'src/components/NewComponents/NewTicket'
-import TicketsCell from 'src/components/Cells/Ticket/TicketsCell'
+import NewTicket from 'src/components/Helpdesk/Ticket/NewTicket'
+import TicketsCell from 'src/components/Helpdesk/Ticket/TicketsCell'
 import { PlusSmIcon } from '@heroicons/react/outline'
 
 const TicketsPage = () => {
@@ -25,7 +25,7 @@ const TicketsPage = () => {
         ]}
       />
 
-      <Popup isOpen={isNewOpen} setIsOpen={setIsNewOpen} title="New project">
+      <Popup isOpen={isNewOpen} setIsOpen={setIsNewOpen} title="New ticket">
         <NewTicket setOpen={setIsNewOpen} />
       </Popup>
 

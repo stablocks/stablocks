@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import PageTitle from 'src/components/Layout/PageTitle'
 import PlaidLinkCell from 'src/components/Cells/Plaid/PlaidLinkCell'
 import { RiAddLine } from 'react-icons/ri'
+import PageTitle from 'src/ui/PageTitle'
 
 const FinancePage = () => {
   const [addAccount, setAddAccount] = useState(false)

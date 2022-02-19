@@ -5,7 +5,7 @@ import { useAuth } from '@redwoodjs/auth'
 import { ArrowNarrowRightIcon } from '@heroicons/react/outline'
 import { BadgeCheckIcon } from '@heroicons/react/solid'
 import { AppContext } from 'src/components/Providers/AppProviderCell'
-import NewOrganization from 'src/components/Essentials/Organization/NewOrganization'
+import NewOrganization from 'src/components/Basics/Organization/NewOrganization'
 import NewFirstUser from 'src/components/Essentials/User/NewFirstUser'
 
 const OnboardingPage = () => {
