@@ -13,7 +13,7 @@
     ]
   },
   "dependencies": {
-    "@headlessui/react": "^1.4.3",
+    "@headlessui/react": "^1.5.0",
     "@heroicons/react": "^1.0.5",
     "@redwoodjs/auth": "^0.45.0",
     "@redwoodjs/forms": "^0.45.0",
