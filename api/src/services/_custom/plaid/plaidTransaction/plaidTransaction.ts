@@ -69,6 +69,8 @@ export const plaidAccountTransactions = async ({ accessToken }) => {
   for (let i = 0; i < transactions.length; i++) {
     const transaction = transactions[i]
 
+    if (transaction.amount < 0) continue
+
     if (!transaction.datetime && !transaction.date) continue
 
     const transactionData: {

@@ -20,7 +20,7 @@ const TabMenu = ({ tabs, children }: TabMenuProps) => {
   useEffect(() => {
     if (search) {
       const params = new URLSearchParams(search)
-      const page = params.get('page')
+      const page = params.get('tab')
 
       if (page) {
         const index = tabs.findIndex((tab) => tab.slug === page)
@@ -38,7 +38,7 @@ const TabMenu = ({ tabs, children }: TabMenuProps) => {
     } else {
       const slug = tabs[index].slug
 
-      navigate(`${pathname}?page=${slug}`)
+      navigate(`${pathname}?tab=${slug}`)
     }
   }
 

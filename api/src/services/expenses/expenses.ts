@@ -1,14 +1,22 @@
 import type { Prisma } from '@prisma/client'
 import type { ResolverArgs } from '@redwoodjs/graphql-server'
+import { perPage } from 'src/utils/base'
 
 import { db } from 'src/lib/db'
 
-export const expenses = () => {
-  return db.expense.findMany({
-    orderBy: {
-      date: 'desc',
-    },
-  })
+export const expenses = ({ page = 1 }) => {
+  const offset = (page - 1) * perPage
+
+  return {
+    expenses: db.expense.findMany({
+      take: perPage,
+      skip: offset,
+      orderBy: {
+        date: 'desc',
+      },
+    }),
+    count: db.expense.count(),
+  }
 }
 
 export const expense = ({ id }: Prisma.ExpenseWhereUniqueInput) => {

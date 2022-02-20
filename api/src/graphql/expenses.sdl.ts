@@ -14,8 +14,13 @@ export const schema = gql`
     createdAt: DateTime!
   }
 
+  type ExpensePage {
+    expenses: [Expense!]!
+    count: Int!
+  }
+
   type Query {
-    expenses: [Expense!]! @requireAuth
+    expenses(page: Int): ExpensePage @requireAuth
     expense(id: String!): Expense @requireAuth
   }
 

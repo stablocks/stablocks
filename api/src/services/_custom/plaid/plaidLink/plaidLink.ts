@@ -33,7 +33,7 @@ export const plaidLinkToken = async () => {
   }
 
   if (process.env.NODE_ENV === 'production') {
-    request.webhook = `${process.env.URL}/webhooks/plaid`
+    request.webhook = `${process.env.URL}/.netlify/functions/plaid`
     request.redirect_uri = `${process.env.URL}/finance`
   }
 

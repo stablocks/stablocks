@@ -1,12 +1,12 @@
 import { useState } from 'react'
-import { routes } from '@redwoodjs/router'
+import { routes, useLocation } from '@redwoodjs/router'
 import PageTitle from 'src/ui/PageTitle'
 import Popup from 'src/components/Elements/Popup'
 import NewExpense from 'src/components/Finance/Expense/NewExpense'
 import ExpensesCell from 'src/components/Finance/Expense/ExpensesCell'
 import { PlusSmIcon } from '@heroicons/react/outline'
 
-const ExpensesPage = () => {
+const ExpensesPage = ({ page }) => {
   const [isNewOpen, setIsNewOpen] = useState(false)
 
   return (
@@ -29,7 +29,7 @@ const ExpensesPage = () => {
         <NewExpense setOpen={setIsNewOpen} />
       </Popup>
 
-      <ExpensesCell />
+      <ExpensesCell page={page} />
     </>
   )
 }
