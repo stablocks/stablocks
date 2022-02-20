@@ -10,7 +10,7 @@ export const schema = gql`
   }
 
   type Query {
-    plaidTransactions: Int! @skipAuth
+    plaidTransactions: Int! @requireAuth
     plaidAccountTransactions(accessToken: String!): Int! @requireAuth
   }
 `

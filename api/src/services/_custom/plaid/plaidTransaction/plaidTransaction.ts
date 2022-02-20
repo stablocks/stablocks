@@ -5,7 +5,7 @@ import { plaidItems } from 'src/services/plaidItems'
 import { db } from 'src/lib/db'
 
 export const plaidTransactions = async () => {
-  // requireAuth({ roles: ['admin', 'financeAdmin'] })
+  requireAuth({ roles: ['admin', 'financeAdmin'] })
 
   const items = await plaidItems()
 
@@ -26,6 +26,8 @@ export const plaidTransactions = async () => {
 }
 
 export const plaidAccountTransactions = async ({ accessToken }) => {
+  requireAuth({ roles: ['admin', 'financeAdmin'] })
+
   const transactions: Transaction[] = []
 
   const currentYear = new Date().getFullYear()

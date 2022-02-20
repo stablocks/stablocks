@@ -6,9 +6,12 @@ import { createPlaidItem } from 'src/services/plaidItems'
 import { plaidAccountTransactions } from 'src/services/_custom/plaid/plaidTransaction'
 
 export const plaidTokenExchange = async ({ publicToken }) => {
+  requireAuth({ roles: ['admin', 'financeAdmin'] })
+
   const request: ItemPublicTokenExchangeRequest = {
     public_token: publicToken,
   }
+
   try {
     const response = await client.itemPublicTokenExchange(request)
     const accessToken = response.data.access_token
