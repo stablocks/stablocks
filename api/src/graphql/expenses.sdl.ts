@@ -1,11 +1,13 @@
 export const schema = gql`
   type Expense {
     id: String!
+    plaidId: String!
     name: String!
-    amount: Int!
+    amount: Float!
     date: DateTime!
     authorizedDate: DateTime
     currency: String!
+    pending: Boolean!
     category: ExpenseCategory
     categoryId: String
     updatedAt: DateTime!
@@ -18,20 +20,24 @@ export const schema = gql`
   }
 
   input CreateExpenseInput {
+    plaidId: String!
     name: String!
-    amount: Int!
+    amount: Float!
     date: DateTime!
     authorizedDate: DateTime
     currency: String!
+    pending: Boolean!
     categoryId: String
   }
 
   input UpdateExpenseInput {
+    plaidId: String
     name: String
-    amount: Int
+    amount: Float
     date: DateTime
     authorizedDate: DateTime
     currency: String
+    pending: Boolean
     categoryId: String
   }
 

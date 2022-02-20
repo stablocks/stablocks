@@ -100,7 +100,7 @@ model Department {
 model Income {
   id        String   @id @default(cuid())
   name      String
-  amount    Int
+  amount    Float
   date      DateTime
   currency  String
   invoice   Invoice? @relation(fields: [invoiceId], references: [id])
@@ -130,7 +130,7 @@ model Invoice {
 model InvoiceItem {
   id          String   @id @default(cuid())
   name        String
-  units       Int
+  units       Float
   rate        Int
   description String?
   invoice     Invoice  @relation(fields: [invoiceId], references: [id])
@@ -142,16 +142,24 @@ model InvoiceItem {
 
 model Expense {
   id             String           @id @default(cuid())
+  plaidId        String           @unique
   name           String
-  amount         Int
+  amount         Float
   date           DateTime
   authorizedDate DateTime?
   currency       String           @default("USD")
+  pending        Boolean          @default(false)
   category       ExpenseCategory? @relation(fields: [categoryId], references: [id])
   categoryId     String?
   // Times
   updatedAt      DateTime         @updatedAt
   createdAt      DateTime         @default(now())
+}
+
+model PlaidItem {
+  id          String @id @default(cuid())
+  accessToken String @unique
+  itemId      String @unique
 }
 
 model ExpenseCategory {

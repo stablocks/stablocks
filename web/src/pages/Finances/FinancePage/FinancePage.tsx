@@ -5,6 +5,7 @@ import PageTitle from 'src/ui/PageTitle'
 
 const FinancePage = () => {
   const [addAccount, setAddAccount] = useState(false)
+
   return (
     <>
       <PageTitle

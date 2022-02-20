@@ -7,6 +7,12 @@ import {
 } from './incomes'
 import type { StandardScenario } from './incomes.scenarios'
 
+// Generated boilerplate tests do not account for all circumstances
+// and can fail without adjustments, e.g. Float and DateTime types.
+//           Please refer to the RedwoodJS Testing Docs:
+//       https://redwoodjs.com/docs/testing#testing-services
+// https://redwoodjs.com/docs/testing#jest-expect-type-considerations
+
 describe('incomes', () => {
   scenario('returns all incomes', async (scenario: StandardScenario) => {
     const result = await incomes()
@@ -24,18 +30,18 @@ describe('incomes', () => {
     const result = await createIncome({
       input: {
         name: 'String',
-        amount: 8969140,
-        date: '2022-01-22T19:51:23Z',
+        amount: 4682952.215464067,
+        date: '2022-02-20T13:04:47Z',
         currency: 'String',
-        updatedAt: '2022-01-22T19:51:23Z',
+        updatedAt: '2022-02-20T13:04:47Z',
       },
     })
 
     expect(result.name).toEqual('String')
-    expect(result.amount).toEqual(8969140)
-    expect(result.date).toEqual('2022-01-22T19:51:23Z')
+    expect(result.amount).toEqual(4682952.215464067)
+    expect(result.date).toEqual('2022-02-20T13:04:47Z')
     expect(result.currency).toEqual('String')
-    expect(result.updatedAt).toEqual('2022-01-22T19:51:23Z')
+    expect(result.updatedAt).toEqual('2022-02-20T13:04:47Z')
   })
 
   scenario('updates a income', async (scenario: StandardScenario) => {

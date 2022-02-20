@@ -1,21 +1,19 @@
 import {
-  AccountSubtype,
   CountryCode,
+  CreditAccountSubtype,
+  DepositoryAccountSubtype,
   LinkTokenCreateRequest,
   Products,
 } from 'plaid'
 import { client } from 'src/lib/plaid'
 import { requireAuth } from 'src/lib/auth'
-import { organization } from 'src/services/organizations'
 
 export const plaidLinkToken = async () => {
-  // requireAuth({ roles: ['admin', 'financeAdmin'] })
-
-  const org = await organization()
+  requireAuth({ roles: ['admin', 'financeAdmin'] })
 
   const request: LinkTokenCreateRequest = {
     user: {
-      client_user_id: org.id,
+      client_user_id: context.currentUser.id.toString(),
     },
     client_name: 'Stablocks',
     products: [Products.Auth, Products.Transactions],
@@ -23,10 +21,13 @@ export const plaidLinkToken = async () => {
     language: 'en',
     account_filters: {
       depository: {
-        account_subtypes: [AccountSubtype.Checking, AccountSubtype.Savings],
+        account_subtypes: [
+          DepositoryAccountSubtype.Checking,
+          DepositoryAccountSubtype.Savings,
+        ],
       },
       credit: {
-        account_subtypes: [AccountSubtype.CreditCard],
+        account_subtypes: [CreditAccountSubtype.CreditCard],
       },
     },
   }

@@ -7,6 +7,12 @@ import {
 } from './invoiceItems'
 import type { StandardScenario } from './invoiceItems.scenarios'
 
+// Generated boilerplate tests do not account for all circumstances
+// and can fail without adjustments, e.g. Float and DateTime types.
+//           Please refer to the RedwoodJS Testing Docs:
+//       https://redwoodjs.com/docs/testing#testing-services
+// https://redwoodjs.com/docs/testing#jest-expect-type-considerations
+
 describe('invoiceItems', () => {
   scenario('returns all invoiceItems', async (scenario: StandardScenario) => {
     const result = await invoiceItems()
@@ -27,18 +33,18 @@ describe('invoiceItems', () => {
     const result = await createInvoiceItem({
       input: {
         name: 'String',
-        units: 2640956,
-        rate: 8320628,
+        units: 2579682.693480798,
+        rate: 1021349,
         invoiceId: scenario.invoiceItem.two.invoiceId,
-        updatedAt: '2022-01-22T19:51:37Z',
+        updatedAt: '2022-02-20T13:05:08Z',
       },
     })
 
     expect(result.name).toEqual('String')
-    expect(result.units).toEqual(2640956)
-    expect(result.rate).toEqual(8320628)
+    expect(result.units).toEqual(2579682.693480798)
+    expect(result.rate).toEqual(1021349)
     expect(result.invoiceId).toEqual(scenario.invoiceItem.two.invoiceId)
-    expect(result.updatedAt).toEqual('2022-01-22T19:51:37Z')
+    expect(result.updatedAt).toEqual('2022-02-20T13:05:08Z')
   })
 
   scenario('updates a invoiceItem', async (scenario: StandardScenario) => {

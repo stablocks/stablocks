@@ -2,7 +2,7 @@ export const schema = gql`
   type InvoiceItem {
     id: String!
     name: String!
-    units: Int!
+    units: Float!
     rate: Int!
     description: String
     invoice: Invoice!
@@ -18,7 +18,7 @@ export const schema = gql`
 
   input CreateInvoiceItemInput {
     name: String!
-    units: Int!
+    units: Float!
     rate: Int!
     description: String
     invoiceId: Int!
@@ -26,7 +26,7 @@ export const schema = gql`
 
   input UpdateInvoiceItemInput {
     name: String
-    units: Int
+    units: Float
     rate: Int
     description: String
     invoiceId: Int

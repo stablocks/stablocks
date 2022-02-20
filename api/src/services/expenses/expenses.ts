@@ -4,7 +4,11 @@ import type { ResolverArgs } from '@redwoodjs/graphql-server'
 import { db } from 'src/lib/db'
 
 export const expenses = () => {
-  return db.expense.findMany()
+  return db.expense.findMany({
+    orderBy: {
+      date: 'desc',
+    },
+  })
 }
 
 export const expense = ({ id }: Prisma.ExpenseWhereUniqueInput) => {

@@ -2,8 +2,8 @@ import { Configuration, PlaidApi, PlaidEnvironments } from 'plaid'
 
 const PLAID_ENV =
   process.env.PLAID_ENV || process.env.NODE_ENV === 'production'
-    ? 'development'
-    : 'sandbox'
+    ? 'production'
+    : 'development'
 
 const configuration = new Configuration({
   basePath: PlaidEnvironments[PLAID_ENV],

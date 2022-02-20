@@ -4,6 +4,7 @@ import type { FindPlaidLinkQuery } from 'types/graphql'
 import type { CellSuccessProps } from '@redwoodjs/web'
 
 import { usePlaidLink, PlaidLinkOptions } from 'react-plaid-link'
+import PlaidTokenExchangeCell from 'src/components/Cells/Plaid/PlaidTokenExchangeCell'
 
 export const QUERY = gql`
   query GetPlaidLinkTokenQuery {
@@ -19,12 +20,13 @@ export const Success = ({
   plaidLinkToken,
   setIsOpen,
 }: CellSuccessProps<FindPlaidLinkQuery>) => {
+  const [publicToken, setPublicToken] = useState('')
+
   const config: PlaidLinkOptions = {
-    onSuccess: (public_token, metadata) => {
-      console.log(public_token, metadata)
+    onSuccess: (public_token, _metadata) => {
+      setPublicToken(public_token)
     },
-    onExit: (err, metadata) => {
-      console.log(err, metadata)
+    onExit: (_err, _metadata) => {
       setIsOpen(false)
     },
     onEvent: (eventName, metadata) => {
@@ -41,5 +43,7 @@ export const Success = ({
     if (ready) open()
   }, [ready, open])
 
-  return <></>
+  return (
+    <>{publicToken && <PlaidTokenExchangeCell publicToken={publicToken} />}</>
+  )
 }
