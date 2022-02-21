@@ -142,15 +142,15 @@ model InvoiceItem {
 
 model Expense {
   id             String           @id @default(cuid())
-  plaidId        String           @unique
+  plaidId        String?          @unique
   name           String
   amount         Float
   date           DateTime
   authorizedDate DateTime?
   currency       String           @default("USD")
   pending        Boolean          @default(false)
-  category       ExpenseCategory? @relation(fields: [categoryId], references: [id])
-  categoryId     String?
+  category       ExpenseCategory? @relation(fields: [categorySlug], references: [slug])
+  categorySlug   String?
   // Times
   updatedAt      DateTime         @updatedAt
   createdAt      DateTime         @default(now())
@@ -165,6 +165,7 @@ model PlaidItem {
 model ExpenseCategory {
   id        String    @id @default(cuid())
   name      String
+  slug      String    @unique
   default   Boolean   @default(false)
   expenses  Expense[]
   // Times

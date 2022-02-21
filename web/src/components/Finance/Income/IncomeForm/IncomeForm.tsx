@@ -1,23 +1,15 @@
-import { DateField, NumberField, TextField } from '@redwoodjs/forms'
-import { useAuth } from '@redwoodjs/auth'
+import { DatetimeLocalField, NumberField, TextField } from '@redwoodjs/forms'
 import Form from 'src/ui/Form'
 
 const IncomeForm = (props) => {
-  const { currentUser } = useAuth()
-
   const onSubmit = (data) => {
-    if (!props.income?.userId) data.userId = currentUser.id
-
     props.onSave(data, props.income?.id)
   }
 
   return (
     <Form
       onSubmit={onSubmit}
-      loading={props.loading}
-      error={props.error}
-      newForm={props.newForm}
-      isSaved={props.isSaved}
+      {...props}
       sections={[
         {
           fields: [
@@ -38,7 +30,7 @@ const IncomeForm = (props) => {
             {
               name: 'date',
               label: 'Date',
-              element: DateField,
+              element: DatetimeLocalField,
               defaultValue: props.income?.date,
               required: true,
             },

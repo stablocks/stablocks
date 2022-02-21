@@ -61,11 +61,7 @@ const Routes = () => {
                   <Route path="/finance/invoices/{id:Int}/edit" page={FinancesInvoiceEditInvoicePage} name="editInvoice" />
                   <Route path="/finance/invoices/{id:Int}" page={FinancesInvoiceInvoicePage} name="invoice" />
                   <Route path="/finance/invoices" page={FinancesInvoiceInvoicesPage} name="invoices" />
-                  <Route path="/finance/expenses/{id}/edit" page={FinancesExpenseEditExpensePage} name="editExpense" />
-                  <Route path="/finance/expenses/{id}" page={FinancesExpenseExpensePage} name="expense" />
                   <Route path="/finance/expenses" page={FinancesExpenseExpensesPage} name="expenses" />
-                  <Route path="/finance/income/{id}/edit" page={FinancesIncomeEditIncomePage} name="editIncome" />
-                  <Route path="/finance/income/{id}" page={FinancesIncomeIncomePage} name="income" />
                   <Route path="/finance/income" page={FinancesIncomeIncomesPage} name="incomes" />
                   <Route path="/finance/accounting" page={FinancesAccountingAccountingPage} name="accounting" />
                   <Route path="/finance" page={FinancesFinancePage} name="finance" />

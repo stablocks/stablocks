@@ -39,7 +39,12 @@ interface UpdateExpenseArgs extends Prisma.ExpenseWhereUniqueInput {
   input: Prisma.ExpenseUpdateInput
 }
 
-export const updateExpense = ({ id, input }: UpdateExpenseArgs) => {
+export const updateExpense = async ({ id, input }: UpdateExpenseArgs) => {
+  if (input.categorySlug === '') {
+    input.category = { disconnect: true }
+    delete input.categorySlug
+  }
+
   return db.expense.update({
     data: input,
     where: { id },

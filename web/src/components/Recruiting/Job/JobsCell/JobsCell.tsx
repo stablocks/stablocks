@@ -1,9 +1,8 @@
 import type { JobsQuery } from 'types/graphql'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
-import { routes } from '@redwoodjs/router'
+import { Link, routes } from '@redwoodjs/router'
 import Loader from 'src/ui/Loader'
-import ItemList from 'src/ui/ItemList'
-import ItemListItem from 'src/ui/ItemList/ItemListItem'
+import Table from 'src/components/Layout/Table'
 
 export const QUERY = gql`
   query JobsQuery {
@@ -27,25 +26,37 @@ export const Failure = ({ error }: CellFailureProps) => (
 )
 
 export const Success = ({ jobs }: CellSuccessProps<JobsQuery>) => {
+  const data = jobs.map((job, i) => [
+    <Link
+      key={i}
+      to={routes.job({ id: job.id })}
+      className="font-medium text-indigo-600 hover:text-indigo-700"
+    >
+      {job.title}
+    </Link>,
+    <span key={i} className="block max-w-[24rem] truncate">
+      {job.description}
+    </span>,
+    job.applications.length,
+    <Link
+      key={i}
+      to={routes.job({ id: job.id })}
+      className="text-indigo-600 hover:text-indigo-700"
+    >
+      View
+    </Link>,
+  ])
+
   return (
-    <ItemList>
-      {jobs.map((job) => (
-        <ItemListItem
-          key={job.id}
-          title={job.title}
-          description={job.description}
-          to={routes.job({ id: job.id })}
-          subItems={
-            job?.applications?.length
-              ? {
-                  count: job.applications.length,
-                  title: 'applications',
-                  singularTitle: 'application',
-                }
-              : undefined
-          }
-        />
-      ))}
-    </ItemList>
+    <Table
+      cols={[
+        { label: 'Title' },
+        { label: 'Description' },
+        { label: 'Applications' },
+        { label: 'View', hidden: true },
+      ]}
+      rows={data}
+      total={jobs.length}
+    />
   )
 }

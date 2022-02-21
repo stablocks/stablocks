@@ -1,7 +1,7 @@
 export const schema = gql`
   type Expense {
     id: String!
-    plaidId: String!
+    plaidId: String
     name: String!
     amount: Float!
     date: DateTime!
@@ -9,7 +9,7 @@ export const schema = gql`
     currency: String!
     pending: Boolean!
     category: ExpenseCategory
-    categoryId: String
+    categorySlug: String
     updatedAt: DateTime!
     createdAt: DateTime!
   }
@@ -25,14 +25,14 @@ export const schema = gql`
   }
 
   input CreateExpenseInput {
-    plaidId: String!
+    plaidId: String
     name: String!
     amount: Float!
     date: DateTime!
     authorizedDate: DateTime
     currency: String!
-    pending: Boolean!
-    categoryId: String
+    pending: Boolean
+    categorySlug: String
   }
 
   input UpdateExpenseInput {
@@ -43,7 +43,7 @@ export const schema = gql`
     authorizedDate: DateTime
     currency: String
     pending: Boolean
-    categoryId: String
+    categorySlug: String
   }
 
   type Mutation {

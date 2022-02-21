@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { routes, useLocation } from '@redwoodjs/router'
+import { routes } from '@redwoodjs/router'
 import PageTitle from 'src/ui/PageTitle'
 import Popup from 'src/components/Elements/Popup'
 import NewExpense from 'src/components/Finance/Expense/NewExpense'

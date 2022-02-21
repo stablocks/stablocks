@@ -46,9 +46,7 @@ export const Success = ({
     >
       {department.name}
     </Link>,
-    <span key={i} className="text-gray-600">
-      {`${department?.email}`}
-    </span>,
+    department?.email ? department.email : '',
     <Link
       key={i}
       to={routes.department({ id: department.id })}
@@ -66,6 +64,7 @@ export const Success = ({
         { label: 'View', hidden: true },
       ]}
       rows={data}
+      total={departments.length}
     />
   )
 }

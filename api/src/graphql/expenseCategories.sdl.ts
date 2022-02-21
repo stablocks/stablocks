@@ -2,6 +2,7 @@ export const schema = gql`
   type ExpenseCategory {
     id: String!
     name: String!
+    slug: String!
     default: Boolean!
     expenses: [Expense]!
     updatedAt: DateTime!
@@ -15,11 +16,13 @@ export const schema = gql`
 
   input CreateExpenseCategoryInput {
     name: String!
+    slug: String!
     default: Boolean!
   }
 
   input UpdateExpenseCategoryInput {
     name: String
+    slug: String
     default: Boolean
   }
 

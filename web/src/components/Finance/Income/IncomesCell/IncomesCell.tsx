@@ -1,11 +1,27 @@
 import type { IncomesQuery } from 'types/graphql'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
-import { Link, routes } from '@redwoodjs/router'
+import { useMutation } from '@redwoodjs/web'
+import { toast } from '@redwoodjs/web/toast'
 import Loader from 'src/ui/Loader'
+import Table from 'src/components/Layout/Table'
+import IncomeForm from '../IncomeForm'
+import { formatAmount } from 'src/utils/currency'
 
 export const QUERY = gql`
   query IncomesQuery {
     incomes {
+      id
+      name
+      amount
+      date
+      currency
+    }
+  }
+`
+
+const UPDATE_INCOME_MUTATION = gql`
+  mutation UpdateIncomeMutation($id: String!, $input: UpdateIncomeInput!) {
+    updateIncome(id: $id, input: $input) {
       id
       name
       amount
@@ -24,15 +40,44 @@ export const Failure = ({ error }: CellFailureProps) => (
 )
 
 export const Success = ({ incomes }: CellSuccessProps<IncomesQuery>) => {
+  const [isSaved, setIsSaved] = React.useState(false)
+  const [updateIncome, { loading, error }] = useMutation(
+    UPDATE_INCOME_MUTATION,
+    {
+      onCompleted: () => {
+        setIsSaved(true)
+        toast.success('Income updated')
+      },
+      refetchQueries: [{ query: QUERY }],
+      awaitRefetchQueries: true,
+      onError: (error) => {
+        toast.error(error.message)
+      },
+    }
+  )
+
+  const onSave = (input, id) => {
+    updateIncome({ variables: { id, input } })
+  }
+
+  const data = incomes.map((income, i) => [
+    <IncomeForm
+      key={i}
+      popup={{ type: 'link', label: income.name }}
+      onSave={onSave}
+      loading={loading}
+      error={error}
+      isSaved={isSaved}
+      income={income}
+    />,
+    formatAmount(income.amount, income.currency),
+    new Date(income.date).toDateString(),
+  ])
   return (
-    <ul>
-      {incomes.map((income) => {
-        return (
-          <li key={income.id}>
-            <Link to={routes.income({ id: income.id })}>{income.name}</Link>
-          </li>
-        )
-      })}
-    </ul>
+    <Table
+      cols={[{ label: 'Name' }, { label: 'Amount' }, { label: 'Date' }]}
+      rows={data}
+      total={incomes.length}
+    />
   )
 }

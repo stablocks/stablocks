@@ -32,9 +32,7 @@ export const Success = ({ companies }: CellSuccessProps<CompaniesQuery>) => {
     >
       {company.name}
     </Link>,
-    <span key={i} className="text-gray-600">
-      {`${company?.website}`}
-    </span>,
+    company?.website ? company.website : '',
     <Link
       key={i}
       to={routes.company({ id: company.id })}
@@ -52,6 +50,7 @@ export const Success = ({ companies }: CellSuccessProps<CompaniesQuery>) => {
         { label: 'View', hidden: true },
       ]}
       rows={data}
+      total={companies.length}
     />
   )
 }

@@ -1,10 +1,13 @@
 import type { ExpensesQuery } from 'types/graphql'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
-import { Link, routes } from '@redwoodjs/router'
+import { useMutation } from '@redwoodjs/web'
+import { toast } from '@redwoodjs/web/toast'
 import Loader from 'src/ui/Loader'
 import Table from 'src/components/Layout/Table'
-import Pagination from 'src/ui/Pagination'
-import { currencies } from 'src/utils/enums'
+import ExpenseForm from '../ExpenseForm'
+import OptionSwitch from 'src/ui/OptionSwitch'
+import { expenseCategories } from 'src/utils/enums'
+import { formatAmount } from 'src/utils/currency'
 
 export const beforeQuery = ({ page }) => {
   page = page ? parseInt(page, 10) : 1
@@ -17,13 +20,32 @@ export const QUERY = gql`
     expenses(page: $page) {
       expenses {
         id
+        plaidId
         name
         amount
         date
         authorizedDate
         currency
+        category {
+          id
+          name
+          slug
+        }
       }
       count
+    }
+  }
+`
+
+const UPDATE_EXPENSE_MUTATION = gql`
+  mutation UpdateExpenseMutation($id: String!, $input: UpdateExpenseInput!) {
+    updateExpense(id: $id, input: $input) {
+      id
+      name
+      amount
+      date
+      authorizedDate
+      currency
     }
   }
 `
@@ -37,45 +59,72 @@ export const Failure = ({ error }: CellFailureProps) => (
 )
 
 export const Success = ({ expenses }: CellSuccessProps<ExpensesQuery>) => {
-  function formatAmount(amount: number, currency: string) {
-    const currencyMatch = currencies.find((c) => c.value === currency)
+  const [isSaved, setIsSaved] = React.useState(false)
+  const [updateExpense, { loading, error }] = useMutation(
+    UPDATE_EXPENSE_MUTATION,
+    {
+      onCompleted: () => {
+        setIsSaved(true)
+        toast.success('Expense updated')
+      },
+      refetchQueries: [{ query: QUERY }],
+      awaitRefetchQueries: true,
+      onError: (error) => {
+        toast.error(error.message)
+      },
+    }
+  )
 
-    return `${currencyMatch.symbol}${Number.parseFloat(
-      amount.toString()
-    ).toFixed(2)}`
+  const onSave = (input, id) => {
+    updateExpense({ variables: { id, input } })
   }
 
   const data = expenses.expenses.map((expense, i) => [
-    <Link
+    !expense?.plaidId ? (
+      <ExpenseForm
+        key={i}
+        popup={{ type: 'link', label: expense.name }}
+        onSave={onSave}
+        loading={loading}
+        error={error}
+        isSaved={isSaved}
+        expense={expense}
+      />
+    ) : (
+      <span className="block font-medium truncate max-w-[16rem] md:max-w-[24rem]">
+        {expense.name}
+      </span>
+    ),
+    <OptionSwitch
       key={i}
-      to={routes.expense({ id: expense.id })}
-      className="font-medium text-indigo-600 hover:text-indigo-700"
-    >
-      {expense.name}
-    </Link>,
+      id={expense.id}
+      selected={expense?.category?.slug}
+      unselectedLabel="Uncategorized"
+      name="categorySlug"
+      onSubmit={onSave}
+      loading={loading}
+      error={error}
+      options={[
+        ...expenseCategories.map((cat) => ({
+          label: cat.name,
+          value: cat.slug,
+        })),
+      ]}
+    />,
     formatAmount(expense.amount, expense.currency),
     new Date(expense.date).toDateString(),
-    <Link
-      key={i}
-      to={routes.expense({ id: expense.id })}
-      className="text-indigo-600 hover:text-indigo-700"
-    >
-      View
-    </Link>,
   ])
 
   return (
-    <>
-      <Table
-        cols={[
-          { label: 'Name' },
-          { label: 'Amount' },
-          { label: 'Date' },
-          { label: 'View', hidden: true },
-        ]}
-        rows={data}
-      />
-      <Pagination total={expenses.count} />
-    </>
+    <Table
+      cols={[
+        { label: 'Name' },
+        { label: 'Category' },
+        { label: 'Amount' },
+        { label: 'Date' },
+      ]}
+      rows={data}
+      total={expenses.count}
+    />
   )
 }

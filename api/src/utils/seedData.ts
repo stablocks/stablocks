@@ -1,11 +1,9 @@
-export const currencies = [{ value: 'USD', label: 'USD', symbol: '$' }]
-
 export const expenseCategories = [
   { name: 'Advertising', slug: 'advertising', default: true },
   { name: 'Car and truck expenses', slug: 'vehicle', default: true },
   { name: 'Commissions and fees', slug: 'commissions', default: true },
   { name: 'Contract labor', slug: 'contracting', default: true },
-  { name: 'Cost of goods sold', slug: 'cogs', default: false },
+  { name: 'Cost of goods sold', slug: 'cogs', default: true },
   { name: 'Deductible meals', slug: 'meals', default: true },
   { name: 'Depletion', slug: 'depletion', default: true },
   { name: 'Deprecation', slug: 'deprecation', default: true },
@@ -13,7 +11,7 @@ export const expenseCategories = [
   { name: 'Insurance (non-health)', slug: 'insurance', default: true },
   { name: 'Legal and professional services', slug: 'services', default: true },
   { name: 'Mortgage interest', slug: 'mortgage', default: true },
-  { name: 'Non-business expense', slug: 'exempt', default: false },
+  { name: 'Non-business expense', slug: 'exempt', default: true },
   { name: 'Office expense', slug: 'office', default: true },
   { name: 'Other interest', slug: 'interest', default: true },
   { name: 'Other rent or lease', slug: 'lease', default: true },

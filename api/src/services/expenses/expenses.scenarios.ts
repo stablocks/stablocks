@@ -4,20 +4,18 @@ export const standard = defineScenario<Prisma.ExpenseCreateArgs>({
   expense: {
     one: {
       data: {
-        plaidId: 'String1162442',
         name: 'String',
-        amount: 9550589.983424686,
-        date: '2022-02-20T13:05:20Z',
-        updatedAt: '2022-02-20T13:05:20Z',
+        amount: 3864927.096576982,
+        date: '2022-02-21T02:09:57Z',
+        updatedAt: '2022-02-21T02:09:57Z',
       },
     },
     two: {
       data: {
-        plaidId: 'String3250752',
         name: 'String',
-        amount: 9570594.740971288,
-        date: '2022-02-20T13:05:20Z',
-        updatedAt: '2022-02-20T13:05:20Z',
+        amount: 8232404.57616518,
+        date: '2022-02-21T02:09:57Z',
+        updatedAt: '2022-02-21T02:09:57Z',
       },
     },
   },

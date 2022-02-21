@@ -1,9 +1,8 @@
 import type { ProjectsQuery } from 'types/graphql'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
-import { routes } from '@redwoodjs/router'
+import { Link, routes } from '@redwoodjs/router'
 import Loader from 'src/ui/Loader'
-import ItemList from 'src/ui/ItemList'
-import ItemListItem from 'src/ui/ItemList/ItemListItem'
+import Table from 'src/components/Layout/Table'
 
 export const QUERY = gql`
   query ProjectsQuery {
@@ -27,27 +26,37 @@ export const Failure = ({ error }: CellFailureProps) => (
 )
 
 export const Success = ({ projects }: CellSuccessProps<ProjectsQuery>) => {
+  const data = projects.map((project, i) => [
+    <Link
+      key={i}
+      to={routes.project({ id: project.id })}
+      className="font-medium text-indigo-600 hover:text-indigo-700"
+    >
+      {project.title}
+    </Link>,
+    <span key={i} className="block max-w-[24rem] truncate">
+      {project.description}
+    </span>,
+    project.tasks.length,
+    <Link
+      key={i}
+      to={routes.project({ id: project.id })}
+      className="text-indigo-600 hover:text-indigo-700"
+    >
+      View
+    </Link>,
+  ])
+
   return (
-    <>
-      <ItemList>
-        {projects.map((project) => (
-          <ItemListItem
-            key={project.id}
-            title={project.title}
-            description={project.description}
-            to={routes.project({ id: project.id })}
-            subItems={
-              project?.tasks?.length
-                ? {
-                    count: project.tasks.length,
-                    title: 'tasks',
-                    singularTitle: 'task',
-                  }
-                : undefined
-            }
-          />
-        ))}
-      </ItemList>
-    </>
+    <Table
+      cols={[
+        { label: 'Title' },
+        { label: 'Description' },
+        { label: 'Tasks' },
+        { label: 'View', hidden: true },
+      ]}
+      rows={data}
+      total={projects.length}
+    />
   )
 }

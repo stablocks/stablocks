@@ -14,10 +14,7 @@ const ProjectForm = (props) => {
   return (
     <Form
       onSubmit={onSubmit}
-      loading={props.loading}
-      error={props.error}
-      newForm={props.newForm}
-      isSaved={props.isSaved}
+      {...props}
       sections={[
         {
           fields: [

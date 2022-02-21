@@ -7,6 +7,12 @@ import {
 } from './expenseCategories'
 import type { StandardScenario } from './expenseCategories.scenarios'
 
+// Generated boilerplate tests do not account for all circumstances
+// and can fail without adjustments, e.g. Float and DateTime types.
+//           Please refer to the RedwoodJS Testing Docs:
+//       https://redwoodjs.com/docs/testing#testing-services
+// https://redwoodjs.com/docs/testing#jest-expect-type-considerations
+
 describe('expenseCategories', () => {
   scenario(
     'returns all expenseCategories',
@@ -32,11 +38,16 @@ describe('expenseCategories', () => {
 
   scenario('creates a expenseCategory', async () => {
     const result = await createExpenseCategory({
-      input: { name: 'String', updatedAt: '2022-01-22T19:52:06Z' },
+      input: {
+        name: 'String',
+        slug: 'String9710810',
+        updatedAt: '2022-02-20T17:21:23Z',
+      },
     })
 
     expect(result.name).toEqual('String')
-    expect(result.updatedAt).toEqual('2022-01-22T19:52:06Z')
+    expect(result.slug).toEqual('String9710810')
+    expect(result.updatedAt).toEqual('2022-02-20T17:21:23Z')
   })
 
   scenario('updates a expenseCategory', async (scenario: StandardScenario) => {

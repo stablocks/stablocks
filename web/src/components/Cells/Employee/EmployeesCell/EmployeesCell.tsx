@@ -35,9 +35,7 @@ export const Success = ({ employees }: CellSuccessProps<EmployeesQuery>) => {
       to={routes.employee({ id: employee.id })}
       className="font-medium text-indigo-600 hover:text-indigo-700"
     >{`${employee.firstName} ${employee.lastName}`}</Link>,
-    <span key={i} className="text-gray-600">
-      {employee.email}
-    </span>,
+    employee.email,
     <Link
       key={i}
       to={routes.employee({ id: employee.id })}
@@ -48,15 +46,14 @@ export const Success = ({ employees }: CellSuccessProps<EmployeesQuery>) => {
   ])
 
   return (
-    <>
-      <Table
-        cols={[
-          { label: 'Name' },
-          { label: 'Email' },
-          { label: 'View', hidden: true },
-        ]}
-        rows={data}
-      />
-    </>
+    <Table
+      cols={[
+        { label: 'Name' },
+        { label: 'Email' },
+        { label: 'View', hidden: true },
+      ]}
+      rows={data}
+      total={employees.length}
+    />
   )
 }

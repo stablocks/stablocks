@@ -31,9 +31,7 @@ export const Success = ({ contacts }: CellSuccessProps<ContactsQuery>) => {
       to={routes.contact({ id: contact.id })}
       className="font-medium text-indigo-600 hover:text-indigo-700"
     >{`${contact.firstName} ${contact.lastName}`}</Link>,
-    <span key={i} className="text-gray-600">
-      {`${contact?.email}`}
-    </span>,
+    contact?.email ? contact.email : '',
     <Link
       key={i}
       to={routes.contact({ id: contact.id })}
@@ -51,6 +49,7 @@ export const Success = ({ contacts }: CellSuccessProps<ContactsQuery>) => {
         { label: 'View', hidden: true },
       ]}
       rows={data}
+      total={contacts.length}
     />
   )
 }

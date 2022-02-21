@@ -2,8 +2,20 @@ import type { Prisma } from '@prisma/client'
 
 export const standard = defineScenario<Prisma.ExpenseCategoryCreateArgs>({
   expenseCategory: {
-    one: { data: { name: 'String', updatedAt: '2022-01-22T19:52:06Z' } },
-    two: { data: { name: 'String', updatedAt: '2022-01-22T19:52:06Z' } },
+    one: {
+      data: {
+        name: 'String',
+        slug: 'String3295984',
+        updatedAt: '2022-02-20T17:21:23Z',
+      },
+    },
+    two: {
+      data: {
+        name: 'String',
+        slug: 'String7359609',
+        updatedAt: '2022-02-20T17:21:23Z',
+      },
+    },
   },
 })
 

@@ -29,29 +29,27 @@ describe('expenses', () => {
   scenario('creates a expense', async () => {
     const result = await createExpense({
       input: {
-        plaidId: 'String6665797',
         name: 'String',
-        amount: 2876306.549708818,
-        date: '2022-02-20T13:05:20Z',
-        updatedAt: '2022-02-20T13:05:20Z',
+        amount: 3954899.560918408,
+        date: '2022-02-21T02:09:57Z',
+        updatedAt: '2022-02-21T02:09:57Z',
       },
     })
 
-    expect(result.plaidId).toEqual('String6665797')
     expect(result.name).toEqual('String')
-    expect(result.amount).toEqual(2876306.549708818)
-    expect(result.date).toEqual('2022-02-20T13:05:20Z')
-    expect(result.updatedAt).toEqual('2022-02-20T13:05:20Z')
+    expect(result.amount).toEqual(3954899.560918408)
+    expect(result.date).toEqual('2022-02-21T02:09:57Z')
+    expect(result.updatedAt).toEqual('2022-02-21T02:09:57Z')
   })
 
   scenario('updates a expense', async (scenario: StandardScenario) => {
     const original = await expense({ id: scenario.expense.one.id })
     const result = await updateExpense({
       id: original.id,
-      input: { plaidId: 'String5656272' },
+      input: { name: 'String2' },
     })
 
-    expect(result.plaidId).toEqual('String5656272')
+    expect(result.name).toEqual('String2')
   })
 
   scenario('deletes a expense', async (scenario: StandardScenario) => {
