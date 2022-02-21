@@ -5,9 +5,9 @@ export const schema = gql`
     contactId: String!
     currency: String!
     issued: DateTime!
-    dueDate: DateTime!
-    sent: Boolean!
-    paid: Boolean!
+    dueDate: DateTime
+    sent: Boolean
+    paid: Boolean
     description: String
     items: [InvoiceItem]!
     income: Income
@@ -24,9 +24,9 @@ export const schema = gql`
     contactId: String!
     currency: String!
     issued: DateTime!
-    dueDate: DateTime!
-    sent: Boolean!
-    paid: Boolean!
+    dueDate: DateTime
+    sent: Boolean
+    paid: Boolean
     description: String
   }
 

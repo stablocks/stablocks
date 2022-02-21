@@ -20,8 +20,16 @@ interface OptionSwitchProps {
 }
 
 const OptionSwitch = (props: OptionSwitchProps) => {
-  const { id, name, options, selected, unselectedLabel, onSubmit, loading } =
-    props
+  const {
+    id,
+    name,
+    options,
+    selected,
+    unselectedLabel,
+    onSubmit,
+    loading,
+    button,
+  } = props
 
   const unselected = { label: unselectedLabel, value: '' }
 
@@ -50,11 +58,17 @@ const OptionSwitch = (props: OptionSwitchProps) => {
   return (
     <Listbox value={selectedOption} onChange={onChange} disabled={loading}>
       <div className="relative mt-1">
-        <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left max-w-[16rem] truncate rounded-md border border-gray-300 bg-gray-50 cursor-default focus:outline-none sm:text-sm">
+        <Listbox.Button
+          className={`${
+            button
+              ? 'btn btn-primary'
+              : 'rounded-md border border-gray-300 bg-gray-50 cursor-default focus:outline-none sm:text-sm'
+          } text-left max-w-[16rem] truncate relative w-full py-2 pl-3 pr-10`}
+        >
           <span className="block truncate">{selectedOption.label}</span>
           <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
             <SelectorIcon
-              className="w-5 h-5 text-gray-400"
+              className={`${button ? 'text-white' : 'text-gray-400'} w-5 h-5`}
               aria-hidden="true"
             />
           </span>

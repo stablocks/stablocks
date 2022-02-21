@@ -97,6 +97,7 @@ const DescriptionListItem = ({
                   validation={{ required: field.required }}
                   defaultChecked={field.defaultValue}
                   ref={fieldRef}
+                  {...field.elementProps}
                 />
               </ConditionalWrapper>
 

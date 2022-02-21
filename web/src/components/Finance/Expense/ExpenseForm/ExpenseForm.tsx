@@ -24,6 +24,9 @@ const ExpenseForm = (props) => {
               name: 'amount',
               label: 'Amount',
               element: NumberField,
+              elementProps: {
+                step: '0.01',
+              },
               defaultValue: props.expense?.amount,
               required: true,
             },
@@ -31,7 +34,9 @@ const ExpenseForm = (props) => {
               name: 'date',
               label: 'Date',
               element: DatetimeLocalField,
-              defaultValue: props.expense?.date,
+              defaultValue: props.expense?.date
+                ? new Date(props.expense?.date).toISOString().slice(0, -1)
+                : undefined,
               required: true,
             },
             {

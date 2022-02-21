@@ -6,6 +6,7 @@ export interface FormField {
   name: string
   label: string
   element: React.ForwardRefExoticComponent<any>
+  elementProps?: { [key: string]: any }
   defaultValue: string | boolean | number | undefined
   required?: boolean
   newHide?: boolean

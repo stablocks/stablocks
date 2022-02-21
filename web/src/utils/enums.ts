@@ -1,4 +1,10 @@
-export const currencies = [{ value: 'USD', label: 'USD', symbol: '$' }]
+export const currencies = [
+  { value: 'USD', label: 'USD', symbol: '$' },
+  { value: 'CAD', label: 'CAD', symbol: 'C$' },
+  { value: 'EUR', label: 'EUR', symbol: '€' },
+  { value: 'GBP', label: 'GBP', symbol: '£' },
+  { value: 'AUD', label: 'AUD', symbol: 'A$' },
+]
 
 export const expenseCategories = [
   { name: 'Advertising', slug: 'advertising', default: true },

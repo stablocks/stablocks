@@ -1,5 +1,11 @@
 import { useContext, useEffect, useState } from 'react'
-import { Redirect, routes, RouteFocus, navigate } from '@redwoodjs/router'
+import {
+  Redirect,
+  routes,
+  RouteFocus,
+  navigate,
+  useParams,
+} from '@redwoodjs/router'
 import { useAuth } from '@redwoodjs/auth'
 import { Form, Label, TextField, FieldError, Submit } from '@redwoodjs/forms'
 import { MetaTags } from '@redwoodjs/web'
@@ -12,6 +18,7 @@ const LoginPage = () => {
   const [email, setEmail] = useState('')
   const { logIn, currentUser } = useAuth()
   const { organization, userCount } = useContext(AppContext)
+  const { redirectTo } = useParams()
 
   const providers = [
     {
@@ -46,7 +53,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (currentUser) {
-      navigate(routes.home())
+      navigate(redirectTo ? redirectTo : routes.home())
     }
   }, [currentUser])
 

@@ -1,12 +1,16 @@
 import { navigate, routes } from '@redwoodjs/router'
+import { AppContext } from 'src/components/Providers/AppProviderCell'
 import PageTitle from 'src/ui/PageTitle'
 import { RiSettings3Line } from 'react-icons/ri'
 
 const OrganizationPage = () => {
+  const { organization } = React.useContext(AppContext)
+
   return (
     <>
       <PageTitle
-        title="Organization"
+        title={organization.name}
+        currentCrumbLabel="Organization"
         buttons={[
           {
             label: 'Settings',

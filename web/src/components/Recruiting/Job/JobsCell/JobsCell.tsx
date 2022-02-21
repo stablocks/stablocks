@@ -1,7 +1,7 @@
 import type { JobsQuery } from 'types/graphql'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import { Link, routes } from '@redwoodjs/router'
-import Loader from 'src/ui/Loader'
+import TableLoader from 'src/ui/TableLoader'
 import Table from 'src/components/Layout/Table'
 
 export const QUERY = gql`
@@ -17,7 +17,14 @@ export const QUERY = gql`
   }
 `
 
-export const Loading = () => <Loader />
+const tableColumns = [
+  { label: 'Title' },
+  { label: 'Description' },
+  { label: 'Applications' },
+  { label: 'View', hidden: true },
+]
+
+export const Loading = () => <TableLoader cols={tableColumns} />
 
 export const Empty = () => <></>
 
@@ -47,16 +54,5 @@ export const Success = ({ jobs }: CellSuccessProps<JobsQuery>) => {
     </Link>,
   ])
 
-  return (
-    <Table
-      cols={[
-        { label: 'Title' },
-        { label: 'Description' },
-        { label: 'Applications' },
-        { label: 'View', hidden: true },
-      ]}
-      rows={data}
-      total={jobs.length}
-    />
-  )
+  return <Table cols={tableColumns} rows={data} total={jobs.length} />
 }

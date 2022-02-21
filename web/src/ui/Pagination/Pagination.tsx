@@ -1,4 +1,4 @@
-import { navigate, useLocation } from '@redwoodjs/router'
+import { navigate, useLocation, useParams } from '@redwoodjs/router'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
 import { classNames } from 'src/utils/base'
 
@@ -10,13 +10,11 @@ type PaginationProps = {
 
 const Pagination = ({ total }: PaginationProps) => {
   const { pathname, search } = useLocation()
+  const params = useParams()
   const [currentPage, setCurrentPage] = React.useState(1)
 
   React.useEffect(() => {
-    const params = new URLSearchParams(search)
-    const page = params.get('page')
-
-    if (page) setCurrentPage(parseInt(page))
+    if (params.page) setCurrentPage(parseInt(params.page))
   }, [search])
 
   const startingItem = (currentPage - 1) * perPage + 1

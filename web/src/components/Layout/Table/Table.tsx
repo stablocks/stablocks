@@ -1,10 +1,12 @@
 import Pagination from 'src/ui/Pagination'
 
+export type TableColumn = {
+  label: string
+  hidden?: boolean
+}
+
 type TableProps = {
-  cols: {
-    label: string
-    hidden?: boolean
-  }[]
+  cols: TableColumn[]
   rows: React.ReactNode[][]
   total?: number
 }

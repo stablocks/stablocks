@@ -1,6 +1,5 @@
 import {
   CheckboxField,
-  DateField,
   DatetimeLocalField,
   TextField,
   TextAreaField,
@@ -43,7 +42,7 @@ const InvoiceForm = (props) => {
             {
               name: 'dueDate',
               label: 'Due Date',
-              element: DateField,
+              element: DatetimeLocalField,
               defaultValue: props.invoice?.dueDate,
               required: true,
             },

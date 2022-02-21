@@ -2,7 +2,7 @@ import type { ExpensesQuery } from 'types/graphql'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
-import Loader from 'src/ui/Loader'
+import TableLoader from 'src/ui/TableLoader'
 import Table from 'src/components/Layout/Table'
 import ExpenseForm from '../ExpenseForm'
 import OptionSwitch from 'src/ui/OptionSwitch'
@@ -50,7 +50,14 @@ const UPDATE_EXPENSE_MUTATION = gql`
   }
 `
 
-export const Loading = () => <Loader />
+const tableColumns = [
+  { label: 'Name' },
+  { label: 'Category' },
+  { label: 'Amount' },
+  { label: 'Date' },
+]
+
+export const Loading = () => <TableLoader cols={tableColumns} />
 
 export const Empty = () => <></>
 
@@ -115,16 +122,5 @@ export const Success = ({ expenses }: CellSuccessProps<ExpensesQuery>) => {
     new Date(expense.date).toDateString(),
   ])
 
-  return (
-    <Table
-      cols={[
-        { label: 'Name' },
-        { label: 'Category' },
-        { label: 'Amount' },
-        { label: 'Date' },
-      ]}
-      rows={data}
-      total={expenses.count}
-    />
-  )
+  return <Table cols={tableColumns} rows={data} total={expenses.count} />
 }

@@ -24,6 +24,9 @@ const IncomeForm = (props) => {
               name: 'amount',
               label: 'Amount',
               element: NumberField,
+              elementProps: {
+                step: '0.01',
+              },
               defaultValue: props.income?.amount,
               required: true,
             },

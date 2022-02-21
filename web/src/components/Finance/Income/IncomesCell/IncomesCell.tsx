@@ -2,7 +2,7 @@ import type { IncomesQuery } from 'types/graphql'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
-import Loader from 'src/ui/Loader'
+import TableLoader from 'src/ui/TableLoader'
 import Table from 'src/components/Layout/Table'
 import IncomeForm from '../IncomeForm'
 import { formatAmount } from 'src/utils/currency'
@@ -31,7 +31,9 @@ const UPDATE_INCOME_MUTATION = gql`
   }
 `
 
-export const Loading = () => <Loader />
+const tableColumns = [{ label: 'Name' }, { label: 'Amount' }, { label: 'Date' }]
+
+export const Loading = () => <TableLoader cols={tableColumns} />
 
 export const Empty = () => <></>
 
@@ -73,11 +75,5 @@ export const Success = ({ incomes }: CellSuccessProps<IncomesQuery>) => {
     formatAmount(income.amount, income.currency),
     new Date(income.date).toDateString(),
   ])
-  return (
-    <Table
-      cols={[{ label: 'Name' }, { label: 'Amount' }, { label: 'Date' }]}
-      rows={data}
-      total={incomes.length}
-    />
-  )
+  return <Table cols={tableColumns} rows={data} total={incomes.length} />
 }

@@ -1,7 +1,7 @@
 import type { TicketsQuery } from 'types/graphql'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import { Link, routes } from '@redwoodjs/router'
-import Loader from 'src/ui/Loader'
+import TableLoader from 'src/ui/TableLoader'
 import Table from 'src/components/Layout/Table'
 
 export const QUERY = gql`
@@ -14,7 +14,14 @@ export const QUERY = gql`
   }
 `
 
-export const Loading = () => <Loader />
+const tableColumns = [
+  { label: 'ID' },
+  { label: 'Title' },
+  { label: 'Description' },
+  { label: 'View', hidden: true },
+]
+
+export const Loading = () => <TableLoader cols={tableColumns} />
 
 export const Empty = () => <></>
 
@@ -44,16 +51,5 @@ export const Success = ({ tickets }: CellSuccessProps<TicketsQuery>) => {
     </Link>,
   ])
 
-  return (
-    <Table
-      cols={[
-        { label: 'ID' },
-        { label: 'Title' },
-        { label: 'Description' },
-        { label: 'View', hidden: true },
-      ]}
-      rows={data}
-      total={tickets.length}
-    />
-  )
+  return <Table cols={tableColumns} rows={data} total={tickets.length} />
 }
