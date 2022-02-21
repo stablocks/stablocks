@@ -72,7 +72,9 @@ export const Success = ({ search, setEmptyResult }: SearchSuccessProps) => {
             to={createTo(result.type, result.id)}
             className="group flex items-center justify-between select-none px-4 py-2 rounded-md overflow-hidden hover:bg-indigo-600 hover:text-white focus:bg-indigo-600 focus:text-white focus:outline-none transition-colors duration-300"
           >
-            <span className="font-medium">{result.title}</span>
+            <span className="font-medium text-left truncate">
+              {result.title}
+            </span>
             <span className="text-2xs uppercase text-gray-500 group-hover:text-gray-100 group-focus:text-gray-100 transition-colors duration-300">
               {result.type}
             </span>

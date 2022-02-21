@@ -8,7 +8,9 @@ import TableLoader from './TableLoader'
 describe('TableLoader', () => {
   it('renders successfully', () => {
     expect(() => {
-      render(<TableLoader />)
+      render(
+        <TableLoader cols={[{ label: 'Title' }, { label: 'Description' }]} />
+      )
     }).not.toThrow()
   })
 })
