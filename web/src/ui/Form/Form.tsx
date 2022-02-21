@@ -1,5 +1,6 @@
 import NewForm from './NewForm'
 import EditForm from './EditForm'
+import PopupForm from './PopupForm'
 
 export interface FormField {
   name: string
@@ -10,6 +11,7 @@ export interface FormField {
   newHide?: boolean
   editHide?: boolean
   prepend?: string
+  notEditable?: boolean
 }
 
 export interface Section {
@@ -23,6 +25,11 @@ export interface Section {
 export interface FormProps {
   sections: Section[]
   newForm?: boolean
+  popup?: {
+    type: 'link' | 'button'
+    label: string
+    title?: string
+  }
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onSubmit: (data: any) => void
   loading: boolean
@@ -32,6 +39,7 @@ export interface FormProps {
 }
 
 const Form = (props: FormProps) => {
+  if (props.popup) return <PopupForm {...props} />
   if (props.newForm) return <NewForm {...props} />
 
   return <EditForm {...props} />
