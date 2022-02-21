@@ -4,7 +4,7 @@ import type { ResolverArgs } from '@redwoodjs/graphql-server'
 import { db } from 'src/lib/db'
 
 export const tasks = () => {
-  return db.task.findMany()
+  return db.task.findMany({ orderBy: { createdAt: 'asc' } })
 }
 
 export const task = ({ id }: Prisma.TaskWhereUniqueInput) => {

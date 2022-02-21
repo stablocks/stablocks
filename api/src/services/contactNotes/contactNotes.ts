@@ -4,7 +4,7 @@ import type { ResolverArgs } from '@redwoodjs/graphql-server'
 import { db } from 'src/lib/db'
 
 export const contactNotes = () => {
-  return db.contactNote.findMany()
+  return db.contactNote.findMany({ orderBy: { createdAt: 'asc' } })
 }
 
 export const contactNote = ({ id }: Prisma.ContactNoteWhereUniqueInput) => {

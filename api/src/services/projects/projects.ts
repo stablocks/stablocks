@@ -4,7 +4,7 @@ import type { ResolverArgs } from '@redwoodjs/graphql-server'
 import { db } from 'src/lib/db'
 
 export const projects = () => {
-  return db.project.findMany()
+  return db.project.findMany({ orderBy: { title: 'asc' } })
 }
 
 export const project = ({ id }: Prisma.ProjectWhereUniqueInput) => {

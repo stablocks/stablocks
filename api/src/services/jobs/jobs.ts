@@ -4,7 +4,7 @@ import type { ResolverArgs } from '@redwoodjs/graphql-server'
 import { db } from 'src/lib/db'
 
 export const jobs = () => {
-  return db.job.findMany()
+  return db.job.findMany({ orderBy: { createdAt: 'desc' } })
 }
 
 export const job = ({ id }: Prisma.JobWhereUniqueInput) => {

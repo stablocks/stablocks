@@ -4,7 +4,7 @@ import { requireAuth } from 'src/lib/auth'
 import { db } from 'src/lib/db'
 
 export const plaidItems = () => {
-  // requireAuth({ roles: ['admin', 'financeAdmin'] })
+  requireAuth({ roles: ['admin', 'financeAdmin'] })
 
   return db.plaidItem.findMany()
 }

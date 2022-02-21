@@ -4,7 +4,7 @@ import type { ResolverArgs } from '@redwoodjs/graphql-server'
 import { db } from 'src/lib/db'
 
 export const companies = () => {
-  return db.company.findMany()
+  return db.company.findMany({ orderBy: { name: 'asc' } })
 }
 
 export const company = ({ id }: Prisma.CompanyWhereUniqueInput) => {

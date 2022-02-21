@@ -4,7 +4,7 @@ import type { ResolverArgs } from '@redwoodjs/graphql-server'
 import { db } from 'src/lib/db'
 
 export const ticketComments = () => {
-  return db.ticketComment.findMany()
+  return db.ticketComment.findMany({ orderBy: { createdAt: 'asc' } })
 }
 
 export const ticketComment = ({ id }: Prisma.TicketCommentWhereUniqueInput) => {

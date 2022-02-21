@@ -4,7 +4,7 @@ import type { ResolverArgs } from '@redwoodjs/graphql-server'
 import { db } from 'src/lib/db'
 
 export const expenseCategories = () => {
-  return db.expenseCategory.findMany()
+  return db.expenseCategory.findMany({ orderBy: { name: 'asc' } })
 }
 
 export const expenseCategory = ({
