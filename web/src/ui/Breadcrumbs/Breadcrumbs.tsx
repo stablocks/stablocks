@@ -52,7 +52,7 @@ const Breadcrumbs = ({ breadcrumbs, currentCrumbLabel }: BreadcrumbsProps) => {
                   />
                   <Link
                     to={breadcrumb.to}
-                    className="rounded-sm text-sm font-medium text-gray-500 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="rounded-sm text-sm truncate max-w-[24rem] font-medium text-gray-500 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   >
                     {breadcrumb.title}
                   </Link>
@@ -68,7 +68,7 @@ const Breadcrumbs = ({ breadcrumbs, currentCrumbLabel }: BreadcrumbsProps) => {
                 />
                 <span
                   aria-current="page"
-                  className="text-sm font-medium text-gray-500"
+                  className="text-sm font-medium text-gray-500 truncate max-w-[24rem]"
                 >
                   {currentCrumbLabel}
                 </span>

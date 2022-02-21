@@ -12,19 +12,19 @@ const Pagination = ({ total }: PaginationProps) => {
   const { pathname, search } = useLocation()
   const [currentPage, setCurrentPage] = React.useState(1)
 
-  const startingItem = (currentPage - 1) * perPage + 1
-  const endingItem = startingItem + (perPage - 1)
-  const lastPage = Math.ceil(total / perPage)
-
-  const pageBelow = currentPage === 1 ? null : currentPage - 1
-  const pageAbove = currentPage === lastPage ? null : currentPage + 1
-
   React.useEffect(() => {
     const params = new URLSearchParams(search)
     const page = params.get('page')
 
     if (page) setCurrentPage(parseInt(page))
   }, [search])
+
+  const startingItem = (currentPage - 1) * perPage + 1
+  const endingItem = startingItem + (perPage - 1)
+  const lastPage = Math.ceil(total / perPage)
+
+  const pageBelow = currentPage === 1 ? null : currentPage - 1
+  const pageAbove = currentPage === lastPage ? null : currentPage + 1
 
   const onPrevious = () => {
     if (currentPage === 1) return
@@ -75,22 +75,24 @@ const Pagination = ({ total }: PaginationProps) => {
 
   return (
     <div className="py-3 flex items-center justify-between">
-      <div className="flex-1 flex justify-between sm:hidden">
-        <button
-          onClick={onPrevious}
-          disabled={currentPage === 1}
-          className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 disabled:bg-gray-100 disabled:text-gray-400"
-        >
-          Previous
-        </button>
-        <button
-          onClick={onNext}
-          disabled={currentPage === lastPage}
-          className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 disabled:bg-gray-100 disabled:text-gray-400"
-        >
-          Next
-        </button>
-      </div>
+      {total > perPage && (
+        <div className="flex-1 flex justify-between sm:hidden">
+          <button
+            onClick={onPrevious}
+            disabled={currentPage === 1}
+            className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 disabled:bg-gray-100 disabled:text-gray-400"
+          >
+            Previous
+          </button>
+          <button
+            onClick={onNext}
+            disabled={currentPage === lastPage}
+            className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 disabled:bg-gray-100 disabled:text-gray-400"
+          >
+            Next
+          </button>
+        </div>
+      )}
       <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
         <div>
           <p className="text-sm text-gray-700">
@@ -98,51 +100,54 @@ const Pagination = ({ total }: PaginationProps) => {
             <span className="font-medium">
               {endingItem > total ? total : endingItem}
             </span>{' '}
-            of <span className="font-medium">{total}</span> results
+            of <span className="font-medium">{total}</span>{' '}
+            {`result${total !== 1 ? 's' : ''}`}
           </p>
         </div>
-        <div>
-          <nav
-            className="relative z-0 inline-flex rounded-md -space-x-px"
-            aria-label="Pagination"
-          >
-            <button
-              onClick={onPrevious}
-              disabled={currentPage === 1}
-              className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:bg-gray-100 disabled:text-gray-400"
+        {total > perPage && (
+          <div>
+            <nav
+              className="relative z-0 inline-flex rounded-md -space-x-px"
+              aria-label="Pagination"
             >
-              <span className="sr-only">Previous</span>
-              <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
-            </button>
+              <button
+                onClick={onPrevious}
+                disabled={currentPage === 1}
+                className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:bg-gray-100 disabled:text-gray-400"
+              >
+                <span className="sr-only">Previous</span>
+                <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
+              </button>
 
-            <PageButton value={1} />
+              <PageButton value={1} />
 
-            {currentPage - 2 > 1 && <SpacerButton />}
+              {currentPage - 2 > 1 && <SpacerButton />}
 
-            {pageBelow && pageBelow !== 1 && <PageButton value={pageBelow} />}
+              {pageBelow && pageBelow !== 1 && <PageButton value={pageBelow} />}
 
-            {![1, lastPage].includes(currentPage) && (
-              <PageButton value={currentPage} />
-            )}
+              {![1, lastPage].includes(currentPage) && (
+                <PageButton value={currentPage} />
+              )}
 
-            {pageAbove && pageAbove !== lastPage && (
-              <PageButton value={pageAbove} />
-            )}
+              {pageAbove && pageAbove !== lastPage && (
+                <PageButton value={pageAbove} />
+              )}
 
-            {currentPage + 2 < lastPage && <SpacerButton />}
+              {currentPage + 2 < lastPage && <SpacerButton />}
 
-            <PageButton value={lastPage} />
+              <PageButton value={lastPage} />
 
-            <button
-              onClick={onNext}
-              disabled={currentPage === lastPage}
-              className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:bg-gray-100 disabled:text-gray-400"
-            >
-              <span className="sr-only">Next</span>
-              <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
-            </button>
-          </nav>
-        </div>
+              <button
+                onClick={onNext}
+                disabled={currentPage === lastPage}
+                className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:bg-gray-100 disabled:text-gray-400"
+              >
+                <span className="sr-only">Next</span>
+                <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
+              </button>
+            </nav>
+          </div>
+        )}
       </div>
     </div>
   )

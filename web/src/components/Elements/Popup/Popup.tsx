@@ -70,7 +70,7 @@ const Popup = ({
                   as="h3"
                   className={`${
                     closeButton || !buttons ? 'pr-8 ' : ''
-                  }text-lg font-medium leading-6 text-gray-900`}
+                  }text-lg font-medium leading-6 text-gray-900 truncate`}
                 >
                   {title}
                 </Dialog.Title>

@@ -40,7 +40,7 @@ const PageTitle = ({
     <>
       <MetaTags title={metaTitle} />
 
-      <div className="page-title mb-12">
+      <div className="page-title mb-8">
         <Breadcrumbs
           breadcrumbs={breadcrumbs}
           currentCrumbLabel={currentCrumbLabel || title}
