@@ -9,6 +9,7 @@ export interface ActionButton {
   icon?: (props: React.ComponentProps<'svg'>) => JSX.Element
   onClick: () => void
   roles?: string[]
+  disabled?: boolean
   children?: ActionButton[]
 }
 
@@ -28,6 +29,7 @@ const MenuButtonGroup = ({ buttons }: MenuButtonGroupProps) => {
               <button
                 onClick={button.onClick}
                 type="button"
+                disabled={button.disabled}
                 className={`${
                   button.main
                     ? 'btn-primary'
@@ -42,6 +44,7 @@ const MenuButtonGroup = ({ buttons }: MenuButtonGroupProps) => {
               {button.children && button.children.length > 0 && (
                 <Menu as="span" className="relative -ml-px block">
                   <Menu.Button
+                    disabled={button.disabled}
                     className={`${
                       button.main
                         ? 'btn-primary border-l-indigo-400'
@@ -60,18 +63,19 @@ const MenuButtonGroup = ({ buttons }: MenuButtonGroupProps) => {
                     leaveFrom="transform opacity-100 scale-100"
                     leaveTo="transform opacity-0 scale-95"
                   >
-                    <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right rounded-md border border-gray-300 bg-white  focus:outline-none">
+                    <Menu.Items className="absolute right-0 mt-2 min-w-[8rem] origin-top-right rounded-md border border-gray-300 bg-white  focus:outline-none">
                       <div className="py-1">
                         {button.children.map((item, i) => (
                           <Menu.Item key={i}>
                             {({ active }) => (
                               <button
                                 onClick={item.onClick}
+                                disabled={button.disabled}
                                 className={`${
                                   active
                                     ? 'bg-gray-100 text-gray-900'
                                     : 'text-gray-700'
-                                } block w-full px-4 py-2 text-sm`}
+                                } block w-full px-4 py-2 text-sm whitespace-nowrap`}
                               >
                                 {item.label}
                               </button>

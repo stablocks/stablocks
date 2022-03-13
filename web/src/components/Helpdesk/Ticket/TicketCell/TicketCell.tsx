@@ -1,10 +1,13 @@
 import type { FindTicketQuery } from 'types/graphql'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
-import { navigate, routes } from '@redwoodjs/router'
+import { useMutation } from '@redwoodjs/web'
+import { toast } from '@redwoodjs/web/toast'
+import { navigate, routes, useParams } from '@redwoodjs/router'
 import Loader from 'src/ui/Loader'
 import InfoImage from 'src/ui/InfoImage'
 import PageTitle from 'src/ui/PageTitle'
 import { PencilAltIcon } from '@heroicons/react/outline'
+import { statuses } from 'src/utils/enums'
 
 export const QUERY = gql`
   query FindTicketQuery($id: Int!) {
@@ -12,6 +15,15 @@ export const QUERY = gql`
       id
       title
       description
+      status
+    }
+  }
+`
+
+const UPDATE_TICKET_STATUS_MUTATION = gql`
+  mutation UpdateTicketStatusMutation($id: Int!, $input: UpdateTicketInput!) {
+    updateTicket(id: $id, input: $input) {
+      id
       status
     }
   }
@@ -47,6 +59,28 @@ export const Failure = ({ error }: CellFailureProps) => (
 )
 
 export const Success = ({ ticket }: CellSuccessProps<FindTicketQuery>) => {
+  const { id } = useParams()
+
+  const [updateTicket, { loading }] = useMutation(
+    UPDATE_TICKET_STATUS_MUTATION,
+    {
+      onCompleted: () => {
+        toast.success('Ticket status updated')
+      },
+      onError: (error) => {
+        toast.error(error.message)
+      },
+    }
+  )
+
+  const label = statuses.find((status) => status.value === ticket.status).label
+
+  const onStatusChange = (value: string) => {
+    if (value !== ticket.status) {
+      updateTicket({ variables: { id, input: { status: value } } })
+    }
+  }
+
   return (
     <>
       <PageTitle
@@ -62,6 +96,20 @@ export const Success = ({ ticket }: CellSuccessProps<FindTicketQuery>) => {
             label: 'Edit',
             icon: PencilAltIcon,
             onClick: () => navigate(routes.editTicket({ id: ticket.id })),
+          },
+          {
+            label,
+            onClick: () => {},
+            main: true,
+            disabled: loading,
+            children: [
+              ...statuses.map((status) => {
+                return {
+                  label: status.label,
+                  onClick: () => onStatusChange(status.value),
+                }
+              }),
+            ],
           },
         ]}
       />
