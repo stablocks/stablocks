@@ -33,6 +33,7 @@ const NewForm = (props: FormProps) => {
                         name={field.name}
                         defaultValue={field.defaultValue}
                         validation={{ required: field.required }}
+                        {...field.attributes}
                       />
                       <FieldError
                         name={field.name}

@@ -14,6 +14,7 @@ export const QUERY = gql`
       id
       title
       description
+      status
       project {
         id
         title
@@ -29,6 +30,12 @@ const UPDATE_TASK_MUTATION = gql`
       id
       title
       description
+      status
+      project {
+        id
+        title
+        description
+      }
     }
   }
 `
@@ -87,7 +94,7 @@ export const Success = ({ task }: CellSuccessProps<EditTask>) => {
             to: routes.project({ id: task.project.id }),
           },
           { title: 'Tasks', to: routes.tasks() },
-          { title: task.title, to: routes.project({ id: task.id }) },
+          { title: task.title, to: routes.task({ id: task.id }) },
         ]}
         search={{ label: 'tasks', type: 'task' }}
       />

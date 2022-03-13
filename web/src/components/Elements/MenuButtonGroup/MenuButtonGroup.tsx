@@ -60,7 +60,7 @@ const MenuButtonGroup = ({ buttons }: MenuButtonGroupProps) => {
                     leaveFrom="transform opacity-100 scale-100"
                     leaveTo="transform opacity-0 scale-95"
                   >
-                    <Menu.Items className="absolute right-0 mt-2 -mr-1 w-56 origin-top-right rounded-md border border-gray-300 bg-white  focus:outline-none">
+                    <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right rounded-md border border-gray-300 bg-white  focus:outline-none">
                       <div className="py-1">
                         {button.children.map((item, i) => (
                           <Menu.Item key={i}>

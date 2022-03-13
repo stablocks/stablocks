@@ -14,6 +14,7 @@ export const QUERY = gql`
       id
       title
       description
+      status
     }
   }
 `
@@ -24,6 +25,7 @@ const UPDATE_TICKET_MUTATION = gql`
       id
       title
       description
+      status
     }
   }
 `

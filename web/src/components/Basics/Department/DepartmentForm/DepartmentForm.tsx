@@ -1,4 +1,4 @@
-import { TextField } from '@redwoodjs/forms'
+import { EmailField, TextField } from '@redwoodjs/forms'
 import Form from 'src/ui/Form'
 
 const DepartmentForm = (props) => {
@@ -21,12 +21,14 @@ const DepartmentForm = (props) => {
               label: 'Name',
               element: TextField,
               defaultValue: props.department?.name,
-              required: true,
+              validation: {
+                required: true,
+              },
             },
             {
               name: 'email',
               label: 'Email',
-              element: TextField,
+              element: EmailField,
               defaultValue: props.department?.email,
             },
           ],

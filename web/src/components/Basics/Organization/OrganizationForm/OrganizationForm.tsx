@@ -1,8 +1,9 @@
 import {
   CheckboxField,
-  NumberField,
+  EmailField,
   TextField,
   TextAreaField,
+  UrlField,
 } from '@redwoodjs/forms'
 import Form from 'src/ui/Form'
 
@@ -35,12 +36,14 @@ const OrganizationForm = (props) => {
               label: 'Name',
               element: TextField,
               defaultValue: props.organization?.name,
-              required: true,
+              validation: {
+                required: true,
+              },
             },
             {
               name: 'website',
               label: 'Website',
-              element: TextField,
+              element: UrlField,
               defaultValue: props.organization?.website,
               prepend: 'https://',
             },
@@ -53,7 +56,7 @@ const OrganizationForm = (props) => {
             {
               name: 'email',
               label: 'Default Company Email',
-              element: TextField,
+              element: EmailField,
               defaultValue: props.organization?.email,
             },
           ],
@@ -88,8 +91,11 @@ const OrganizationForm = (props) => {
             {
               name: 'zipCode',
               label: 'Zip Code',
-              element: NumberField,
+              element: TextField,
               defaultValue: props.organization?.zipCode,
+              validation: {
+                valueAsNumber: true,
+              },
             },
           ],
         },

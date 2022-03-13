@@ -1,4 +1,4 @@
-import { EmailField, NumberField, TelField, TextField } from '@redwoodjs/forms'
+import { EmailField, TelField, TextField } from '@redwoodjs/forms'
 import { useAuth } from '@redwoodjs/auth'
 import Form from 'src/ui/Form'
 
@@ -27,14 +27,18 @@ const ContactForm = (props) => {
               label: 'First Name',
               element: TextField,
               defaultValue: props.contact?.firstName,
-              required: true,
+              validation: {
+                required: true,
+              },
             },
             {
               name: 'lastName',
               label: 'Last Name',
               element: TextField,
               defaultValue: props.contact?.lastName,
-              required: true,
+              validation: {
+                required: true,
+              },
             },
             {
               name: 'email',
@@ -80,8 +84,11 @@ const ContactForm = (props) => {
             {
               name: 'zipCode',
               label: 'ZIP / Postal Code',
-              element: NumberField,
+              element: TextField,
               defaultValue: props.contact?.zipCode,
+              validation: {
+                valueAsNumber: true,
+              },
             },
           ],
         },

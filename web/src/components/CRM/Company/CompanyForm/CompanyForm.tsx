@@ -1,4 +1,4 @@
-import { TelField, TextField } from '@redwoodjs/forms'
+import { TelField, TextField, UrlField } from '@redwoodjs/forms'
 import { useAuth } from '@redwoodjs/auth'
 import Form from 'src/ui/Form'
 
@@ -26,12 +26,14 @@ const CompanyForm = (props) => {
               label: 'Name',
               element: TextField,
               defaultValue: props.company?.name,
-              required: true,
+              validation: {
+                required: true,
+              },
             },
             {
               name: 'website',
               label: 'Website',
-              element: TextField,
+              element: UrlField,
               defaultValue: props.company?.website,
             },
             {

@@ -26,7 +26,9 @@ const ProjectForm = (props) => {
               label: 'Title',
               element: TextField,
               defaultValue: props.project?.title,
-              required: true,
+              validation: {
+                required: true,
+              },
             },
             {
               name: 'description',

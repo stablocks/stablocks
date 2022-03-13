@@ -2,11 +2,12 @@ import {
   CheckboxField,
   DateField,
   DatetimeLocalField,
-  TextField,
+  SelectField,
   TextAreaField,
 } from '@redwoodjs/forms'
 import { useAuth } from '@redwoodjs/auth'
 import Form from 'src/ui/Form'
+import { currencies } from 'src/utils/enums'
 
 const InvoiceForm = (props) => {
   const { currentUser } = useAuth()
@@ -30,9 +31,22 @@ const InvoiceForm = (props) => {
             {
               name: 'currency',
               label: 'Currency',
-              element: TextField,
+              element: SelectField,
               defaultValue: props.invoice?.currency,
-              required: true,
+              validation: {
+                required: true,
+              },
+              attributes: {
+                children: (
+                  <>
+                    {currencies.map((option, i) => (
+                      <option key={i} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </>
+                ),
+              },
             },
             {
               name: 'issued',
@@ -45,7 +59,9 @@ const InvoiceForm = (props) => {
               label: 'Due Date',
               element: DateField,
               defaultValue: props.invoice?.dueDate,
-              required: true,
+              validation: {
+                required: true,
+              },
             },
             {
               name: 'sent',

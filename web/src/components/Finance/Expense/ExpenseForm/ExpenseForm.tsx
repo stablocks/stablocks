@@ -1,13 +1,9 @@
-import { DateField, NumberField, TextField } from '@redwoodjs/forms'
-import { useAuth } from '@redwoodjs/auth'
+import { DateField, SelectField, TextField } from '@redwoodjs/forms'
 import Form from 'src/ui/Form'
+import { currencies } from 'src/utils/enums'
 
 const ExpenseForm = (props) => {
-  const { currentUser } = useAuth()
-
   const onSubmit = (data) => {
-    if (!props.expense?.userId) data.userId = currentUser.id
-
     props.onSave(data, props.expense?.id)
   }
 
@@ -26,27 +22,45 @@ const ExpenseForm = (props) => {
               label: 'Name',
               element: TextField,
               defaultValue: props.expense?.name,
-              required: true,
+              validation: {
+                required: true,
+              },
             },
             {
               name: 'amount',
               label: 'Amount',
-              element: NumberField,
+              element: TextField,
               defaultValue: props.expense?.amount,
-              required: true,
+              validation: {
+                required: true,
+                valueAsNumber: true,
+              },
             },
             {
               name: 'date',
               label: 'Date',
               element: DateField,
               defaultValue: props.expense?.date,
-              required: true,
+              validation: {
+                required: true,
+              },
             },
             {
               name: 'currency',
               label: 'Currency',
-              element: TextField,
+              element: SelectField,
               defaultValue: props.expense?.currency,
+              attributes: {
+                children: (
+                  <>
+                    {currencies.map((option, i) => (
+                      <option key={i} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </>
+                ),
+              },
             },
           ],
         },

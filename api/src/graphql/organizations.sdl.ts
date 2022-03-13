@@ -30,7 +30,7 @@ export const schema = gql`
   input CreateOrganizationInput {
     name: String!
     website: String
-    # logo: String
+    logo: String
   }
 
   input UpdateOrganizationInput {
