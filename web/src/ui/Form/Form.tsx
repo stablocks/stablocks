@@ -16,6 +16,7 @@ export interface FormField {
   label: string
   element: React.ForwardRefExoticComponent<any> | ((props: any) => JSX.Element)
   defaultValue: string | boolean | number | undefined
+  displayValue?: string
   validation?: RedwoodRegisterOptions
   newHide?: boolean
   editHide?: boolean

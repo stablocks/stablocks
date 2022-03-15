@@ -18,7 +18,11 @@ export const QUERY = gql`
       email
       profileImage
       position
-      supervisorId
+      supervisor {
+        id
+        firstName
+        lastName
+      }
       resume
     }
   }

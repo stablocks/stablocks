@@ -1,8 +1,10 @@
 import type { FindEmployeeQuery } from 'types/graphql'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
-import { navigate, routes } from '@redwoodjs/router'
+import { Link, navigate, routes } from '@redwoodjs/router'
 import Loader from 'src/ui/Loader'
 import PageTitle from 'src/ui/PageTitle'
+import PageContentLayout from 'src/layouts/PageContentLayout'
+import ContentBlock from 'src/ui/ContentBlock'
 import { PencilAltIcon } from '@heroicons/react/outline'
 
 export const QUERY = gql`
@@ -13,6 +15,20 @@ export const QUERY = gql`
       lastName
       email
       profileImage
+      supervisor {
+        id
+        firstName
+        lastName
+      }
+      employees {
+        id
+        firstName
+        lastName
+      }
+      departments {
+        id
+        name
+      }
     }
   }
 `
@@ -58,6 +74,30 @@ export const Success = ({ employee }: CellSuccessProps<FindEmployeeQuery>) => {
           },
         ]}
       />
+      <PageContentLayout
+        aside={
+          <>
+            {employee.supervisor && (
+              <ContentBlock title="Supervisor">
+                <Link to={routes.employee({ id: employee.supervisor.id })}>
+                  {`${employee.supervisor.firstName} ${employee.supervisor.lastName}`}
+                </Link>
+              </ContentBlock>
+            )}
+            {employee.employees && employee.employees.length > 0 && (
+              <ContentBlock title="Employees">
+                {employee.employees.map((sub) => (
+                  <Link key={sub.id} to={routes.employee({ id: sub.id })}>
+                    {`${sub.firstName} ${sub.lastName}`}
+                  </Link>
+                ))}
+              </ContentBlock>
+            )}
+          </>
+        }
+      >
+        <ContentBlock title={fullName} />
+      </PageContentLayout>
     </>
   )
 }

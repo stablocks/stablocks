@@ -107,7 +107,6 @@ export const Success = ({ task }: CellSuccessProps<FindTaskQuery>) => {
           },
           {
             label,
-            onClick: () => {},
             main: true,
             disabled: loading,
             children: [

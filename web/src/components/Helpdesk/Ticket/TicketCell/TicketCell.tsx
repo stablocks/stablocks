@@ -85,6 +85,7 @@ export const Success = ({ ticket }: CellSuccessProps<FindTicketQuery>) => {
     <>
       <PageTitle
         title={ticket.title}
+        metaTitle={`#${ticket.id}`}
         currentCrumbLabel={`#${ticket.id}`}
         breadcrumbs={[
           { title: 'Helpdesk', to: routes.helpdesk() },
@@ -99,7 +100,6 @@ export const Success = ({ ticket }: CellSuccessProps<FindTicketQuery>) => {
           },
           {
             label,
-            onClick: () => {},
             main: true,
             disabled: loading,
             children: [

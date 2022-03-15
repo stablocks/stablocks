@@ -64,16 +64,27 @@ interface CreateEmployeeArgs {
 export const createEmployee = async ({ input }: CreateEmployeeArgs) => {
   requireAuth({ roles: ['admin'] })
 
-  return db.user.create({
-    data: {
-      ...input,
-      roles: {
-        create: {
-          employee: true,
-          external: false,
-        },
+  const data = {
+    ...input,
+    roles: {
+      create: {
+        employee: true,
+        external: false,
       },
     },
+  }
+
+  if (input.departments) {
+    const connect = []
+    for (let i = 0; i < (input.departments as string[]).length; i++) {
+      const id = (input.departments as string[])[i]
+      connect.push({ id })
+    }
+    data.departments = { connect }
+  }
+
+  return db.user.create({
+    data,
   })
 }
 interface UpdateEmployeeArgs extends Prisma.UserWhereUniqueInput {
@@ -85,8 +96,21 @@ export const updateEmployee = ({ id, input }: UpdateEmployeeArgs) => {
     requireAuth({ roles: ['admin'] })
   }
 
+  const data = {
+    ...input,
+  }
+
+  if (input.departments) {
+    const connect = []
+    for (let i = 0; i < (input.departments as string[]).length; i++) {
+      const id = (input.departments as string[])[i]
+      connect.push({ id })
+    }
+    data.departments = { connect }
+  }
+
   return db.user.update({
-    data: input,
+    data,
     where: { id },
   })
 }

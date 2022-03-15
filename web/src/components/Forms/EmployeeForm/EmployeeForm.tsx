@@ -1,5 +1,8 @@
-import { TextField } from '@redwoodjs/forms'
+import { EmailField, SelectField, TextField } from '@redwoodjs/forms'
 import Form from 'src/ui/Form'
+import FileUpload from 'src/components/Elements/FileUpload'
+import SupervisorSelectCell from 'src/components/Basics/Employee/SupervisorSelectCell'
+import DepartmentSelectCell from 'src/components/Basics/Department/DepartmentSelectCell'
 
 const EmployeeForm = (props) => {
   const onSubmit = (data) => {
@@ -30,7 +33,9 @@ const EmployeeForm = (props) => {
               label: 'First Name',
               element: TextField,
               defaultValue: props.employee?.firstName,
-              required: true,
+              validation: {
+                required: true,
+              },
             },
             {
               name: 'middleName',
@@ -43,21 +48,28 @@ const EmployeeForm = (props) => {
               label: 'Last Name',
               element: TextField,
               defaultValue: props.employee?.lastName,
-              required: true,
+              validation: {
+                required: true,
+              },
             },
             {
               name: 'email',
               label: 'Company Email Address',
-              element: TextField,
+              element: EmailField,
               defaultValue: props.employee?.email,
-              required: true,
+              validation: {
+                required: true,
+              },
             },
             {
               name: 'profileImage',
               label: 'Profile Picture',
-              element: TextField,
+              element: FileUpload,
               defaultValue: props.employee?.profileImage,
               newHide: true,
+              attributes: {
+                type: 'image/png, image/jpg',
+              },
             },
           ],
         },
@@ -69,20 +81,43 @@ const EmployeeForm = (props) => {
               label: 'Position',
               element: TextField,
               defaultValue: props.employee?.position,
-              required: true,
+              validation: {
+                required: true,
+              },
             },
             {
               name: 'supervisorId',
-              label: 'Supervisor ID',
-              element: TextField,
-              defaultValue: props.employee?.supervisorId,
+              label: 'Supervisor',
+              element: SelectField,
+              defaultValue: props.employee?.supervisor?.id,
+              displayValue:
+                props.employee?.supervisor?.firstName &&
+                props.employee?.supervisor?.lastName
+                  ? `${props.employee?.supervisor?.firstName} ${props.employee?.supervisor?.lastName}`
+                  : undefined,
+              attributes: {
+                children: <SupervisorSelectCell userId={props.employee?.id} />,
+              },
+            },
+            {
+              name: 'departments',
+              label: 'Departments',
+              element: SelectField,
+              defaultValue: props.employee?.departments,
+              attributes: {
+                multiple: true,
+                children: <DepartmentSelectCell />,
+              },
             },
             {
               name: 'resume',
               label: 'Résumé',
-              element: TextField,
+              element: FileUpload,
               defaultValue: props.employee?.resume,
               newHide: true,
+              attributes: {
+                type: '.pdf',
+              },
             },
           ],
         },

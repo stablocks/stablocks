@@ -45,7 +45,7 @@ const DescriptionListItem = ({
     <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
       <dt className="text-sm font-medium text-gray-500">
         {field.label}
-        {field.required && (
+        {field?.validation?.required && (
           <span className="font-base text-indigo-600">{' *'}</span>
         )}
       </dt>
@@ -60,7 +60,7 @@ const DescriptionListItem = ({
                   <XCircleIcon className="h-5 w-5 text-red-600" />
                 )
               ) : (
-                field?.defaultValue
+                field?.displayValue || field?.defaultValue
               )}
             </span>
             {!editAll && (

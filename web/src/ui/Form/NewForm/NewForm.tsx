@@ -23,7 +23,7 @@ const NewForm = (props: FormProps) => {
                     <div key={i}>
                       <Label name={field.name}>
                         {field.label}
-                        {field.required && (
+                        {field?.validation?.required && (
                           <span className="font-base text-indigo-600">
                             {' *'}
                           </span>
@@ -32,7 +32,7 @@ const NewForm = (props: FormProps) => {
                       <field.element
                         name={field.name}
                         defaultValue={field.defaultValue}
-                        validation={{ required: field.required }}
+                        validation={field.validation}
                         {...field.attributes}
                       />
                       <FieldError

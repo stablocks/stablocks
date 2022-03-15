@@ -1,4 +1,5 @@
 import { Form, FieldError, Label, TextField, Submit } from '@redwoodjs/forms'
+import FileUpload from 'src/components/Elements/FileUpload'
 
 const NewOrganizationForm = (props) => {
   const onSubmit = (data) => {
@@ -55,7 +56,11 @@ const NewOrganizationForm = (props) => {
             >
               Logo URL
             </Label>
-            <TextField name="logo" defaultValue={props.organization?.logo} />
+            <FileUpload
+              name="logo"
+              defaultValue={props.organization?.logo}
+              type="image/png, image/jpg"
+            />
             <FieldError name="logo" className="rw-field-error" />
           </div>
         </div>

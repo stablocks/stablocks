@@ -7,7 +7,7 @@ export interface ActionButton {
   label: React.ReactNode
   main?: boolean
   icon?: (props: React.ComponentProps<'svg'>) => JSX.Element
-  onClick: () => void
+  onClick?: () => void
   roles?: string[]
   disabled?: boolean
   children?: ActionButton[]
@@ -26,21 +26,23 @@ const MenuButtonGroup = ({ buttons }: MenuButtonGroupProps) => {
         (button, i) =>
           (button.roles ? hasRole(button.roles) : true) && (
             <span key={i} className="relative z-0 inline-flex rounded-md">
-              <button
-                onClick={button.onClick}
-                type="button"
-                disabled={button.disabled}
-                className={`${
-                  button.main
-                    ? 'btn-primary'
-                    : 'border-gray-300 bg-white text-gray-700 hover:bg-gray-50 focus:border-indigo-500'
-                } ${
-                  button.children ? 'rounded-l-md' : 'rounded-md'
-                } relative inline-flex w-full items-center justify-center space-x-1 border px-4 py-2 text-sm font-medium focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500`}
-              >
-                {button.icon && <button.icon className="h-4 w-4" />}
-                <span>{button.label}</span>
-              </button>
+              {button.onClick && (
+                <button
+                  onClick={button.onClick}
+                  type="button"
+                  disabled={button.disabled}
+                  className={`${
+                    button.main
+                      ? 'btn-primary'
+                      : 'border-gray-300 bg-white text-gray-700 hover:bg-gray-50 focus:border-indigo-500'
+                  } ${
+                    button.children ? 'rounded-l-md' : 'rounded-md'
+                  } relative inline-flex w-full items-center justify-center space-x-1 border px-4 py-2 text-sm font-medium focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500`}
+                >
+                  {button.icon && <button.icon className="h-4 w-4" />}
+                  <span>{button.label}</span>
+                </button>
+              )}
               {button.children && button.children.length > 0 && (
                 <Menu as="span" className="relative -ml-px block">
                   <Menu.Button
@@ -49,9 +51,15 @@ const MenuButtonGroup = ({ buttons }: MenuButtonGroupProps) => {
                       button.main
                         ? 'btn-primary border-l-indigo-400'
                         : 'border-gray-300 bg-white text-gray-500 hover:bg-gray-50'
-                    } relative inline-flex items-center rounded-r-md border px-2 py-2 text-sm font-medium focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500`}
+                    } ${
+                      button.onClick ? 'rounded-r-md' : 'rounded-md'
+                    } relative inline-flex items-center border px-2 py-2 text-sm font-medium focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500`}
                   >
-                    <span className="sr-only">Open options</span>
+                    {button.onClick ? (
+                      <span className="sr-only">Open options</span>
+                    ) : (
+                      <span className="px-2">{button.label}</span>
+                    )}
                     <ChevronDownIcon className="h-5 w-5" aria-hidden="true" />
                   </Menu.Button>
                   <Transition

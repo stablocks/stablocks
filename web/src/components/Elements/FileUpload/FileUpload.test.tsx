@@ -1,11 +1,11 @@
 import { render } from '@redwoodjs/testing/web'
 
-import PhotoUpload from './PhotoUpload'
+import FileUpload from './FileUpload'
 
-describe('PhotoUpload', () => {
+describe('FileUpload', () => {
   it('renders successfully', () => {
     expect(() => {
-      render(<PhotoUpload />)
+      render(<FileUpload />)
     }).not.toThrow()
   })
 })

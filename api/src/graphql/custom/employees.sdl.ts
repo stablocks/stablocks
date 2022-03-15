@@ -19,6 +19,7 @@ export const schema = gql`
     position: String
     supervisorId: String
     resume: String
+    departments: [String]
   }
 
   input UpdateEmployeeInput {
@@ -30,6 +31,7 @@ export const schema = gql`
     position: String
     supervisorId: String
     resume: String
+    departments: [String]
   }
 
   type Mutation {

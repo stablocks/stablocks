@@ -7,7 +7,7 @@ const EditForm = (props: FormProps) => {
   const { sections, onSubmit, loading, error, isSaved } = props
 
   return (
-    <div className="space-y-12">
+    <div className="space-y-12 max-w-7xl mx-auto">
       {sections.map(
         (section, i) =>
           !section.editHide && (
