@@ -19,6 +19,7 @@ model Organization {
   addressTwo   String?
   city         String?
   state        String?
+  country      String?
   zipCode      Int?
   // Module toggles
   recruiting   Boolean  @default(true)
@@ -226,6 +227,7 @@ model Contact {
   addressTwo String?
   city       String?
   state      String?
+  country    String?
   zipCode    Int?
   // Internal info
   user       User          @relation(fields: [userId], references: [id])

@@ -1,6 +1,6 @@
 export const schema = gql`
   type Organization {
-    id: String!
+    id: Int!
     name: String!
     website: String
     logo: String
@@ -9,6 +9,7 @@ export const schema = gql`
     addressTwo: String
     city: String
     state: String
+    country: String
     zipCode: Int
     recruiting: Boolean!
     crm: Boolean!
@@ -42,6 +43,7 @@ export const schema = gql`
     addressTwo: String
     city: String
     state: String
+    country: String
     zipCode: Int
     recruiting: Boolean
     crm: Boolean

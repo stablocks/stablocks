@@ -11,6 +11,7 @@ export const schema = gql`
     addressTwo: String
     city: String
     state: String
+    country: String
     zipCode: Int
     user: User!
     userId: String!
@@ -35,6 +36,7 @@ export const schema = gql`
     addressTwo: String
     city: String
     state: String
+    country: String
     zipCode: Int
     userId: String!
   }
@@ -49,6 +51,7 @@ export const schema = gql`
     addressTwo: String
     city: String
     state: String
+    country: String
     zipCode: Int
     userId: String
   }
