@@ -19,6 +19,7 @@ export const QUERY = gql`
       address
       addressTwo
       city
+      country
       state
       zipCode
     }

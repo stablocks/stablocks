@@ -22,6 +22,7 @@ export const QUERY = gql`
       addressTwo
       city
       state
+      country
       zipCode
       finance
       crm
