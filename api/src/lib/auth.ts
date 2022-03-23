@@ -50,6 +50,8 @@ export const getCurrentUser = async (
   if (fetchedUser) {
     user = fetchedUser
 
+    roles.push(fetchedUser.id)
+
     if (fetchedUser.roles) {
       for (const key in fetchedUser.roles) {
         if (Object.prototype.hasOwnProperty.call(fetchedUser.roles, key)) {
