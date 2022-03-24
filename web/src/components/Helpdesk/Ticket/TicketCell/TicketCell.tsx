@@ -24,6 +24,8 @@ const UPDATE_TICKET_STATUS_MUTATION = gql`
   mutation UpdateTicketStatusMutation($id: Int!, $input: UpdateTicketInput!) {
     updateTicket(id: $id, input: $input) {
       id
+      title
+      description
       status
     }
   }

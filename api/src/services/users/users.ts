@@ -19,14 +19,7 @@ interface CreateUserArgs {
 
 export const createUser = ({ input }: CreateUserArgs) => {
   return db.user.create({
-    data: {
-      ...input,
-      roles: {
-        create: {
-          external: true,
-        },
-      },
-    },
+    data: input,
   })
 }
 
@@ -48,44 +41,16 @@ export const deleteUser = ({ id }: Prisma.UserWhereUniqueInput) => {
 }
 
 export const User = {
-  roles: (_obj, { root }: ResolverArgs<ReturnType<typeof user>>) =>
-    db.user.findUnique({ where: { id: root.id } }).roles(),
-  departments: (_obj, { root }: ResolverArgs<ReturnType<typeof user>>) =>
-    db.user.findUnique({ where: { id: root.id } }).departments(),
-  supervisor: (_obj, { root }: ResolverArgs<ReturnType<typeof user>>) =>
-    db.user.findUnique({ where: { id: root.id } }).supervisor(),
-  employees: (_obj, { root }: ResolverArgs<ReturnType<typeof user>>) =>
-    db.user.findUnique({ where: { id: root.id } }).employees(),
-  pay: (_obj, { root }: ResolverArgs<ReturnType<typeof user>>) =>
-    db.user.findUnique({ where: { id: root.id } }).pay(),
-  jobs: (_obj, { root }: ResolverArgs<ReturnType<typeof user>>) =>
-    db.user.findUnique({ where: { id: root.id } }).jobs(),
+  employee: (_obj, { root }: ResolverArgs<ReturnType<typeof user>>) =>
+    db.user.findUnique({ where: { id: root.id } }).employee(),
   applications: (_obj, { root }: ResolverArgs<ReturnType<typeof user>>) =>
     db.user.findUnique({ where: { id: root.id } }).applications(),
-  contacts: (_obj, { root }: ResolverArgs<ReturnType<typeof user>>) =>
-    db.user.findUnique({ where: { id: root.id } }).contacts(),
-  contactNotes: (_obj, { root }: ResolverArgs<ReturnType<typeof user>>) =>
-    db.user.findUnique({ where: { id: root.id } }).contactNotes(),
-  companies: (_obj, { root }: ResolverArgs<ReturnType<typeof user>>) =>
-    db.user.findUnique({ where: { id: root.id } }).companies(),
   ticketsCreated: (_obj, { root }: ResolverArgs<ReturnType<typeof user>>) =>
     db.user.findUnique({ where: { id: root.id } }).ticketsCreated(),
-  ticketsAssigned: (_obj, { root }: ResolverArgs<ReturnType<typeof user>>) =>
-    db.user.findUnique({ where: { id: root.id } }).ticketsAssigned(),
   ticketComments: (_obj, { root }: ResolverArgs<ReturnType<typeof user>>) =>
     db.user.findUnique({ where: { id: root.id } }).ticketComments(),
   chatsCreated: (_obj, { root }: ResolverArgs<ReturnType<typeof user>>) =>
     db.user.findUnique({ where: { id: root.id } }).chatsCreated(),
-  chatsAssigned: (_obj, { root }: ResolverArgs<ReturnType<typeof user>>) =>
-    db.user.findUnique({ where: { id: root.id } }).chatsAssigned(),
   chatMessages: (_obj, { root }: ResolverArgs<ReturnType<typeof user>>) =>
     db.user.findUnique({ where: { id: root.id } }).chatMessages(),
-  projects: (_obj, { root }: ResolverArgs<ReturnType<typeof user>>) =>
-    db.user.findUnique({ where: { id: root.id } }).projects(),
-  tasksCreated: (_obj, { root }: ResolverArgs<ReturnType<typeof user>>) =>
-    db.user.findUnique({ where: { id: root.id } }).tasksCreated(),
-  tasksAssigned: (_obj, { root }: ResolverArgs<ReturnType<typeof user>>) =>
-    db.user.findUnique({ where: { id: root.id } }).tasksAssigned(),
-  taskComments: (_obj, { root }: ResolverArgs<ReturnType<typeof user>>) =>
-    db.user.findUnique({ where: { id: root.id } }).taskComments(),
 }

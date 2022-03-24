@@ -13,7 +13,7 @@ const InvoiceForm = (props) => {
   const { currentUser } = useAuth()
 
   const onSubmit = (data) => {
-    if (!props.invoice?.userId) data.userId = currentUser.id
+    if (!props.invoice?.employeeId) data.employeeId = currentUser.id
 
     props.onSave(data, props.invoice?.id)
   }
@@ -64,16 +64,10 @@ const InvoiceForm = (props) => {
               },
             },
             {
-              name: 'sent',
-              label: 'Sent',
-              element: CheckboxField,
-              defaultValue: props.invoice?.sent,
-            },
-            {
-              name: 'paid',
+              name: 'paidDate',
               label: 'Paid',
-              element: CheckboxField,
-              defaultValue: props.invoice?.paid,
+              element: DateField,
+              defaultValue: props.invoice?.paidDate,
             },
             {
               name: 'description',

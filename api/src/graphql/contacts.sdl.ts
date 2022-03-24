@@ -7,14 +7,10 @@ export const schema = gql`
     phone: Int
     company: Company
     companyId: String
-    address: String
-    addressTwo: String
-    city: String
-    state: String
-    country: String
-    zipCode: Int
-    user: User!
-    userId: String!
+    address: Address
+    addressId: String
+    employee: EmployeeInfo!
+    employeeId: String!
     notes: [ContactNote]!
     invoices: [Invoice]!
     updatedAt: DateTime!
@@ -32,13 +28,8 @@ export const schema = gql`
     email: String
     phone: Int
     companyId: String
-    address: String
-    addressTwo: String
-    city: String
-    state: String
-    country: String
-    zipCode: Int
-    userId: String!
+    addressId: String
+    employeeId: String!
   }
 
   input UpdateContactInput {
@@ -47,13 +38,8 @@ export const schema = gql`
     email: String
     phone: Int
     companyId: String
-    address: String
-    addressTwo: String
-    city: String
-    state: String
-    country: String
-    zipCode: Int
-    userId: String
+    addressId: String
+    employeeId: String
   }
 
   type Mutation {

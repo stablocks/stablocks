@@ -9,9 +9,18 @@ export const employees = () => {
 
   return db.user.findMany({
     where: {
-      roles: {
-        employee: true,
-      },
+      OR: [
+        {
+          type: {
+            equals: 'admin',
+          },
+        },
+        {
+          type: {
+            equals: 'employee',
+          },
+        },
+      ],
     },
     orderBy: {
       lastName: 'asc',
@@ -20,16 +29,15 @@ export const employees = () => {
 }
 
 export const employee = async ({ id }: Prisma.UserWhereUniqueInput) => {
-  requireAuth({ roles: ['admin', 'employee'] })
+  const roles = ['admin', 'employee']
+
+  requireAuth({ roles })
 
   const user = await db.user.findUnique({
     where: { id },
-    include: {
-      roles: true,
-    },
   })
 
-  if (!user?.roles?.employee) return
+  if (!roles.includes(user.type)) return {}
 
   return user
 }
@@ -46,11 +54,12 @@ export const createFirstUser = async ({ input }: CreateUserArgs) => {
   return db.user.create({
     data: {
       ...input,
-      roles: {
+      type: 'admin',
+      employee: {
         create: {
-          admin: true,
-          employee: true,
-          external: false,
+          roles: {
+            create: {},
+          },
         },
       },
     },
@@ -64,27 +73,18 @@ interface CreateEmployeeArgs {
 export const createEmployee = async ({ input }: CreateEmployeeArgs) => {
   requireAuth({ roles: ['admin'] })
 
-  const data = {
-    ...input,
-    roles: {
-      create: {
-        employee: true,
-        external: false,
+  return db.user.create({
+    data: {
+      ...input,
+      type: 'employee',
+      employee: {
+        create: {
+          roles: {
+            create: {},
+          },
+        },
       },
     },
-  }
-
-  if (input.departments) {
-    const connect = []
-    for (let i = 0; i < (input.departments as string[]).length; i++) {
-      const id = (input.departments as string[])[i]
-      connect.push({ id })
-    }
-    data.departments = { connect }
-  }
-
-  return db.user.create({
-    data,
   })
 }
 interface UpdateEmployeeArgs extends Prisma.UserWhereUniqueInput {
@@ -96,21 +96,8 @@ export const updateEmployee = ({ id, input }: UpdateEmployeeArgs) => {
     requireAuth({ roles: ['admin'] })
   }
 
-  const data = {
-    ...input,
-  }
-
-  if (input.departments) {
-    const connect = []
-    for (let i = 0; i < (input.departments as string[]).length; i++) {
-      const id = (input.departments as string[])[i]
-      connect.push({ id })
-    }
-    data.departments = { connect }
-  }
-
   return db.user.update({
-    data,
+    data: input,
     where: { id },
   })
 }

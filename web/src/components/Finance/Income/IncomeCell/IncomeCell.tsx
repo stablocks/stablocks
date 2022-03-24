@@ -13,6 +13,10 @@ export const QUERY = gql`
       amount
       date
       currency
+      invoice {
+        id
+        status
+      }
     }
   }
 `

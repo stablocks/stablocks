@@ -3,7 +3,7 @@ export const schema = gql`
     id: String!
     user: User!
     userId: String!
-    assignee: User
+    assignee: EmployeeInfo
     assigneeId: String
     messages: [ChatMessage]!
     updatedAt: DateTime!

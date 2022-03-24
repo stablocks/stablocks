@@ -4,30 +4,40 @@ export const standard = defineScenario<Prisma.EmployeePayCreateArgs>({
   employeePay: {
     one: {
       data: {
-        amount: 6529725,
-        updatedAt: '2022-01-22T19:52:18Z',
-        user: {
+        amount: 177223.45744376478,
+        updatedAt: '2022-03-23T23:02:02Z',
+        employee: {
           create: {
-            firstName: 'String',
-            lastName: 'String',
-            email: 'String2642112',
-            otherEmails: 'String',
-            updatedAt: '2022-01-22T19:52:18Z',
+            position: 'String',
+            updatedAt: '2022-03-23T23:02:02Z',
+            user: {
+              create: {
+                firstName: 'String',
+                lastName: 'String',
+                email: 'String7811125',
+                updatedAt: '2022-03-23T23:02:02Z',
+              },
+            },
           },
         },
       },
     },
     two: {
       data: {
-        amount: 9176046,
-        updatedAt: '2022-01-22T19:52:18Z',
-        user: {
+        amount: 5302401.160251218,
+        updatedAt: '2022-03-23T23:02:02Z',
+        employee: {
           create: {
-            firstName: 'String',
-            lastName: 'String',
-            email: 'String8959373',
-            otherEmails: 'String',
-            updatedAt: '2022-01-22T19:52:18Z',
+            position: 'String',
+            updatedAt: '2022-03-23T23:02:02Z',
+            user: {
+              create: {
+                firstName: 'String',
+                lastName: 'String',
+                email: 'String1020131',
+                updatedAt: '2022-03-23T23:02:02Z',
+              },
+            },
           },
         },
       },

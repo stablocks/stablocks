@@ -6,7 +6,7 @@ import Footer from './Footer'
 
 import '@reach/skip-nav/styles.css'
 
-const Dashboard = ({ children }: { children?: React.ReactNode }) => {
+const Dashboard = ({ children }: { children: React.ReactNode }) => {
   const [sidebarOpen, setSidebarOpen] = React.useState(false)
 
   return (

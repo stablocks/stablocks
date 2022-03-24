@@ -29,8 +29,8 @@ const Routes = () => {
             <Set wrap={[RedirectProvider, DashboardLayout]}>
               <Route path="/profile" page={ProfilePage} name="profile" />
 
-              <Private unauthenticated="home" role={['admin', 'employee']}>
-                <Private unauthenticated="home" role={['admin', 'projectsAdmin', 'projects']}>
+              <Private unauthenticated="home" roles={['admin', 'employee']}>
+                <Private unauthenticated="home" roles={['admin', 'projectsAdmin', 'projects']}>
                   <Route path="/projects/tasks/{id}/edit" page={ProjectsTaskEditTaskPage} name="editTask" />
                   <Route path="/projects/tasks/{id}" page={ProjectsTaskTaskPage} name="task" />
                   <Route path="/projects/tasks" page={ProjectsTaskTasksPage} name="tasks" />
@@ -39,7 +39,7 @@ const Routes = () => {
                   <Route path="/projects" page={ProjectsProjectProjectsPage} name="projects" />
                 </Private>
 
-                <Private unauthenticated="home" role={['admin', 'helpdeskAdmin', 'helpdesk']}>
+                <Private unauthenticated="home" roles={['admin', 'helpdeskAdmin', 'helpdesk']}>
                   <Route path="/helpdesk/chat" page={HelpdeskChatChatPage} name="chat" />
                   <Route path="/helpdesk/tickets/{id:Int}/edit" page={HelpdeskTicketEditTicketPage} name="editTicket" />
                   <Route path="/helpdesk/tickets/{id:Int}" page={HelpdeskTicketTicketPage} name="ticket" />
@@ -47,7 +47,7 @@ const Routes = () => {
                   <Route path="/helpdesk" page={HelpdeskHelpdeskPage} name="helpdesk" />
                 </Private>
 
-                <Private unauthenticated="home" role={['admin', 'recruitingAdmin', 'recruiting']}>
+                <Private unauthenticated="home" roles={['admin', 'recruitingAdmin', 'recruiting']}>
                   <Route path="/recruiting/applications/{id}/edit" page={RecruitingApplicationEditApplicationPage} name="editApplication" />
                   <Route path="/recruiting/applications/{id}" page={RecruitingApplicationApplicationPage} name="application" />
                   <Route path="/recruiting/applications" page={RecruitingApplicationApplicationsPage} name="applications" />
@@ -57,7 +57,7 @@ const Routes = () => {
                   <Route path="/recruiting" page={RecruitingRecruitingPage} name="recruiting" />
                 </Private>
 
-                <Private unauthenticated="home" role={['admin', 'financeAdmin', 'finance']}>
+                <Private unauthenticated="home" roles={['admin', 'financeAdmin', 'finance']}>
                   <Route path="/finance/invoices/{id:Int}/edit" page={FinancesInvoiceEditInvoicePage} name="editInvoice" />
                   <Route path="/finance/invoices/{id:Int}" page={FinancesInvoiceInvoicePage} name="invoice" />
                   <Route path="/finance/invoices" page={FinancesInvoiceInvoicesPage} name="invoices" />
@@ -71,7 +71,7 @@ const Routes = () => {
                   <Route path="/finance" page={FinancesFinancePage} name="finance" />
                 </Private>
 
-                <Private unauthenticated="home" role={['admin', 'crmAdmin', 'crm']}>
+                <Private unauthenticated="home" roles={['admin', 'crmAdmin', 'crm']}>
                   <Route path="/contacts/companies/{id}/edit" page={CRMCompanyEditCompanyPage} name="editCompany" />
                   <Route path="/contacts/companies/{id}" page={CRMCompanyCompanyPage} name="company" />
                   <Route path="/contacts/companies" page={CRMCompanyCompaniesPage} name="companies" />
@@ -80,14 +80,14 @@ const Routes = () => {
                   <Route path="/contacts" page={CRMContactContactsPage} name="contacts" />
                 </Private>
 
-                <Private unauthenticated="organization" role={['admin', 'departmentAdmin']}>
+                <Private unauthenticated="organization" roles={['admin', 'departmentAdmin']}>
                   <Route path="/organization/departments/{id}/edit" page={BasicsDepartmentEditDepartmentPage} name="editDepartment" />
                 </Private>
 
                 <Route path="/organization/departments/{id}" page={BasicsDepartmentDepartmentPage} name="department" />
                 <Route path="/organization/departments" page={BasicsDepartmentDepartmentsPage} name="departments" />
 
-                <Private unauthenticated="employees" role={['admin']}>
+                <Private unauthenticated="employees" roles={['admin']}>
                   <Route path="/organization/employees/{id}/roles" page={BasicsEmployeeEmployeeRolesPage} name="employeeRoles" />
                 </Private>
 
@@ -95,7 +95,7 @@ const Routes = () => {
                 <Route path="/organization/employees/{id}" page={BasicsEmployeeEmployeePage} name="employee" />
                 <Route path="/organization/employees" page={BasicsEmployeeEmployeesPage} name="employees" />
 
-                <Private unauthenticated="organization" role={['admin']}>
+                <Private unauthenticated="organization" roles={['admin']}>
                   <Route path="/organization/settings" page={BasicsOrganizationOrganizationSettingsPage} name="organizationSettings" />
                 </Private>
 

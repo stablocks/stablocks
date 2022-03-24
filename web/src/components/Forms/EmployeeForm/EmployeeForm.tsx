@@ -77,39 +77,6 @@ const EmployeeForm = (props) => {
           title: 'Organization Information',
           fields: [
             {
-              name: 'position',
-              label: 'Position',
-              element: TextField,
-              defaultValue: props.employee?.position,
-              validation: {
-                required: true,
-              },
-            },
-            {
-              name: 'supervisorId',
-              label: 'Supervisor',
-              element: SelectField,
-              defaultValue: props.employee?.supervisor?.id,
-              displayValue:
-                props.employee?.supervisor?.firstName &&
-                props.employee?.supervisor?.lastName
-                  ? `${props.employee?.supervisor?.firstName} ${props.employee?.supervisor?.lastName}`
-                  : undefined,
-              attributes: {
-                children: <SupervisorSelectCell userId={props.employee?.id} />,
-              },
-            },
-            {
-              name: 'departments',
-              label: 'Departments',
-              element: SelectField,
-              defaultValue: props.employee?.departments,
-              attributes: {
-                multiple: true,
-                children: <DepartmentSelectCell />,
-              },
-            },
-            {
               name: 'resume',
               label: 'Résumé',
               element: FileUpload,

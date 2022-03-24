@@ -19,17 +19,15 @@ describe('users', () => {
       input: {
         firstName: 'String',
         lastName: 'String',
-        email: 'String137700',
-        otherEmails: 'String',
-        updatedAt: '2022-01-22T19:51:02Z',
+        email: 'String2166339',
+        updatedAt: '2022-03-23T23:00:26Z',
       },
     })
 
     expect(result.firstName).toEqual('String')
     expect(result.lastName).toEqual('String')
-    expect(result.email).toEqual('String137700')
-    expect(result.otherEmails).toEqual('String')
-    expect(result.updatedAt).toEqual('2022-01-22T19:51:02Z')
+    expect(result.email).toEqual('String2166339')
+    expect(result.updatedAt).toEqual('2022-03-23T23:00:26Z')
   })
 
   scenario('updates a user', async (scenario: StandardScenario) => {

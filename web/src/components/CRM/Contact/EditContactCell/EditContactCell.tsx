@@ -16,12 +16,14 @@ export const QUERY = gql`
       lastName
       email
       phone
-      address
-      addressTwo
-      city
-      country
-      state
-      zipCode
+      address {
+        address
+        addressTwo
+        city
+        state
+        country
+        zip
+      }
     }
   }
 `
@@ -34,11 +36,14 @@ const UPDATE_CONTACT_MUTATION = gql`
       lastName
       email
       phone
-      address
-      addressTwo
-      city
-      state
-      zipCode
+      address {
+        address
+        addressTwo
+        city
+        state
+        country
+        zip
+      }
     }
   }
 `

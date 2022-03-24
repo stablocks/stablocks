@@ -6,9 +6,9 @@ export const schema = gql`
     status: Status!
     project: Project!
     projectId: String!
-    user: User!
-    userId: String!
-    assignee: User
+    employee: EmployeeInfo!
+    employeeId: String!
+    assignee: EmployeeInfo
     assigneeId: String
     tickets: [Ticket]!
     comments: [TaskComment]!
@@ -33,7 +33,7 @@ export const schema = gql`
     description: String
     status: Status
     projectId: String!
-    userId: String!
+    employeeId: String!
     assigneeId: String
   }
 
@@ -42,7 +42,7 @@ export const schema = gql`
     description: String
     status: Status
     projectId: String
-    userId: String
+    employeeId: String
     assigneeId: String
   }
 

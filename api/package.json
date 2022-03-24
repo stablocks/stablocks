@@ -3,8 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "@redwoodjs/api": "^0.49.1",
-    "@redwoodjs/graphql-server": "^0.49.1",
+    "@redwoodjs/api": "^0.50.0",
+    "@redwoodjs/graphql-server": "^0.50.0",
     "octokit": "^1.7.1"
+  },
+  "devDependencies": {
+    "@netlify/zip-it-and-ship-it": "^5.9.0"
   }
 }

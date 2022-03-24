@@ -1,9 +1,14 @@
 import { DateField, SelectField, TextField } from '@redwoodjs/forms'
+import { useAuth } from '@redwoodjs/auth'
 import Form from 'src/ui/Form'
 import { currencies } from 'src/utils/enums'
 
 const ExpenseForm = (props) => {
+  const { currentUser } = useAuth()
+
   const onSubmit = (data) => {
+    if (!props.expense?.employeeId) data.employeeId = currentUser.id
+
     props.onSave(data, props.expense?.id)
   }
 

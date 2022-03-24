@@ -1,18 +1,25 @@
 export const schema = gql`
   type Invoice {
     id: Int!
+    status: InvoiceStatus!
     contact: Contact!
     contactId: String!
     currency: String!
     issued: DateTime!
-    dueDate: DateTime!
-    sent: Boolean!
-    paid: Boolean!
+    dueDate: DateTime
+    paidDate: DateTime
     description: String
     items: [InvoiceItem]!
     income: Income
     updatedAt: DateTime!
     createdAt: DateTime!
+  }
+
+  enum InvoiceStatus {
+    draft
+    sent
+    paid
+    archived
   }
 
   type Query {
@@ -21,22 +28,22 @@ export const schema = gql`
   }
 
   input CreateInvoiceInput {
+    status: InvoiceStatus!
     contactId: String!
     currency: String!
     issued: DateTime!
-    dueDate: DateTime!
-    sent: Boolean!
-    paid: Boolean!
+    dueDate: DateTime
+    paidDate: DateTime
     description: String
   }
 
   input UpdateInvoiceInput {
+    status: InvoiceStatus
     contactId: String
     currency: String
     issued: DateTime
     dueDate: DateTime
-    sent: Boolean
-    paid: Boolean
+    paidDate: DateTime
     description: String
   }
 

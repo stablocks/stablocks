@@ -24,14 +24,14 @@ describe('companies', () => {
     const result = await createCompany({
       input: {
         name: 'String',
-        userId: scenario.company.two.userId,
-        updatedAt: '2022-01-15T20:52:23Z',
+        employeeId: scenario.company.two.employeeId,
+        updatedAt: '2022-03-23T23:03:10Z',
       },
     })
 
     expect(result.name).toEqual('String')
-    expect(result.userId).toEqual(scenario.company.two.userId)
-    expect(result.updatedAt.toString()).toEqual('2022-01-15T20:52:23.000Z')
+    expect(result.employeeId).toEqual(scenario.company.two.employeeId)
+    expect(result.updatedAt).toEqual('2022-03-23T23:03:10Z')
   })
 
   scenario('updates a company', async (scenario: StandardScenario) => {

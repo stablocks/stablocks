@@ -43,8 +43,8 @@ export const deleteTask = ({ id }: Prisma.TaskWhereUniqueInput) => {
 export const Task = {
   project: (_obj, { root }: ResolverArgs<ReturnType<typeof task>>) =>
     db.task.findUnique({ where: { id: root.id } }).project(),
-  user: (_obj, { root }: ResolverArgs<ReturnType<typeof task>>) =>
-    db.task.findUnique({ where: { id: root.id } }).user(),
+  employee: (_obj, { root }: ResolverArgs<ReturnType<typeof task>>) =>
+    db.task.findUnique({ where: { id: root.id } }).employee(),
   assignee: (_obj, { root }: ResolverArgs<ReturnType<typeof task>>) =>
     db.task.findUnique({ where: { id: root.id } }).assignee(),
   tickets: (_obj, { root }: ResolverArgs<ReturnType<typeof task>>) =>
