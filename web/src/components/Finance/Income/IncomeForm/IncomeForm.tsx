@@ -6,7 +6,7 @@ const IncomeForm = (props) => {
   const { currentUser } = useAuth()
 
   const onSubmit = (data) => {
-    if (!props.income?.userId) data.userId = currentUser.id
+    if (!props.income?.employeeId) data.employeeId = currentUser.id
 
     props.onSave(data, props.income?.id)
   }

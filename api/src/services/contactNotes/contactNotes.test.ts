@@ -28,15 +28,15 @@ describe('contactNotes', () => {
       input: {
         message: 'String',
         contactId: scenario.contactNote.two.contactId,
-        userId: scenario.contactNote.two.userId,
-        updatedAt: '2022-01-15T20:52:14Z',
+        employeeId: scenario.contactNote.two.employeeId,
+        updatedAt: '2022-03-23T23:02:57Z',
       },
     })
 
     expect(result.message).toEqual('String')
     expect(result.contactId).toEqual(scenario.contactNote.two.contactId)
-    expect(result.userId).toEqual(scenario.contactNote.two.userId)
-    expect(result.updatedAt.toString()).toEqual('2022-01-15T20:52:14:000Z')
+    expect(result.employeeId).toEqual(scenario.contactNote.two.employeeId)
+    expect(result.updatedAt).toEqual('2022-03-23T23:02:57Z')
   })
 
   scenario('updates a contactNote', async (scenario: StandardScenario) => {

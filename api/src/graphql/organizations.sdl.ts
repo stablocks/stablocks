@@ -1,15 +1,12 @@
 export const schema = gql`
   type Organization {
-    id: String!
+    id: Int!
     name: String!
     website: String
     logo: String
     email: String
-    address: String
-    addressTwo: String
-    city: String
-    state: String
-    zipCode: Int
+    address: Address
+    addressId: String
     recruiting: Boolean!
     crm: Boolean!
     marketing: Boolean!
@@ -38,11 +35,7 @@ export const schema = gql`
     website: String
     logo: String
     email: String
-    address: String
-    addressTwo: String
-    city: String
-    state: String
-    zipCode: Int
+    addressId: String
     recruiting: Boolean
     crm: Boolean
     marketing: Boolean

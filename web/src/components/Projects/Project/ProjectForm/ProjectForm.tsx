@@ -6,7 +6,7 @@ const ProjectForm = (props) => {
   const { currentUser } = useAuth()
 
   const onSubmit = (data) => {
-    if (!props.project?.userId) data.userId = currentUser.id
+    if (!props.project?.employeeId) data.employeeId = currentUser.id
 
     props.onSave(data, props.project?.id)
   }

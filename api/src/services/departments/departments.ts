@@ -41,8 +41,8 @@ export const deleteDepartment = ({ id }: Prisma.DepartmentWhereUniqueInput) => {
 }
 
 export const Department = {
-  users: (_obj, { root }: ResolverArgs<ReturnType<typeof department>>) =>
-    db.department.findUnique({ where: { id: root.id } }).users(),
+  employees: (_obj, { root }: ResolverArgs<ReturnType<typeof department>>) =>
+    db.department.findUnique({ where: { id: root.id } }).employees(),
   department: (_obj, { root }: ResolverArgs<ReturnType<typeof department>>) =>
     db.department.findUnique({ where: { id: root.id } }).department(),
   subDepartments: (

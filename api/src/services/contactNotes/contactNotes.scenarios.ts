@@ -5,28 +5,20 @@ export const standard = defineScenario<Prisma.ContactNoteCreateArgs>({
     one: {
       data: {
         message: 'String',
-        updatedAt: '2022-01-15T20:52:14Z',
-        contact: {
+        updatedAt: '2022-03-23T23:02:57Z',
+        contact: { create: { updatedAt: '2022-03-23T23:02:57Z' } },
+        employee: {
           create: {
-            updatedAt: '2022-01-15T20:52:14Z',
+            position: 'String',
+            updatedAt: '2022-03-23T23:02:57Z',
             user: {
               create: {
                 firstName: 'String',
                 lastName: 'String',
-                email: 'String7269654',
-                otherEmails: 'String',
-                updatedAt: '2022-01-15T20:52:14Z',
+                email: 'String9251086',
+                updatedAt: '2022-03-23T23:02:57Z',
               },
             },
-          },
-        },
-        user: {
-          create: {
-            firstName: 'String',
-            lastName: 'String',
-            email: 'String6278271',
-            otherEmails: 'String',
-            updatedAt: '2022-01-15T20:52:14Z',
           },
         },
       },
@@ -34,28 +26,20 @@ export const standard = defineScenario<Prisma.ContactNoteCreateArgs>({
     two: {
       data: {
         message: 'String',
-        updatedAt: '2022-01-15T20:52:14Z',
-        contact: {
+        updatedAt: '2022-03-23T23:02:57Z',
+        contact: { create: { updatedAt: '2022-03-23T23:02:57Z' } },
+        employee: {
           create: {
-            updatedAt: '2022-01-15T20:52:14Z',
+            position: 'String',
+            updatedAt: '2022-03-23T23:02:57Z',
             user: {
               create: {
                 firstName: 'String',
                 lastName: 'String',
-                email: 'String8228997',
-                otherEmails: 'String',
-                updatedAt: '2022-01-15T20:52:14Z',
+                email: 'String7307128',
+                updatedAt: '2022-03-23T23:02:57Z',
               },
             },
-          },
-        },
-        user: {
-          create: {
-            firstName: 'String',
-            lastName: 'String',
-            email: 'String1064166',
-            otherEmails: 'String',
-            updatedAt: '2022-01-15T20:52:14Z',
           },
         },
       },

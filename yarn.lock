@@ -8459,6 +8459,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"buildcheck@npm:0.0.3":
+  version: 0.0.3
+  resolution: "buildcheck@npm:0.0.3"
+  checksum: 0fda98a7dca9d7a5edfe4e08d0ca98b440dc78695b15dfeb6ca1a695aa3a44512a0a4aa5a1d671df1d9bb33d964a9c6b1034cd3bccc9cad2c440d62bbcf4e2bf
+  languageName: node
+  linkType: hard
+
 "builtin-modules@npm:^3.0.0":
   version: 3.2.0
   resolution: "builtin-modules@npm:3.2.0"
@@ -9682,13 +9689,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cpu-features@npm:0.0.2":
-  version: 0.0.2
-  resolution: "cpu-features@npm:0.0.2"
+"cpu-features@npm:0.0.3":
+  version: 0.0.3
+  resolution: "cpu-features@npm:0.0.3"
   dependencies:
-    nan: ^2.14.1
+    buildcheck: 0.0.3
+    nan: ^2.15.0
     node-gyp: latest
-  checksum: 54e6b66bcb3e046ce39a0116ddfde209a77202574ecedc820128021ff56e1022601d666721545342e0d08922b748a33d43c7c1e7d0040079c3c431a8bafe4b3a
+  checksum: 86043df8c4e8042818e32bbaae24f6033dc208696309a73067aaaa0a0b93d80ade6a8b9128192a0a90a1777f95aa301d9742a8b8492671d1fae07b05fa2290f6
   languageName: node
   linkType: hard
 
@@ -17521,7 +17529,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nan@npm:^2.12.1, nan@npm:^2.14.1, nan@npm:^2.15.0":
+"nan@npm:^2.12.1, nan@npm:^2.15.0":
   version: 2.15.0
   resolution: "nan@npm:2.15.0"
   dependencies:
@@ -21900,19 +21908,19 @@ __metadata:
   linkType: hard
 
 "ssh2@npm:^1.5.0":
-  version: 1.7.0
-  resolution: "ssh2@npm:1.7.0"
+  version: 1.8.0
+  resolution: "ssh2@npm:1.8.0"
   dependencies:
     asn1: ^0.2.4
     bcrypt-pbkdf: ^1.0.2
-    cpu-features: 0.0.2
+    cpu-features: 0.0.3
     nan: ^2.15.0
   dependenciesMeta:
     cpu-features:
       optional: true
     nan:
       optional: true
-  checksum: 313ab70d1cd077a878a7d7ae61204eb323c6d1b75bf1a6713099e7f3ba351f911644b845030426fdcafa3a2439e3927d16aacb812b713d1c184751176fd9c242
+  checksum: 3977ee8b83366d0f1d4241f2884ea42bfe03ba6eae639535fe985e246563d253e67c710bffbcbf87dc8d9ec24780a30373e2ffcc2aeed0002f6e72978db8ed17
   languageName: node
   linkType: hard
 

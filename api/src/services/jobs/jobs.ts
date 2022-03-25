@@ -41,8 +41,8 @@ export const deleteJob = ({ id }: Prisma.JobWhereUniqueInput) => {
 }
 
 export const Job = {
-  user: (_obj, { root }: ResolverArgs<ReturnType<typeof job>>) =>
-    db.job.findUnique({ where: { id: root.id } }).user(),
+  employee: (_obj, { root }: ResolverArgs<ReturnType<typeof job>>) =>
+    db.job.findUnique({ where: { id: root.id } }).employee(),
   applications: (_obj, { root }: ResolverArgs<ReturnType<typeof job>>) =>
     db.job.findUnique({ where: { id: root.id } }).applications(),
 }

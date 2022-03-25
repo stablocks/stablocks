@@ -4,28 +4,26 @@ export const standard = defineScenario<Prisma.ChatCreateArgs>({
   chat: {
     one: {
       data: {
-        updatedAt: '2022-01-22T19:53:42Z',
+        updatedAt: '2022-03-23T23:04:07Z',
         user: {
           create: {
             firstName: 'String',
             lastName: 'String',
-            email: 'String2926050',
-            otherEmails: 'String',
-            updatedAt: '2022-01-22T19:53:42Z',
+            email: 'String9083701',
+            updatedAt: '2022-03-23T23:04:07Z',
           },
         },
       },
     },
     two: {
       data: {
-        updatedAt: '2022-01-22T19:53:42Z',
+        updatedAt: '2022-03-23T23:04:07Z',
         user: {
           create: {
             firstName: 'String',
             lastName: 'String',
-            email: 'String704770',
-            otherEmails: 'String',
-            updatedAt: '2022-01-22T19:53:42Z',
+            email: 'String5735681',
+            updatedAt: '2022-03-23T23:04:07Z',
           },
         },
       },

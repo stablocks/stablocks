@@ -43,6 +43,6 @@ export const deleteEmployeePay = ({
 }
 
 export const EmployeePay = {
-  user: (_obj, { root }: ResolverArgs<ReturnType<typeof employeePay>>) =>
-    db.employeePay.findUnique({ where: { id: root.id } }).user(),
+  employee: (_obj, { root }: ResolverArgs<ReturnType<typeof employeePay>>) =>
+    db.employeePay.findUnique({ where: { id: root.id } }).employee(),
 }

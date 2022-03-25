@@ -5,26 +5,24 @@ export const standard = defineScenario<Prisma.ChatMessageCreateArgs>({
     one: {
       data: {
         message: 'String',
-        updatedAt: '2022-01-23T14:28:26Z',
+        updatedAt: '2022-03-23T23:04:24Z',
         user: {
           create: {
             firstName: 'String',
             lastName: 'String',
-            email: 'String2956809',
-            otherEmails: 'String',
-            updatedAt: '2022-01-23T14:28:26Z',
+            email: 'String8748581',
+            updatedAt: '2022-03-23T23:04:24Z',
           },
         },
         chat: {
           create: {
-            updatedAt: '2022-01-23T14:28:26Z',
+            updatedAt: '2022-03-23T23:04:24Z',
             user: {
               create: {
                 firstName: 'String',
                 lastName: 'String',
-                email: 'String1189782',
-                otherEmails: 'String',
-                updatedAt: '2022-01-23T14:28:26Z',
+                email: 'String4602210',
+                updatedAt: '2022-03-23T23:04:24Z',
               },
             },
           },
@@ -34,26 +32,24 @@ export const standard = defineScenario<Prisma.ChatMessageCreateArgs>({
     two: {
       data: {
         message: 'String',
-        updatedAt: '2022-01-23T14:28:26Z',
+        updatedAt: '2022-03-23T23:04:24Z',
         user: {
           create: {
             firstName: 'String',
             lastName: 'String',
-            email: 'String7046114',
-            otherEmails: 'String',
-            updatedAt: '2022-01-23T14:28:26Z',
+            email: 'String8500711',
+            updatedAt: '2022-03-23T23:04:24Z',
           },
         },
         chat: {
           create: {
-            updatedAt: '2022-01-23T14:28:26Z',
+            updatedAt: '2022-03-23T23:04:24Z',
             user: {
               create: {
                 firstName: 'String',
                 lastName: 'String',
-                email: 'String4020061',
-                otherEmails: 'String',
-                updatedAt: '2022-01-23T14:28:26Z',
+                email: 'String783313',
+                updatedAt: '2022-03-23T23:04:24Z',
               },
             },
           },

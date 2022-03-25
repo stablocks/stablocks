@@ -12,6 +12,7 @@ export const QUERY = gql`
       id
       title
       description
+      status
     }
   }
 `

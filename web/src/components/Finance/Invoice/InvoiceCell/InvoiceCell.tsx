@@ -9,6 +9,7 @@ export const QUERY = gql`
   query FindInvoiceQuery($id: Int!) {
     invoice(id: $id) {
       id
+      status
       contact {
         id
         firstName
@@ -17,8 +18,7 @@ export const QUERY = gql`
       currency
       issued
       dueDate
-      sent
-      paid
+      paidDate
       description
       items {
         id

@@ -4,8 +4,8 @@ export const schema = gql`
     message: String!
     contact: Contact!
     contactId: String!
-    user: User!
-    userId: String!
+    employee: EmployeeInfo!
+    employeeId: String!
     updatedAt: DateTime!
     createdAt: DateTime!
   }
@@ -18,13 +18,13 @@ export const schema = gql`
   input CreateContactNoteInput {
     message: String!
     contactId: String!
-    userId: String!
+    employeeId: String!
   }
 
   input UpdateContactNoteInput {
     message: String
     contactId: String
-    userId: String
+    employeeId: String
   }
 
   type Mutation {

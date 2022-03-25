@@ -16,6 +16,10 @@ export const QUERY = gql`
       date
       authorizedDate
       currency
+      category {
+        id
+        name
+      }
     }
   }
 `
