@@ -33,21 +33,16 @@ const NewOrganizationForm = (props) => {
             >
               Website
             </Label>
-            <div className="mt-1 flex rounded-md shadow-sm">
-              <span className="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-sm text-gray-500">
-                https://
-              </span>
-              <TextField
-                name="website"
-                defaultValue={props.organization?.website}
-                className="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                placeholder="www.example.com"
-              />
-            </div>
+            <TextField
+              name="website"
+              defaultValue={props.organization?.website}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              placeholder="www.example.com"
+            />
             <FieldError name="website" className="rw-field-error" />
           </div>
 
-          <div className="col-span-3 sm:col-span-2">
+          {/* <div className="col-span-3 sm:col-span-2">
             <Label
               name="logo"
               className="block text-sm font-medium text-gray-700"
@@ -56,7 +51,7 @@ const NewOrganizationForm = (props) => {
             </Label>
             <TextField name="logo" defaultValue={props.organization?.logo} />
             <FieldError name="logo" className="rw-field-error" />
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">

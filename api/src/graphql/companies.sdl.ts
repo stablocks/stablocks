@@ -4,9 +4,11 @@ export const schema = gql`
     name: String!
     website: String
     phone: Int
+    address: Address
+    addressId: String
     contacts: [Contact]!
-    user: User!
-    userId: String!
+    employee: EmployeeInfo!
+    employeeId: String!
     updatedAt: DateTime!
     createdAt: DateTime!
   }
@@ -20,14 +22,16 @@ export const schema = gql`
     name: String!
     website: String
     phone: Int
-    userId: String!
+    addressId: String
+    employeeId: String!
   }
 
   input UpdateCompanyInput {
     name: String
     website: String
     phone: Int
-    userId: String
+    addressId: String
+    employeeId: String
   }
 
   type Mutation {

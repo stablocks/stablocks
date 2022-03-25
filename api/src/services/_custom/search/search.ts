@@ -38,16 +38,18 @@ const queryOptions: QueryOption[] = [
     fields: ['id', 'firstName', 'lastName', 'email'],
     title: ['firstName', 'lastName'],
     extraFilters: {
-      roles: {
-        OR: [
-          {
-            admin: true,
+      OR: [
+        {
+          type: {
+            equals: 'admin',
           },
-          {
-            employee: true,
+        },
+        {
+          type: {
+            equals: 'employee',
           },
-        ],
-      },
+        },
+      ],
     },
   },
   { id: 'expense', fields: ['id', 'name'], title: ['name'] },

@@ -45,6 +45,6 @@ export const deleteContactNote = ({
 export const ContactNote = {
   contact: (_obj, { root }: ResolverArgs<ReturnType<typeof contactNote>>) =>
     db.contactNote.findUnique({ where: { id: root.id } }).contact(),
-  user: (_obj, { root }: ResolverArgs<ReturnType<typeof contactNote>>) =>
-    db.contactNote.findUnique({ where: { id: root.id } }).user(),
+  employee: (_obj, { root }: ResolverArgs<ReturnType<typeof contactNote>>) =>
+    db.contactNote.findUnique({ where: { id: root.id } }).employee(),
 }

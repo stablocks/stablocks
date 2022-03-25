@@ -30,16 +30,16 @@ describe('expenses', () => {
     const result = await createExpense({
       input: {
         name: 'String',
-        amount: 3954899.560918408,
-        date: '2022-02-21T02:09:57Z',
-        updatedAt: '2022-02-21T02:09:57Z',
+        amount: 7419158.737360685,
+        date: '2022-03-23T23:01:37Z',
+        updatedAt: '2022-03-23T23:01:37Z',
       },
     })
 
     expect(result.name).toEqual('String')
-    expect(result.amount).toEqual(3954899.560918408)
-    expect(result.date).toEqual('2022-02-21T02:09:57Z')
-    expect(result.updatedAt).toEqual('2022-02-21T02:09:57Z')
+    expect(result.amount).toEqual(7419158.737360685)
+    expect(result.date).toEqual('2022-03-23T23:01:37Z')
+    expect(result.updatedAt).toEqual('2022-03-23T23:01:37Z')
   })
 
   scenario('updates a expense', async (scenario: StandardScenario) => {

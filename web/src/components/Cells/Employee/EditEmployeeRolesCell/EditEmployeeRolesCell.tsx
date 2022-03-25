@@ -2,9 +2,9 @@ import type { EditRoleByUserId } from 'types/graphql'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 
 export const QUERY = gql`
-  query EditRole($userId: String!) {
-    role(userId: $userId) {
-      id
+  query EditRole($employeeId: String!) {
+    role(employeeId: $employeeId) {
+      employeeId
     }
   }
 `

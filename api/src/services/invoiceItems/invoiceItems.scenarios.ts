@@ -5,27 +5,13 @@ export const standard = defineScenario<Prisma.InvoiceItemCreateArgs>({
     one: {
       data: {
         name: 'String',
-        units: 4481647.285977319,
-        rate: 8084255,
-        updatedAt: '2022-02-20T13:05:08Z',
+        units: 9162257,
+        rate: 9985098.609099163,
+        updatedAt: '2022-03-23T23:01:25Z',
         invoice: {
           create: {
-            dueDate: '2022-02-20T13:05:08Z',
-            updatedAt: '2022-02-20T13:05:08Z',
-            contact: {
-              create: {
-                updatedAt: '2022-02-20T13:05:08Z',
-                user: {
-                  create: {
-                    firstName: 'String',
-                    lastName: 'String',
-                    email: 'String5882210',
-                    otherEmails: 'String',
-                    updatedAt: '2022-02-20T13:05:08Z',
-                  },
-                },
-              },
-            },
+            updatedAt: '2022-03-23T23:01:25Z',
+            contact: { create: { updatedAt: '2022-03-23T23:01:25Z' } },
           },
         },
       },
@@ -33,27 +19,13 @@ export const standard = defineScenario<Prisma.InvoiceItemCreateArgs>({
     two: {
       data: {
         name: 'String',
-        units: 9907218.988833813,
-        rate: 1707778,
-        updatedAt: '2022-02-20T13:05:08Z',
+        units: 8301178,
+        rate: 943306.2726992758,
+        updatedAt: '2022-03-23T23:01:25Z',
         invoice: {
           create: {
-            dueDate: '2022-02-20T13:05:08Z',
-            updatedAt: '2022-02-20T13:05:08Z',
-            contact: {
-              create: {
-                updatedAt: '2022-02-20T13:05:08Z',
-                user: {
-                  create: {
-                    firstName: 'String',
-                    lastName: 'String',
-                    email: 'String3167025',
-                    otherEmails: 'String',
-                    updatedAt: '2022-02-20T13:05:08Z',
-                  },
-                },
-              },
-            },
+            updatedAt: '2022-03-23T23:01:25Z',
+            contact: { create: { updatedAt: '2022-03-23T23:01:25Z' } },
           },
         },
       },

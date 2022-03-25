@@ -33,18 +33,18 @@ describe('invoiceItems', () => {
     const result = await createInvoiceItem({
       input: {
         name: 'String',
-        units: 2579682.693480798,
-        rate: 1021349,
+        units: 1854951,
+        rate: 4944805.334233752,
         invoiceId: scenario.invoiceItem.two.invoiceId,
-        updatedAt: '2022-02-20T13:05:08Z',
+        updatedAt: '2022-03-23T23:01:25Z',
       },
     })
 
     expect(result.name).toEqual('String')
-    expect(result.units).toEqual(2579682.693480798)
-    expect(result.rate).toEqual(1021349)
+    expect(result.units).toEqual(1854951)
+    expect(result.rate).toEqual(4944805.334233752)
     expect(result.invoiceId).toEqual(scenario.invoiceItem.two.invoiceId)
-    expect(result.updatedAt).toEqual('2022-02-20T13:05:08Z')
+    expect(result.updatedAt).toEqual('2022-03-23T23:01:25Z')
   })
 
   scenario('updates a invoiceItem', async (scenario: StandardScenario) => {

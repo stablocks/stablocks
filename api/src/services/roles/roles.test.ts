@@ -17,23 +17,23 @@ describe('roles', () => {
   scenario('creates a role', async (scenario: StandardScenario) => {
     const result = await createRole({
       input: {
-        userId: scenario.role.two.userId,
-        updatedAt: '2022-01-19T11:08:17Z',
+        employeeId: scenario.role.two.employeeId,
+        updatedAt: '2022-03-23T23:05:11Z',
       },
     })
 
-    expect(result.userId).toEqual(scenario.role.two.userId)
-    expect(result.updatedAt).toEqual('2022-01-19T11:08:17Z')
+    expect(result.employeeId).toEqual(scenario.role.two.employeeId)
+    expect(result.updatedAt).toEqual('2022-03-23T23:05:11Z')
   })
 
   scenario('updates a role', async (scenario: StandardScenario) => {
     const original = await role({ id: scenario.role.one.id })
     const result = await updateRole({
       id: original.id,
-      input: { updatedAt: '2022-01-20T11:08:17Z' },
+      input: { updatedAt: '2022-03-24T23:05:11Z' },
     })
 
-    expect(result.updatedAt).toEqual('2022-01-20T11:08:17Z')
+    expect(result.updatedAt).toEqual('2022-03-24T23:05:11Z')
   })
 
   scenario('deletes a role', async (scenario: StandardScenario) => {

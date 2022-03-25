@@ -1,8 +1,13 @@
 import { DatetimeLocalField, NumberField, TextField } from '@redwoodjs/forms'
+import { useAuth } from '@redwoodjs/auth'
 import Form from 'src/ui/Form'
 
 const IncomeForm = (props) => {
+  const { currentUser } = useAuth()
+
   const onSubmit = (data) => {
+    if (!props.income?.employeeId) data.employeeId = currentUser.id
+
     props.onSave(data, props.income?.id)
   }
 

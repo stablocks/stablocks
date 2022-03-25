@@ -45,6 +45,6 @@ export const deleteTaskComment = ({
 export const TaskComment = {
   task: (_obj, { root }: ResolverArgs<ReturnType<typeof taskComment>>) =>
     db.taskComment.findUnique({ where: { id: root.id } }).task(),
-  user: (_obj, { root }: ResolverArgs<ReturnType<typeof taskComment>>) =>
-    db.taskComment.findUnique({ where: { id: root.id } }).user(),
+  employee: (_obj, { root }: ResolverArgs<ReturnType<typeof taskComment>>) =>
+    db.taskComment.findUnique({ where: { id: root.id } }).employee(),
 }

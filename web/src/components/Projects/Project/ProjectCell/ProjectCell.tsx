@@ -3,6 +3,7 @@ import type { FindProjectQuery } from 'types/graphql'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import { Link, navigate, routes } from '@redwoodjs/router'
 import Loader from 'src/ui/Loader'
+import InfoImage from 'src/ui/InfoImage'
 import PageTitle from 'src/ui/PageTitle'
 import Popup from 'src/components/Elements/Popup'
 import NewTask from '../../Task/NewTask'
@@ -24,18 +25,27 @@ export const QUERY = gql`
   }
 `
 
+const NonSuccessHeader = () => (
+  <PageTitle
+    title="Project"
+    breadcrumbs={[{ title: 'Projects', to: routes.projects() }]}
+    search={{ label: 'projects', type: 'project' }}
+  />
+)
+
 export const Loading = () => (
   <>
-    <PageTitle
-      title="Project"
-      breadcrumbs={[{ title: 'Projects', to: routes.projects() }]}
-      search={{ label: 'projects', type: 'project' }}
-    />
+    <NonSuccessHeader />
     <Loader />
   </>
 )
 
-export const Empty = () => <></>
+export const Empty = () => (
+  <>
+    <NonSuccessHeader />
+    <InfoImage type="error" message="This project could not be found" />
+  </>
+)
 
 export const Failure = ({ error }: CellFailureProps) => (
   <div style={{ color: 'red' }}>Error: {error.message}</div>

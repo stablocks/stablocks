@@ -12,9 +12,11 @@ export const QUERY = gql`
       lastName
       email
       profileImage
-      position
-      departments {
-        id
+      employee {
+        position
+        departments {
+          id
+        }
       }
     }
   }

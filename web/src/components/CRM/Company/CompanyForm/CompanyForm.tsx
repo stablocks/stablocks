@@ -6,7 +6,7 @@ const CompanyForm = (props) => {
   const { currentUser } = useAuth()
 
   const onSubmit = (data) => {
-    if (!props.company?.userId) data.userId = currentUser.id
+    if (!props.company?.employeeId) data.employeeId = currentUser.id
 
     props.onSave(data, props.company?.id)
   }

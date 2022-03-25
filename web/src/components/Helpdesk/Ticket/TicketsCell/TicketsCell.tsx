@@ -3,6 +3,7 @@ import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import { Link, routes } from '@redwoodjs/router'
 import TableLoader from 'src/ui/TableLoader'
 import Table from 'src/components/Layout/Table'
+import InfoImage from 'src/ui/InfoImage'
 
 export const QUERY = gql`
   query TicketsQuery {
@@ -10,6 +11,7 @@ export const QUERY = gql`
       id
       title
       description
+      status
     }
   }
 `
@@ -23,10 +25,10 @@ const tableColumns = [
 
 export const Loading = () => <TableLoader cols={tableColumns} />
 
-export const Empty = () => <></>
+export const Empty = () => <InfoImage type="empty" message="No tickets yet" />
 
 export const Failure = ({ error }: CellFailureProps) => (
-  <div style={{ color: 'red' }}>Error: {error.message}</div>
+  <InfoImage type="error" message={`${error}`} />
 )
 
 export const Success = ({ tickets }: CellSuccessProps<TicketsQuery>) => {

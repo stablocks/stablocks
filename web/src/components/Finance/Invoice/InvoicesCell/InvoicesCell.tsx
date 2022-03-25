@@ -8,6 +8,7 @@ export const QUERY = gql`
   query InvoicesQuery {
     invoices {
       id
+      status
       contact {
         id
         firstName
@@ -16,8 +17,7 @@ export const QUERY = gql`
       currency
       issued
       dueDate
-      sent
-      paid
+      paidDate
       description
     }
   }
