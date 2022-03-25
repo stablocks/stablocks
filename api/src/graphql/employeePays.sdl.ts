@@ -1,12 +1,12 @@
 export const schema = gql`
   type EmployeePay {
     id: String!
-    amount: Int!
+    amount: Float!
     currency: String!
     type: EmployeePayType!
     frequency: Frequency!
-    user: User!
-    userId: String!
+    employee: EmployeeInfo!
+    employeeId: String!
     updatedAt: DateTime!
     createdAt: DateTime!
   }
@@ -31,19 +31,19 @@ export const schema = gql`
   }
 
   input CreateEmployeePayInput {
-    amount: Int!
+    amount: Float!
     currency: String!
     type: EmployeePayType!
     frequency: Frequency!
-    userId: String!
+    employeeId: String!
   }
 
   input UpdateEmployeePayInput {
-    amount: Int
+    amount: Float
     currency: String
     type: EmployeePayType
     frequency: Frequency
-    userId: String
+    employeeId: String
   }
 
   type Mutation {

@@ -6,7 +6,7 @@ const ApplicationForm = (props) => {
   const { currentUser } = useAuth()
 
   const onSubmit = (data) => {
-    if (!props.application?.userId) data.userId = currentUser.id
+    if (!props.application?.employeeId) data.employeeId = currentUser.id
 
     props.onSave(data, props.application?.id)
   }

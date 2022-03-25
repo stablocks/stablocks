@@ -6,7 +6,7 @@ export const schema = gql`
     status: Status!
     user: User!
     userId: String!
-    assignee: User
+    assignee: EmployeeInfo
     assigneeId: String
     task: Task
     taskId: String

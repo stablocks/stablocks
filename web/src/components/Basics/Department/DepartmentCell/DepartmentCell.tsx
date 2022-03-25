@@ -11,10 +11,12 @@ export const QUERY = gql`
       id
       name
       email
-      users {
-        id
-        firstName
-        lastName
+      employees {
+        user {
+          id
+          firstName
+          lastName
+        }
       }
       department {
         id

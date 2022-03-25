@@ -2,6 +2,7 @@ import type { FindTaskQuery } from 'types/graphql'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import { navigate, routes } from '@redwoodjs/router'
 import Loader from 'src/ui/Loader'
+import InfoImage from 'src/ui/InfoImage'
 import PageTitle from 'src/ui/PageTitle'
 import { PencilAltIcon } from '@heroicons/react/outline'
 
@@ -11,6 +12,7 @@ export const QUERY = gql`
       id
       title
       description
+      status
       project {
         id
         title
@@ -20,25 +22,34 @@ export const QUERY = gql`
   }
 `
 
+const NonSuccessHeader = () => (
+  <PageTitle
+    title="Task"
+    breadcrumbs={[
+      { title: 'Projects', to: routes.projects() },
+      {
+        title: 'Project',
+        to: '#',
+      },
+      { title: 'Tasks', to: routes.tasks() },
+    ]}
+    search={{ label: 'tasks', type: 'task' }}
+  />
+)
+
 export const Loading = () => (
   <>
-    <PageTitle
-      title="Task"
-      breadcrumbs={[
-        { title: 'Projects', to: routes.projects() },
-        {
-          title: 'Project',
-          to: '#',
-        },
-        { title: 'Tasks', to: routes.tasks() },
-      ]}
-      search={{ label: 'tasks', type: 'task' }}
-    />
+    <NonSuccessHeader />
     <Loader />
   </>
 )
 
-export const Empty = () => <></>
+export const Empty = () => (
+  <>
+    <NonSuccessHeader />
+    <InfoImage type="error" message="This task could not be found" />
+  </>
+)
 
 export const Failure = ({ error }: CellFailureProps) => (
   <div style={{ color: 'red' }}>Error: {error.message}</div>

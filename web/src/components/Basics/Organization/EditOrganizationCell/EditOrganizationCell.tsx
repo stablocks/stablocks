@@ -18,11 +18,14 @@ export const QUERY = gql`
       website
       logo
       email
-      address
-      addressTwo
-      city
-      state
-      zipCode
+      address {
+        address
+        addressTwo
+        city
+        state
+        country
+        zip
+      }
       finance
       crm
       marketing

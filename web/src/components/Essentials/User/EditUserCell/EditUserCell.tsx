@@ -16,10 +16,7 @@ export const QUERY = gql`
       middleName
       lastName
       email
-      otherEmails
       profileImage
-      position
-      supervisorId
       resume
       updatedAt
       createdAt
@@ -34,10 +31,7 @@ const UPDATE_USER_MUTATION = gql`
       middleName
       lastName
       email
-      otherEmails
       profileImage
-      position
-      supervisorId
       resume
       updatedAt
       createdAt

@@ -6,7 +6,7 @@ const TaskForm = (props) => {
   const { currentUser } = useAuth()
 
   const onSubmit = (data) => {
-    if (!props.task?.userId) data.userId = currentUser.id
+    if (!props.task?.employeeId) data.employeeId = currentUser.id
 
     props.onSave(data, props.task?.id)
   }

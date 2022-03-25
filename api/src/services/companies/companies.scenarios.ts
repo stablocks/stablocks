@@ -5,14 +5,19 @@ export const standard = defineScenario<Prisma.CompanyCreateArgs>({
     one: {
       data: {
         name: 'String',
-        updatedAt: '2022-01-15T20:52:23Z',
-        user: {
+        updatedAt: '2022-03-23T23:03:10Z',
+        employee: {
           create: {
-            firstName: 'String',
-            lastName: 'String',
-            email: 'String940565',
-            otherEmails: 'String',
-            updatedAt: '2022-01-15T20:52:23Z',
+            position: 'String',
+            updatedAt: '2022-03-23T23:03:10Z',
+            user: {
+              create: {
+                firstName: 'String',
+                lastName: 'String',
+                email: 'String9003577',
+                updatedAt: '2022-03-23T23:03:10Z',
+              },
+            },
           },
         },
       },
@@ -20,14 +25,19 @@ export const standard = defineScenario<Prisma.CompanyCreateArgs>({
     two: {
       data: {
         name: 'String',
-        updatedAt: '2022-01-15T20:52:23Z',
-        user: {
+        updatedAt: '2022-03-23T23:03:10Z',
+        employee: {
           create: {
-            firstName: 'String',
-            lastName: 'String',
-            email: 'String1555056',
-            otherEmails: 'String',
-            updatedAt: '2022-01-15T20:52:23Z',
+            position: 'String',
+            updatedAt: '2022-03-23T23:03:10Z',
+            user: {
+              create: {
+                firstName: 'String',
+                lastName: 'String',
+                email: 'String9518887',
+                updatedAt: '2022-03-23T23:03:10Z',
+              },
+            },
           },
         },
       },

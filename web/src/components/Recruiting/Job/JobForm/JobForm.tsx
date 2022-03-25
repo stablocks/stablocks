@@ -6,7 +6,7 @@ const JobForm = (props) => {
   const { currentUser } = useAuth()
 
   const onSubmit = (data) => {
-    if (!props.job?.userId) data.userId = currentUser.id
+    if (!props.job?.employeeId) data.employeeId = currentUser.id
 
     props.onSave(data, props.job?.id)
   }

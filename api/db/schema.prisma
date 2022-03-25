@@ -15,11 +15,8 @@ model Organization {
   website      String?
   logo         String?
   email        String?
-  address      String?
-  addressTwo   String?
-  city         String?
-  state        String?
-  zipCode      Int?
+  address      Address? @relation(fields: [addressId], references: [id])
+  addressId    String?  @unique
   // Module toggles
   recruiting   Boolean  @default(true)
   crm          Boolean  @default(true)
@@ -37,58 +34,72 @@ model Organization {
 }
 
 model User {
-  id              String          @id @default(cuid())
-  firstName       String
-  middleName      String?
-  lastName        String
-  email           String          @unique
-  otherEmails     String[]
-  profileImage    String?
+  id             String          @id @default(cuid())
+  type           UserType        @default(external)
+  firstName      String
+  middleName     String?
+  lastName       String
+  email          String          @unique
+  profileImage   String?
+  employee       EmployeeInfo?
+  // Recruiting
+  applications   Application[]
+  resume         String?
+  // Helpdesk
+  ticketsCreated Ticket[]        @relation("UserTicket")
+  ticketComments TicketComment[]
+  chatsCreated   Chat[]          @relation("UserChat")
+  chatMessages   ChatMessage[]
+  // Times
+  updatedAt      DateTime        @updatedAt
+  createdAt      DateTime        @default(now())
+}
+
+model EmployeeInfo {
+  user            User           @relation(fields: [userId], references: [id])
+  userId          String         @id
+  // Essentials
   roles           Role?
-  // Organization
   position        String?
-  departments     Department[]
+  altEmail        String?
+  address         Address?       @relation(fields: [addressId], references: [id])
+  addressId       String?        @unique
+  supervisor      EmployeeInfo?  @relation("SupervisorEmployees", fields: [supervisorId], references: [userId])
   supervisorId    String?
-  supervisor      User?           @relation("SupervisorEmployees", fields: [supervisorId], references: [id])
-  employees       User[]          @relation("SupervisorEmployees")
-  // Payroll
+  employees       EmployeeInfo[] @relation("SupervisorEmployees")
+  departments     Department[]
+  // HR
   pay             EmployeePay?
   // Recruiting
   jobs            Job[]
-  applications    Application[]
-  resume          String?
   // CRM
   contacts        Contact[]
   contactNotes    ContactNote[]
   companies       Company[]
   // Helpdesk
-  ticketsCreated  Ticket[]        @relation("UserTicket")
-  ticketsAssigned Ticket[]        @relation("AssigneeTicket")
-  ticketComments  TicketComment[]
-  chatsCreated    Chat[]          @relation("UserChat")
-  chatsAssigned   Chat[]          @relation("AssigneeChat")
-  chatMessages    ChatMessage[]
+  ticketsAssigned Ticket[]       @relation("AssigneeTicket")
+  chatsAssigned   Chat[]         @relation("AssigneeChat")
   // Project Management
   projects        Project[]
-  tasksCreated    Task[]          @relation("UserTask")
-  tasksAssigned   Task[]          @relation("AssigneeTask")
+  tasksCreated    Task[]         @relation("UserTask")
+  tasksAssigned   Task[]         @relation("AssigneeTask")
   taskComments    TaskComment[]
   // Times
-  updatedAt       DateTime        @updatedAt
-  createdAt       DateTime        @default(now())
+  updatedAt       DateTime       @updatedAt
+  createdAt       DateTime       @default(now())
 }
 
 model Department {
-  id             String       @id @default(cuid())
+  id             String         @id @default(cuid())
   name           String
   email          String?
-  users          User[]
-  department     Department?  @relation("Subdepartments", fields: [departmentId], references: [id])
+  employees      EmployeeInfo[]
+  department     Department?    @relation("Subdepartments", fields: [departmentId], references: [id])
   departmentId   String?
-  subDepartments Department[] @relation("Subdepartments")
+  subDepartments Department[]   @relation("Subdepartments")
   // Times
-  updatedAt      DateTime     @updatedAt
-  createdAt      DateTime     @default(now())
+  updatedAt      DateTime       @updatedAt
+  createdAt      DateTime       @default(now())
 }
 
 // --------------------
@@ -98,7 +109,7 @@ model Department {
 model Income {
   id        String   @id @default(cuid())
   name      String
-  amount    Int
+  amount    Float
   date      DateTime
   currency  String
   invoice   Invoice? @relation(fields: [invoiceId], references: [id])
@@ -110,13 +121,13 @@ model Income {
 
 model Invoice {
   id          Int           @id @default(autoincrement())
+  status      InvoiceStatus @default(draft)
   contact     Contact       @relation(fields: [contactId], references: [id])
   contactId   String
   currency    String        @default("USD")
   issued      DateTime      @default(now())
-  dueDate     DateTime
-  sent        Boolean       @default(false)
-  paid        Boolean       @default(false)
+  dueDate     DateTime?
+  paidDate    DateTime?
   description String?
   items       InvoiceItem[]
   income      Income?
@@ -129,7 +140,7 @@ model InvoiceItem {
   id          String   @id @default(cuid())
   name        String
   units       Int
-  rate        Int
+  rate        Float
   description String?
   invoice     Invoice  @relation(fields: [invoiceId], references: [id])
   invoiceId   Int
@@ -141,7 +152,7 @@ model InvoiceItem {
 model Expense {
   id             String           @id @default(cuid())
   name           String
-  amount         Int
+  amount         Float
   date           DateTime
   authorizedDate DateTime?
   currency       String           @default("USD")
@@ -167,16 +178,16 @@ model ExpenseCategory {
 // --------------------
 
 model EmployeePay {
-  id        String          @id @default(cuid())
-  amount    Int
-  currency  String          @default("USD")
-  type      EmployeePayType @default(salary)
-  frequency Frequency       @default(biweekly)
-  user      User            @relation(fields: [userId], references: [id])
-  userId    String          @unique
+  id         String          @id @default(cuid())
+  amount     Float
+  currency   String          @default("USD")
+  type       EmployeePayType @default(salary)
+  frequency  Frequency       @default(biweekly)
+  employee   EmployeeInfo    @relation(fields: [employeeId], references: [userId])
+  employeeId String          @unique
   // Times
-  updatedAt DateTime        @updatedAt
-  createdAt DateTime        @default(now())
+  updatedAt  DateTime        @updatedAt
+  createdAt  DateTime        @default(now())
 }
 
 // --------------------
@@ -187,8 +198,8 @@ model Job {
   id           String        @id @default(cuid())
   title        String
   description  String
-  user         User          @relation(fields: [userId], references: [id])
-  userId       String
+  employee     EmployeeInfo  @relation(fields: [employeeId], references: [userId])
+  employeeId   String
   applications Application[]
   // Times
   updatedAt    DateTime      @updatedAt
@@ -222,14 +233,11 @@ model Contact {
   phone      Int?
   company    Company?      @relation(fields: [companyId], references: [id])
   companyId  String?
-  address    String?
-  addressTwo String?
-  city       String?
-  state      String?
-  zipCode    Int?
+  address    Address?      @relation(fields: [addressId], references: [id])
+  addressId  String?       @unique
   // Internal info
-  user       User          @relation(fields: [userId], references: [id])
-  userId     String
+  employee   EmployeeInfo  @relation(fields: [employeeId], references: [userId])
+  employeeId String
   notes      ContactNote[]
   invoices   Invoice[]
   // Times
@@ -238,28 +246,30 @@ model Contact {
 }
 
 model ContactNote {
-  id        String   @id @default(cuid())
-  message   String
-  contact   Contact  @relation(fields: [contactId], references: [id])
-  contactId String
-  user      User     @relation(fields: [userId], references: [id])
-  userId    String
+  id         String       @id @default(cuid())
+  message    String
+  contact    Contact      @relation(fields: [contactId], references: [id])
+  contactId  String
+  employee   EmployeeInfo @relation(fields: [employeeId], references: [userId])
+  employeeId String
   // Times
-  updatedAt DateTime @updatedAt
-  createdAt DateTime @default(now())
+  updatedAt  DateTime     @updatedAt
+  createdAt  DateTime     @default(now())
 }
 
 model Company {
-  id        String    @id @default(cuid())
-  name      String
-  website   String?
-  phone     Int?
-  contacts  Contact[]
-  user      User      @relation(fields: [userId], references: [id])
-  userId    String
+  id         String       @id @default(cuid())
+  name       String
+  website    String?
+  phone      Int?
+  address    Address?     @relation(fields: [addressId], references: [id])
+  addressId  String?      @unique
+  contacts   Contact[]
+  employee   EmployeeInfo @relation(fields: [employeeId], references: [userId])
+  employeeId String
   // Times
-  updatedAt DateTime  @updatedAt
-  createdAt DateTime  @default(now())
+  updatedAt  DateTime     @updatedAt
+  createdAt  DateTime     @default(now())
 }
 
 // --------------------
@@ -273,7 +283,7 @@ model Ticket {
   status      Status          @default(open)
   user        User            @relation("UserTicket", fields: [userId], references: [id])
   userId      String
-  assignee    User?           @relation("AssigneeTicket", fields: [assigneeId], references: [id])
+  assignee    EmployeeInfo?   @relation("AssigneeTicket", fields: [assigneeId], references: [userId])
   assigneeId  String?
   task        Task?           @relation(fields: [taskId], references: [id])
   taskId      String?
@@ -299,7 +309,7 @@ model Chat {
   id         String        @id @default(cuid())
   user       User          @relation("UserChat", fields: [userId], references: [id])
   userId     String
-  assignee   User?         @relation("AssigneeChat", fields: [assigneeId], references: [id])
+  assignee   EmployeeInfo? @relation("AssigneeChat", fields: [assigneeId], references: [userId])
   assigneeId String?
   messages   ChatMessage[]
   // Times
@@ -325,15 +335,15 @@ model ChatMessage {
 // --------------------
 
 model Project {
-  id          String   @id @default(cuid())
+  id          String       @id @default(cuid())
   title       String
   description String?
   tasks       Task[]
-  user        User     @relation(fields: [userId], references: [id])
-  userId      String
+  employee    EmployeeInfo @relation(fields: [employeeId], references: [userId])
+  employeeId  String
   // Times
-  updatedAt   DateTime @updatedAt
-  createdAt   DateTime @default(now())
+  updatedAt   DateTime     @updatedAt
+  createdAt   DateTime     @default(now())
 }
 
 model Task {
@@ -343,9 +353,9 @@ model Task {
   status      Status        @default(open)
   project     Project       @relation(fields: [projectId], references: [id])
   projectId   String
-  user        User          @relation("UserTask", fields: [userId], references: [id])
-  userId      String
-  assignee    User?         @relation("AssigneeTask", fields: [assigneeId], references: [id])
+  employee    EmployeeInfo  @relation("UserTask", fields: [employeeId], references: [userId])
+  employeeId  String
+  assignee    EmployeeInfo? @relation("AssigneeTask", fields: [assigneeId], references: [userId])
   assigneeId  String?
   tickets     Ticket[]
   comments    TaskComment[]
@@ -355,49 +365,67 @@ model Task {
 }
 
 model TaskComment {
-  id        String   @id @default(cuid())
-  message   String
-  task      Task     @relation(fields: [taskId], references: [id])
-  taskId    String
-  user      User     @relation(fields: [userId], references: [id])
-  userId    String
+  id         String       @id @default(cuid())
+  message    String
+  task       Task         @relation(fields: [taskId], references: [id])
+  taskId     String
+  employee   EmployeeInfo @relation(fields: [employeeId], references: [userId])
+  employeeId String
   // Times
-  updatedAt DateTime @updatedAt
-  createdAt DateTime @default(now())
+  updatedAt  DateTime     @updatedAt
+  createdAt  DateTime     @default(now())
+}
+
+// --------------------
+// Utils
+// --------------------
+
+model Address {
+  id           String        @id @default(cuid())
+  organization Organization?
+  employee     EmployeeInfo?
+  contact      Contact?
+  company      Company?
+  address      String
+  addressTwo   String?
+  city         String
+  state        String
+  country      String
+  zip          Int
+  // Times
+  updatedAt    DateTime      @updatedAt
+  createdAt    DateTime      @default(now())
 }
 
 model Role {
-  id              String   @id @default(cuid())
-  user            User     @relation(fields: [userId], references: [id])
-  userId          String   @unique
-  admin           Boolean  @default(false)
-  employee        Boolean  @default(false)
-  external        Boolean  @default(true)
-  departmentAdmin Boolean  @default(false)
-  financeAdmin    Boolean  @default(false)
-  finance         Boolean  @default(false)
-  hrAdmin         Boolean  @default(false)
-  hr              Boolean  @default(false)
-  recruitingAdmin Boolean  @default(false)
-  recruiting      Boolean  @default(false)
-  crmAdmin        Boolean  @default(false)
-  crm             Boolean  @default(false)
-  marketingAdmin  Boolean  @default(false)
-  marketing       Boolean  @default(false)
-  salesAdmin      Boolean  @default(false)
-  sales           Boolean  @default(false)
-  helpdeskAdmin   Boolean  @default(false)
-  helpdesk        Boolean  @default(false)
-  projectsAdmin   Boolean  @default(false)
-  projects        Boolean  @default(false)
+  employee        EmployeeInfo @relation(fields: [employeeId], references: [userId])
+  employeeId      String       @id
+  departmentAdmin Boolean      @default(false)
+  financeAdmin    Boolean      @default(false)
+  finance         Boolean      @default(false)
+  hrAdmin         Boolean      @default(false)
+  recruitingAdmin Boolean      @default(false)
+  crmAdmin        Boolean      @default(false)
+  marketingAdmin  Boolean      @default(false)
+  marketing       Boolean      @default(false)
+  salesAdmin      Boolean      @default(false)
+  sales           Boolean      @default(false)
+  helpdeskAdmin   Boolean      @default(false)
+  projectsAdmin   Boolean      @default(false)
   // Times
-  updatedAt       DateTime @updatedAt
-  createdAt       DateTime @default(now())
+  updatedAt       DateTime     @updatedAt
+  createdAt       DateTime     @default(now())
 }
 
 // --------------------
 // Enums
 // --------------------
+
+enum UserType {
+  admin
+  employee
+  external
+}
 
 enum EmployeePayType {
   salary
@@ -412,6 +440,13 @@ enum Frequency {
   monthly
   bimonthly
   annually
+}
+
+enum InvoiceStatus {
+  draft
+  sent
+  paid
+  archived
 }
 
 enum Status {

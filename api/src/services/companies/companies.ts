@@ -41,8 +41,10 @@ export const deleteCompany = ({ id }: Prisma.CompanyWhereUniqueInput) => {
 }
 
 export const Company = {
+  address: (_obj, { root }: ResolverArgs<ReturnType<typeof company>>) =>
+    db.company.findUnique({ where: { id: root.id } }).address(),
   contacts: (_obj, { root }: ResolverArgs<ReturnType<typeof company>>) =>
     db.company.findUnique({ where: { id: root.id } }).contacts(),
-  user: (_obj, { root }: ResolverArgs<ReturnType<typeof company>>) =>
-    db.company.findUnique({ where: { id: root.id } }).user(),
+  employee: (_obj, { root }: ResolverArgs<ReturnType<typeof company>>) =>
+    db.company.findUnique({ where: { id: root.id } }).employee(),
 }

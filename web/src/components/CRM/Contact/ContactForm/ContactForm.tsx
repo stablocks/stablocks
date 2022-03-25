@@ -6,7 +6,7 @@ const ContactForm = (props) => {
   const { currentUser } = useAuth()
 
   const onSubmit = (data) => {
-    if (!props.contact?.userId) data.userId = currentUser.id
+    if (!props.contact?.employeeId) data.employeeId = currentUser.id
 
     props.onSave(data, props.contact?.id)
   }
@@ -47,41 +47,6 @@ const ContactForm = (props) => {
               label: 'Phone number',
               element: TelField,
               defaultValue: props.contact?.phone,
-            },
-          ],
-        },
-        {
-          title: 'Address Information',
-          fields: [
-            {
-              name: 'address',
-              label: 'Address',
-              element: TextField,
-              defaultValue: props.contact?.address,
-            },
-            {
-              name: 'addressTwo',
-              label: 'Apt., P.O. Box, etc.',
-              element: TextField,
-              defaultValue: props.contact?.addressTwo,
-            },
-            {
-              name: 'city',
-              label: 'City',
-              element: TextField,
-              defaultValue: props.contact?.city,
-            },
-            {
-              name: 'state',
-              label: 'State',
-              element: TextField,
-              defaultValue: props.contact?.state,
-            },
-            {
-              name: 'zipCode',
-              label: 'ZIP / Postal Code',
-              element: NumberField,
-              defaultValue: props.contact?.zipCode,
             },
           ],
         },

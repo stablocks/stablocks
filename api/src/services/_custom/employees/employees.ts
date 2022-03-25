@@ -9,9 +9,18 @@ export const employees = () => {
 
   return db.user.findMany({
     where: {
-      roles: {
-        employee: true,
-      },
+      OR: [
+        {
+          type: {
+            equals: 'admin',
+          },
+        },
+        {
+          type: {
+            equals: 'employee',
+          },
+        },
+      ],
     },
     orderBy: {
       lastName: 'asc',
@@ -20,16 +29,15 @@ export const employees = () => {
 }
 
 export const employee = async ({ id }: Prisma.UserWhereUniqueInput) => {
-  requireAuth({ roles: ['admin', 'employee'] })
+  const roles = ['admin', 'employee']
+
+  requireAuth({ roles })
 
   const user = await db.user.findUnique({
     where: { id },
-    include: {
-      roles: true,
-    },
   })
 
-  if (!user?.roles?.employee) return
+  if (!roles.includes(user.type)) return {}
 
   return user
 }
@@ -46,11 +54,12 @@ export const createFirstUser = async ({ input }: CreateUserArgs) => {
   return db.user.create({
     data: {
       ...input,
-      roles: {
+      type: 'admin',
+      employee: {
         create: {
-          admin: true,
-          employee: true,
-          external: false,
+          roles: {
+            create: {},
+          },
         },
       },
     },
@@ -67,10 +76,12 @@ export const createEmployee = async ({ input }: CreateEmployeeArgs) => {
   return db.user.create({
     data: {
       ...input,
-      roles: {
+      type: 'employee',
+      employee: {
         create: {
-          employee: true,
-          external: false,
+          roles: {
+            create: {},
+          },
         },
       },
     },

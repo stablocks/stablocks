@@ -6,7 +6,7 @@ const TicketForm = (props) => {
   const { currentUser } = useAuth()
 
   const onSubmit = (data) => {
-    if (!props.ticket?.userId) data.userId = currentUser.id
+    if (!props.ticket?.employeeId) data.employeeId = currentUser.id
 
     props.onSave(data, props.ticket?.id)
   }

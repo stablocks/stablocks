@@ -43,6 +43,6 @@ export const deleteProject = ({ id }: Prisma.ProjectWhereUniqueInput) => {
 export const Project = {
   tasks: (_obj, { root }: ResolverArgs<ReturnType<typeof project>>) =>
     db.project.findUnique({ where: { id: root.id } }).tasks(),
-  user: (_obj, { root }: ResolverArgs<ReturnType<typeof project>>) =>
-    db.project.findUnique({ where: { id: root.id } }).user(),
+  employee: (_obj, { root }: ResolverArgs<ReturnType<typeof project>>) =>
+    db.project.findUnique({ where: { id: root.id } }).employee(),
 }

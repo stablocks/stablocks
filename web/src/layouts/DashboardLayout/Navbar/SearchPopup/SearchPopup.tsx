@@ -11,6 +11,7 @@ import { useLocation } from '@redwoodjs/router'
 import { Dialog, Transition } from '@headlessui/react'
 import { AppContext } from 'src/components/Providers/AppProviderCell'
 import SearchCell from 'src/components/Cells/SearchCell'
+import { SearchIcon } from '@heroicons/react/solid'
 
 type SearchPopupProps = {
   isOpen: boolean
@@ -51,7 +52,7 @@ const SearchPopup = ({ isOpen, setIsOpen }: SearchPopupProps) => {
         className="fixed inset-0 z-[100] overflow-y-auto"
         onClose={closePopup}
       >
-        <div className="min-h-screen px-4 text-center">
+        <div className="min-h-screen px-4 py-12 text-center">
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -64,13 +65,6 @@ const SearchPopup = ({ isOpen, setIsOpen }: SearchPopupProps) => {
             <Dialog.Overlay className="fixed inset-0 bg-gray-900 bg-opacity-95" />
           </Transition.Child>
 
-          {/* This element is to trick the browser into centering the modal contents. */}
-          <span
-            className="inline-block h-screen align-middle"
-            aria-hidden="true"
-          >
-            &#8203;
-          </span>
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -80,15 +74,20 @@ const SearchPopup = ({ isOpen, setIsOpen }: SearchPopupProps) => {
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-95"
           >
-            <div className="relative mt-8 mb-16 inline-block w-full max-w-lg transform text-left align-top transition-all">
-              <Form className="search-form">
-                <Label name="search" className="mb-1 text-sm text-white">
-                  Search {search.label}:
+            <div className="mx-auto max-w-xl transform divide-y divide-gray-100 overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition-all">
+              <Form className="relative">
+                <Label name="search" className="sr-only">
+                  Search {search.label}
                 </Label>
+                <SearchIcon
+                  className="pointer-events-none absolute top-3.5 left-4 h-5 w-5 text-gray-400"
+                  aria-hidden="true"
+                />
                 <TextField
                   name="search"
-                  className="w-full rounded-md px-4 py-2 text-lg focus:outline-none focus:ring-2 focus:ring-indigo-700"
+                  className="h-12 w-full border-0 bg-transparent pl-11 pr-4 text-sm text-gray-800 placeholder-gray-400 focus:ring-0"
                   value={searchQuery}
+                  placeholder={`Search ${search.label}...`}
                   onChange={updateQuery}
                   autoComplete="off"
                 />
@@ -101,12 +100,10 @@ const SearchPopup = ({ isOpen, setIsOpen }: SearchPopupProps) => {
                     setEmptyResult={setEmptyResult}
                   />
                 ) : (
-                  <p className="mt-6 text-center text-xs text-white">
-                    No results found
-                  </p>
+                  <p className="p-4 text-sm text-gray-500">No results found</p>
                 )
               ) : (
-                <p className="text-2xs mt-2 text-center text-white">
+                <p className="p-4 text-sm text-gray-500">
                   Type at least two characters
                 </p>
               )}

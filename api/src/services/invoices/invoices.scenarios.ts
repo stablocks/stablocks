@@ -4,18 +4,22 @@ export const standard = defineScenario<Prisma.InvoiceCreateArgs>({
   invoice: {
     one: {
       data: {
-        dueDate: '2022-01-22T19:51:31Z',
-        updatedAt: '2022-01-22T19:51:31Z',
+        updatedAt: '2022-03-23T23:24:49Z',
         contact: {
           create: {
-            updatedAt: '2022-01-22T19:51:31Z',
-            user: {
+            updatedAt: '2022-03-23T23:24:49Z',
+            employee: {
               create: {
-                firstName: 'String',
-                lastName: 'String',
-                email: 'String326391',
-                otherEmails: 'String',
-                updatedAt: '2022-01-22T19:51:31Z',
+                position: 'String',
+                updatedAt: '2022-03-23T23:24:49Z',
+                user: {
+                  create: {
+                    firstName: 'String',
+                    lastName: 'String',
+                    email: 'String9353191',
+                    updatedAt: '2022-03-23T23:24:49Z',
+                  },
+                },
               },
             },
           },
@@ -24,18 +28,22 @@ export const standard = defineScenario<Prisma.InvoiceCreateArgs>({
     },
     two: {
       data: {
-        dueDate: '2022-01-22T19:51:31Z',
-        updatedAt: '2022-01-22T19:51:31Z',
+        updatedAt: '2022-03-23T23:24:49Z',
         contact: {
           create: {
-            updatedAt: '2022-01-22T19:51:31Z',
-            user: {
+            updatedAt: '2022-03-23T23:24:49Z',
+            employee: {
               create: {
-                firstName: 'String',
-                lastName: 'String',
-                email: 'String8830714',
-                otherEmails: 'String',
-                updatedAt: '2022-01-22T19:51:31Z',
+                position: 'String',
+                updatedAt: '2022-03-23T23:24:49Z',
+                user: {
+                  create: {
+                    firstName: 'String',
+                    lastName: 'String',
+                    email: 'String7532727',
+                    updatedAt: '2022-03-23T23:24:49Z',
+                  },
+                },
               },
             },
           },

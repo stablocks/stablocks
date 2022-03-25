@@ -24,14 +24,14 @@ describe('projects', () => {
     const result = await createProject({
       input: {
         title: 'String',
-        userId: scenario.project.two.userId,
-        updatedAt: '2022-01-15T20:52:58Z',
+        employeeId: scenario.project.two.employeeId,
+        updatedAt: '2022-03-23T23:04:39Z',
       },
     })
 
     expect(result.title).toEqual('String')
-    expect(result.userId).toEqual(scenario.project.two.userId)
-    expect(result.updatedAt.toString()).toEqual('2022-01-15T20:52:58.000Z')
+    expect(result.employeeId).toEqual(scenario.project.two.employeeId)
+    expect(result.updatedAt).toEqual('2022-03-23T23:04:39Z')
   })
 
   scenario('updates a project', async (scenario: StandardScenario) => {

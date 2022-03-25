@@ -1,9 +1,7 @@
-import { Dispatch, createContext, useState } from 'react'
 import { Redirect, routes, useLocation } from '@redwoodjs/router'
 
 import type { FindAppProviderQuery } from 'types/graphql'
 import type { CellSuccessProps } from '@redwoodjs/web'
-import { SetStateAction } from '@redwoodjs/testing/node_modules/@types/react'
 
 export const QUERY = gql`
   query FindAppProviderQuery {
@@ -49,7 +47,7 @@ interface AppContextValue {
   }
   userCount: number
   search?: SearchItem
-  setSearch: Dispatch<SetStateAction<SearchItem | undefined>>
+  setSearch: React.Dispatch<React.SetStateAction<SearchItem | undefined>>
 }
 
 interface AppProviderSuccessProps
@@ -57,7 +55,7 @@ interface AppProviderSuccessProps
   children?: React.ReactNode
 }
 
-export const AppContext = createContext<AppContextValue>({
+export const AppContext = React.createContext<AppContextValue>({
   userCount: 0,
   setSearch: () => {},
 })
@@ -65,7 +63,7 @@ export const AppContext = createContext<AppContextValue>({
 export const Success = ({ appProvider, children }: AppProviderSuccessProps) => {
   const { organization, userCount } = appProvider
   const { pathname } = useLocation()
-  const [search, setSearch] = useState<SearchItem | undefined>(undefined)
+  const [search, setSearch] = React.useState<SearchItem | undefined>(undefined)
 
   const value = {
     organization,

@@ -11,11 +11,11 @@ export const QUERY = gql`
   query FindEditInvoiceQuery($id: Int!) {
     invoice(id: $id) {
       id
+      status
       currency
       issued
       dueDate
-      sent
-      paid
+      paidDate
       description
     }
   }
@@ -25,11 +25,11 @@ const UPDATE_INVOICE_MUTATION = gql`
   mutation UpdateInvoiceMutation($id: Int!, $input: UpdateInvoiceInput!) {
     updateInvoice(id: $id, input: $input) {
       id
+      status
       currency
       issued
       dueDate
-      sent
-      paid
+      paidDate
       description
     }
   }

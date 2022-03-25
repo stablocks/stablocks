@@ -2,6 +2,7 @@ import type { ProjectsQuery } from 'types/graphql'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import { routes } from '@redwoodjs/router'
 import Loader from 'src/ui/Loader'
+import InfoImage from 'src/ui/InfoImage'
 import ItemList from 'src/ui/ItemList'
 import ItemListItem from 'src/ui/ItemList/ItemListItem'
 
@@ -20,10 +21,10 @@ export const QUERY = gql`
 
 export const Loading = () => <Loader />
 
-export const Empty = () => <></>
+export const Empty = () => <InfoImage type="empty" message="No projects yet" />
 
 export const Failure = ({ error }: CellFailureProps) => (
-  <div style={{ color: 'red' }}>Error: {error.message}</div>
+  <InfoImage type="error" message={`${error}`} />
 )
 
 export const Success = ({ projects }: CellSuccessProps<ProjectsQuery>) => {

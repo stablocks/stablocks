@@ -65,19 +65,6 @@ const EmployeeForm = (props) => {
           title: 'Organization Information',
           fields: [
             {
-              name: 'position',
-              label: 'Position',
-              element: TextField,
-              defaultValue: props.employee?.position,
-              required: true,
-            },
-            {
-              name: 'supervisorId',
-              label: 'Supervisor ID',
-              element: TextField,
-              defaultValue: props.employee?.supervisorId,
-            },
-            {
               name: 'resume',
               label: 'Résumé',
               element: TextField,

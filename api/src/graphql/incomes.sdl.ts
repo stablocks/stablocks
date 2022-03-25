@@ -2,7 +2,7 @@ export const schema = gql`
   type Income {
     id: String!
     name: String!
-    amount: Int!
+    amount: Float!
     date: DateTime!
     currency: String!
     invoice: Invoice
@@ -18,7 +18,7 @@ export const schema = gql`
 
   input CreateIncomeInput {
     name: String!
-    amount: Int!
+    amount: Float!
     date: DateTime!
     currency: String!
     invoiceId: Int
@@ -26,7 +26,7 @@ export const schema = gql`
 
   input UpdateIncomeInput {
     name: String
-    amount: Int
+    amount: Float
     date: DateTime
     currency: String
     invoiceId: Int

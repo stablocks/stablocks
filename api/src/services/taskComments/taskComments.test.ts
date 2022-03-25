@@ -28,15 +28,15 @@ describe('taskComments', () => {
       input: {
         message: 'String',
         taskId: scenario.taskComment.two.taskId,
-        userId: scenario.taskComment.two.userId,
-        updatedAt: '2022-01-15T20:53:16Z',
+        employeeId: scenario.taskComment.two.employeeId,
+        updatedAt: '2022-03-23T23:04:59Z',
       },
     })
 
     expect(result.message).toEqual('String')
     expect(result.taskId).toEqual(scenario.taskComment.two.taskId)
-    expect(result.userId).toEqual(scenario.taskComment.two.userId)
-    expect(result.updatedAt.toString()).toEqual('2022-01-15T20:53:16.000Z')
+    expect(result.employeeId).toEqual(scenario.taskComment.two.employeeId)
+    expect(result.updatedAt).toEqual('2022-03-23T23:04:59Z')
   })
 
   scenario('updates a taskComment', async (scenario: StandardScenario) => {

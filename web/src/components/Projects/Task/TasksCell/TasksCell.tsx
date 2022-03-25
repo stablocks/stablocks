@@ -2,6 +2,7 @@ import type { TasksQuery } from 'types/graphql'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import { Link, routes } from '@redwoodjs/router'
 import Loader from 'src/ui/Loader'
+import InfoImage from 'src/ui/InfoImage'
 
 export const QUERY = gql`
   query TasksQuery {
@@ -9,16 +10,17 @@ export const QUERY = gql`
       id
       title
       description
+      status
     }
   }
 `
 
 export const Loading = () => <Loader />
 
-export const Empty = () => <div>Empty</div>
+export const Empty = () => <InfoImage type="empty" message="No tasks yet" />
 
 export const Failure = ({ error }: CellFailureProps) => (
-  <div style={{ color: 'red' }}>Error: {error.message}</div>
+  <InfoImage type="error" message={`${error}`} />
 )
 
 export const Success = ({ tasks }: CellSuccessProps<TasksQuery>) => {

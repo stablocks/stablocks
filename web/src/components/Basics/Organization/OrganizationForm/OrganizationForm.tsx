@@ -1,9 +1,4 @@
-import {
-  CheckboxField,
-  NumberField,
-  TextField,
-  TextAreaField,
-} from '@redwoodjs/forms'
+import { CheckboxField, TextField, TextAreaField } from '@redwoodjs/forms'
 import Form from 'src/ui/Form'
 
 const OrganizationForm = (props) => {
@@ -55,41 +50,6 @@ const OrganizationForm = (props) => {
               label: 'Default Company Email',
               element: TextField,
               defaultValue: props.organization?.email,
-            },
-          ],
-        },
-        {
-          title: 'Organization Address',
-          fields: [
-            {
-              name: 'address',
-              label: 'Address',
-              element: TextField,
-              defaultValue: props.organization?.address,
-            },
-            {
-              name: 'addressTwo',
-              label: 'Additional Address',
-              element: TextField,
-              defaultValue: props.organization?.addressTwo,
-            },
-            {
-              name: 'city',
-              label: 'City',
-              element: TextField,
-              defaultValue: props.organization?.city,
-            },
-            {
-              name: 'state',
-              label: 'State',
-              element: TextField,
-              defaultValue: props.organization?.state,
-            },
-            {
-              name: 'zipCode',
-              label: 'Zip Code',
-              element: NumberField,
-              defaultValue: props.organization?.zipCode,
             },
           ],
         },
