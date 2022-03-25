@@ -1,6 +1,6 @@
-import TicketCell from 'src/components/Cells/Ticket/TicketCell'
+import TicketCell from 'src/components/Helpdesk/Ticket/TicketCell'
 
-const TicketPage = ({ id }: { id: string }) => {
+const TicketPage = ({ id }: { id: number }) => {
   return <TicketCell id={id} />
 }
 

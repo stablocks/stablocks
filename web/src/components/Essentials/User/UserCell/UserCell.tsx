@@ -11,10 +11,7 @@ export const QUERY = gql`
       middleName
       lastName
       email
-      otherEmails
       profileImage
-      position
-      supervisorId
       resume
       updatedAt
       createdAt

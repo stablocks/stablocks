@@ -5,29 +5,39 @@ export const standard = defineScenario<Prisma.TaskCreateArgs>({
     one: {
       data: {
         title: 'String',
-        updatedAt: '2022-01-22T19:54:08Z',
+        updatedAt: '2022-03-23T23:04:50Z',
         project: {
           create: {
             title: 'String',
-            updatedAt: '2022-01-22T19:54:08Z',
-            user: {
+            updatedAt: '2022-03-23T23:04:50Z',
+            employee: {
               create: {
-                firstName: 'String',
-                lastName: 'String',
-                email: 'String4999662',
-                otherEmails: 'String',
-                updatedAt: '2022-01-22T19:54:08Z',
+                position: 'String',
+                updatedAt: '2022-03-23T23:04:50Z',
+                user: {
+                  create: {
+                    firstName: 'String',
+                    lastName: 'String',
+                    email: 'String8073474',
+                    updatedAt: '2022-03-23T23:04:50Z',
+                  },
+                },
               },
             },
           },
         },
-        user: {
+        employee: {
           create: {
-            firstName: 'String',
-            lastName: 'String',
-            email: 'String3742079',
-            otherEmails: 'String',
-            updatedAt: '2022-01-22T19:54:08Z',
+            position: 'String',
+            updatedAt: '2022-03-23T23:04:50Z',
+            user: {
+              create: {
+                firstName: 'String',
+                lastName: 'String',
+                email: 'String7791759',
+                updatedAt: '2022-03-23T23:04:50Z',
+              },
+            },
           },
         },
       },
@@ -35,29 +45,39 @@ export const standard = defineScenario<Prisma.TaskCreateArgs>({
     two: {
       data: {
         title: 'String',
-        updatedAt: '2022-01-22T19:54:08Z',
+        updatedAt: '2022-03-23T23:04:50Z',
         project: {
           create: {
             title: 'String',
-            updatedAt: '2022-01-22T19:54:08Z',
-            user: {
+            updatedAt: '2022-03-23T23:04:50Z',
+            employee: {
               create: {
-                firstName: 'String',
-                lastName: 'String',
-                email: 'String6925994',
-                otherEmails: 'String',
-                updatedAt: '2022-01-22T19:54:08Z',
+                position: 'String',
+                updatedAt: '2022-03-23T23:04:50Z',
+                user: {
+                  create: {
+                    firstName: 'String',
+                    lastName: 'String',
+                    email: 'String4549984',
+                    updatedAt: '2022-03-23T23:04:50Z',
+                  },
+                },
               },
             },
           },
         },
-        user: {
+        employee: {
           create: {
-            firstName: 'String',
-            lastName: 'String',
-            email: 'String8747139',
-            otherEmails: 'String',
-            updatedAt: '2022-01-22T19:54:08Z',
+            position: 'String',
+            updatedAt: '2022-03-23T23:04:50Z',
+            user: {
+              create: {
+                firstName: 'String',
+                lastName: 'String',
+                email: 'String8383076',
+                updatedAt: '2022-03-23T23:04:50Z',
+              },
+            },
           },
         },
       },

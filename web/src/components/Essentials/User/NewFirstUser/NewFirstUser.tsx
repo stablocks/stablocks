@@ -2,6 +2,8 @@ import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 import FirstUserForm from 'src/components/Essentials/User/FirstUserForm'
 
+import { QUERY as USERS_QUERY } from 'src/components/Providers/AppProviderCell'
+
 const CREATE_USER_MUTATION = gql`
   mutation CreateFirstUserMutation($input: CreateFirstUserInput!) {
     createFirstUser(input: $input) {
@@ -15,6 +17,8 @@ const NewUser = () => {
     onCompleted: () => {
       toast.success('User created')
     },
+    refetchQueries: [{ query: USERS_QUERY }],
+    awaitRefetchQueries: true,
     onError: (error) => {
       toast.error(error.message)
     },

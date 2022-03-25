@@ -1,5 +1,5 @@
 import { Link, routes } from '@redwoodjs/router'
-import PageTitle from 'src/components/Layout/PageTitle'
+import PageTitle from 'src/ui/PageTitle'
 
 const FinancePage = () => {
   return (

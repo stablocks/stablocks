@@ -5,7 +5,7 @@ import {
   AppContext,
   SearchItem,
 } from 'src/components/Providers/AppProviderCell'
-import Breadcrumbs, { Breadcrumb } from 'src/components/Layout/Breadcrumbs'
+import Breadcrumbs, { Breadcrumb } from 'src/ui/Breadcrumbs'
 import MenuButtonGroup, {
   ActionButton,
 } from 'src/components/Elements/MenuButtonGroup'

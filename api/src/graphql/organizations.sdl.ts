@@ -5,11 +5,8 @@ export const schema = gql`
     website: String
     logo: String
     email: String
-    address: String
-    addressTwo: String
-    city: String
-    state: String
-    zipCode: Int
+    address: Address
+    addressId: String
     recruiting: Boolean!
     crm: Boolean!
     marketing: Boolean!
@@ -30,22 +27,7 @@ export const schema = gql`
   input CreateOrganizationInput {
     name: String!
     website: String
-    logo: String
-    email: String
-    address: String
-    addressTwo: String
-    city: String
-    state: String
-    zipCode: Int
-    recruiting: Boolean
-    crm: Boolean
-    marketing: Boolean
-    sales: Boolean
-    finance: Boolean
-    hr: Boolean
-    helpdesk: Boolean
-    projects: Boolean
-    chatGreeting: String
+    # logo: String
   }
 
   input UpdateOrganizationInput {
@@ -53,11 +35,7 @@ export const schema = gql`
     website: String
     logo: String
     email: String
-    address: String
-    addressTwo: String
-    city: String
-    state: String
-    zipCode: Int
+    addressId: String
     recruiting: Boolean
     crm: Boolean
     marketing: Boolean

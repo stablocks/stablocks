@@ -2,11 +2,11 @@ export const schema = gql`
   type Income {
     id: String!
     name: String!
-    amount: Int!
+    amount: Float!
     date: DateTime!
     currency: String!
     invoice: Invoice
-    invoiceId: String
+    invoiceId: Int
     updatedAt: DateTime!
     createdAt: DateTime!
   }
@@ -18,18 +18,18 @@ export const schema = gql`
 
   input CreateIncomeInput {
     name: String!
-    amount: Int!
+    amount: Float!
     date: DateTime!
     currency: String!
-    invoiceId: String
+    invoiceId: Int
   }
 
   input UpdateIncomeInput {
     name: String
-    amount: Int
+    amount: Float
     date: DateTime
     currency: String
-    invoiceId: String
+    invoiceId: Int
   }
 
   type Mutation {

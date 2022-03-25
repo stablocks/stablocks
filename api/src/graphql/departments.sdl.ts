@@ -3,7 +3,7 @@ export const schema = gql`
     id: String!
     name: String!
     email: String
-    users: [User]!
+    employees: [EmployeeInfo]!
     department: Department
     departmentId: String
     subDepartments: [Department]!

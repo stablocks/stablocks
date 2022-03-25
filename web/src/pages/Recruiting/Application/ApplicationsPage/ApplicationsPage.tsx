@@ -1,23 +1,18 @@
-import { Link, routes } from '@redwoodjs/router'
-import PageTitle from 'src/components/Layout/PageTitle'
+import { routes } from '@redwoodjs/router'
+import PageTitle from 'src/ui/PageTitle'
+import ApplicationsCell from 'src/components/Recruiting/Application/ApplicationsCell'
 
 const ApplicationsPage = () => {
   return (
     <>
       <PageTitle
-        title="Applications"
-        breadcrumbs={[{ title: 'Recruiting', to: routes.recruiting() }]}
+        title="Your Applications"
+        breadcrumbs={[{ title: 'Jobs', to: routes.jobs() }]}
+        currentCrumbLabel="Applications"
         search={{ label: 'applications', type: 'application' }}
       />
 
-      <p>
-        Find me in{' '}
-        <code>./web/src/pages/ApplicationsPage/ApplicationsPage.tsx</code>
-      </p>
-      <p>
-        My default route is named <code>applications</code>, link to me with `
-        <Link to={routes.applications()}>Applications</Link>`
-      </p>
+      <ApplicationsCell />
     </>
   )
 }

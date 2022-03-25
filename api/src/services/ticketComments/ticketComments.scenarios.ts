@@ -5,27 +5,25 @@ export const standard = defineScenario<Prisma.TicketCommentCreateArgs>({
     one: {
       data: {
         message: 'String',
-        updatedAt: '2022-01-23T14:28:09Z',
+        updatedAt: '2022-03-23T23:03:51Z',
         user: {
           create: {
             firstName: 'String',
             lastName: 'String',
-            email: 'String4743370',
-            otherEmails: 'String',
-            updatedAt: '2022-01-23T14:28:09Z',
+            email: 'String9149548',
+            updatedAt: '2022-03-23T23:03:51Z',
           },
         },
         Ticket: {
           create: {
             title: 'String',
-            updatedAt: '2022-01-23T14:28:09Z',
+            updatedAt: '2022-03-23T23:03:51Z',
             user: {
               create: {
                 firstName: 'String',
                 lastName: 'String',
-                email: 'String897046',
-                otherEmails: 'String',
-                updatedAt: '2022-01-23T14:28:09Z',
+                email: 'String28868',
+                updatedAt: '2022-03-23T23:03:51Z',
               },
             },
           },
@@ -35,27 +33,25 @@ export const standard = defineScenario<Prisma.TicketCommentCreateArgs>({
     two: {
       data: {
         message: 'String',
-        updatedAt: '2022-01-23T14:28:09Z',
+        updatedAt: '2022-03-23T23:03:51Z',
         user: {
           create: {
             firstName: 'String',
             lastName: 'String',
-            email: 'String7332085',
-            otherEmails: 'String',
-            updatedAt: '2022-01-23T14:28:09Z',
+            email: 'String7274458',
+            updatedAt: '2022-03-23T23:03:51Z',
           },
         },
         Ticket: {
           create: {
             title: 'String',
-            updatedAt: '2022-01-23T14:28:09Z',
+            updatedAt: '2022-03-23T23:03:51Z',
             user: {
               create: {
                 firstName: 'String',
                 lastName: 'String',
-                email: 'String4149873',
-                otherEmails: 'String',
-                updatedAt: '2022-01-23T14:28:09Z',
+                email: 'String5556784',
+                updatedAt: '2022-03-23T23:03:51Z',
               },
             },
           },

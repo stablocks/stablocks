@@ -1,4 +1,4 @@
-import EditOrganizationCell from 'src/components/Cells/Organization/EditOrganizationCell'
+import EditOrganizationCell from 'src/components/Basics/Organization/EditOrganizationCell'
 
 const OrganizationSettingsPage = () => {
   return <EditOrganizationCell />

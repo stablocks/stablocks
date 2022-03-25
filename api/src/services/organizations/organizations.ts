@@ -1,4 +1,5 @@
 import type { Prisma } from '@prisma/client'
+import type { ResolverArgs } from '@redwoodjs/graphql-server'
 
 import { db } from 'src/lib/db'
 
@@ -35,4 +36,9 @@ export const deleteOrganization = ({
   return db.organization.delete({
     where: { id },
   })
+}
+
+export const Organization = {
+  address: (_obj, { root }: ResolverArgs<ReturnType<typeof organization>>) =>
+    db.organization.findUnique({ where: { id: root.id } }).address(),
 }
