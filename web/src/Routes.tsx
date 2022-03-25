@@ -29,8 +29,16 @@ const Routes = () => {
             <Set wrap={[RedirectProvider, DashboardLayout]}>
               <Route path="/profile" page={ProfilePage} name="profile" />
 
+              <Private unauthenticated="home">
+                <Route path="/helpdesk/chat" page={HelpdeskChatChatPage} name="chat" />
+                <Route path="/helpdesk/tickets/{id:Int}" page={HelpdeskTicketTicketPage} name="ticket" />
+                <Route path="/helpdesk/tickets" page={HelpdeskTicketTicketsPage} name="tickets" />
+                <Route path="/helpdesk" page={HelpdeskHelpdeskPage} name="helpdesk" />
+              </Private>
+
+              {/* Employees Only */}
               <Private unauthenticated="home" roles={['admin', 'employee']}>
-                <Private unauthenticated="home" roles={['admin', 'projectsAdmin', 'projects']}>
+                <Private unauthenticated="home">
                   <Route path="/projects/tasks/{id}/edit" page={ProjectsTaskEditTaskPage} name="editTask" />
                   <Route path="/projects/tasks/{id}" page={ProjectsTaskTaskPage} name="task" />
                   <Route path="/projects/tasks" page={ProjectsTaskTasksPage} name="tasks" />
@@ -40,11 +48,7 @@ const Routes = () => {
                 </Private>
 
                 <Private unauthenticated="home" roles={['admin', 'helpdeskAdmin', 'helpdesk']}>
-                  <Route path="/helpdesk/chat" page={HelpdeskChatChatPage} name="chat" />
                   <Route path="/helpdesk/tickets/{id:Int}/edit" page={HelpdeskTicketEditTicketPage} name="editTicket" />
-                  <Route path="/helpdesk/tickets/{id:Int}" page={HelpdeskTicketTicketPage} name="ticket" />
-                  <Route path="/helpdesk/tickets" page={HelpdeskTicketTicketsPage} name="tickets" />
-                  <Route path="/helpdesk" page={HelpdeskHelpdeskPage} name="helpdesk" />
                 </Private>
 
                 <Private unauthenticated="home" roles={['admin', 'recruitingAdmin', 'recruiting']}>

@@ -5,7 +5,13 @@ import Loader from 'src/ui/Loader'
 import PageTitle from 'src/ui/PageTitle'
 import PageContentLayout from 'src/layouts/PageContentLayout'
 import ContentBlock from 'src/ui/ContentBlock'
-import { PencilAltIcon } from '@heroicons/react/outline'
+import { usePermissions } from 'src/utils/permissions'
+import {
+  IdentificationIcon,
+  PencilAltIcon,
+  UserIcon,
+  UserGroupIcon,
+} from '@heroicons/react/outline'
 
 export const QUERY = gql`
   query FindEmployeeQuery($id: String!) {
@@ -15,19 +21,20 @@ export const QUERY = gql`
       lastName
       email
       profileImage
-      supervisor {
-        id
-        firstName
-        lastName
-      }
-      employees {
-        id
-        firstName
-        lastName
-      }
-      departments {
-        id
-        name
+      employee {
+        position
+        supervisor {
+          position
+          user {
+            id
+            firstName
+            lastName
+          }
+        }
+        departments {
+          id
+          name
+        }
       }
     }
   }
@@ -56,6 +63,30 @@ export const Failure = ({ error }: CellFailureProps) => (
 export const Success = ({ employee }: CellSuccessProps<FindEmployeeQuery>) => {
   const fullName = `${employee.firstName} ${employee.lastName}`
 
+  const EmployeeLink = ({
+    id,
+    name,
+    position,
+  }: {
+    id: string
+    name: string
+    position?: string
+  }) => {
+    return (
+      <li className="flex items-center justify-between">
+        <Link
+          to={routes.employee({ id })}
+          className="mr-2 text-sm font-medium text-indigo-600 hover:text-indigo-700"
+        >
+          {name}
+        </Link>
+        {position && (
+          <span className="text-xs text-right text-gray-500">{position}</span>
+        )}
+      </li>
+    )
+  }
+
   return (
     <>
       <PageTitle
@@ -70,7 +101,7 @@ export const Success = ({ employee }: CellSuccessProps<FindEmployeeQuery>) => {
             label: 'Edit',
             icon: PencilAltIcon,
             onClick: () => navigate(routes.editEmployee({ id: employee.id })),
-            roles: ['admin'],
+            authorized: usePermissions('admin', employee.id),
           },
         ]}
       />
@@ -78,25 +109,34 @@ export const Success = ({ employee }: CellSuccessProps<FindEmployeeQuery>) => {
         aside={
           <>
             {employee.supervisor && (
-              <ContentBlock title="Supervisor">
-                <Link to={routes.employee({ id: employee.supervisor.id })}>
-                  {`${employee.supervisor.firstName} ${employee.supervisor.lastName}`}
-                </Link>
+              <ContentBlock title="Supervisor" icon={UserIcon}>
+                <ul>
+                  <EmployeeLink
+                    id={employee.supervisor.id}
+                    name={`${employee.supervisor.firstName} ${employee.supervisor.lastName}`}
+                    position={employee.supervisor?.position}
+                  />
+                </ul>
               </ContentBlock>
             )}
             {employee.employees && employee.employees.length > 0 && (
-              <ContentBlock title="Employees">
-                {employee.employees.map((sub) => (
-                  <Link key={sub.id} to={routes.employee({ id: sub.id })}>
-                    {`${sub.firstName} ${sub.lastName}`}
-                  </Link>
-                ))}
+              <ContentBlock title="Employees" icon={UserGroupIcon}>
+                <ul className="space-y-3">
+                  {employee.employees.map((sub) => (
+                    <EmployeeLink
+                      key={sub.id}
+                      id={sub.id}
+                      name={`${sub.firstName} ${sub.lastName}`}
+                      position={sub.position}
+                    />
+                  ))}
+                </ul>
               </ContentBlock>
             )}
           </>
         }
       >
-        <ContentBlock title={fullName} />
+        <ContentBlock title="Details" icon={IdentificationIcon} />
       </PageContentLayout>
     </>
   )

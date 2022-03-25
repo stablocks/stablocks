@@ -1,39 +1,52 @@
-import DescriptionList from 'src/ui/DescriptionList'
-import DescriptionListItem from 'src/ui/DescriptionList/DescriptionListItem'
+import EditFormSection from './EditFormSection'
 
 import type { FormProps } from '../Form'
 
+type EditFormContextProps = {
+  editingSection?: number
+  setEditingSection: React.Dispatch<React.SetStateAction<number | undefined>>
+  changedFields: string[]
+  setChangedFields: React.Dispatch<React.SetStateAction<string[]>>
+}
+
+const EditFormContext = React.createContext<EditFormContextProps>({
+  editingSection: undefined,
+  setEditingSection: () => {},
+  changedFields: [],
+  setChangedFields: () => {},
+})
+
 const EditForm = (props: FormProps) => {
-  const { sections, onSubmit, loading, error, isSaved } = props
+  const { sections, ...rest } = props
+  const [editingSection, setEditingSection] = React.useState<
+    number | undefined
+  >()
+  const [changedFields, setChangedFields] = React.useState<string[]>([])
+
+  const value = {
+    editingSection,
+    setEditingSection,
+    changedFields,
+    setChangedFields,
+  }
 
   return (
-    <div className="space-y-12 max-w-7xl mx-auto">
-      {sections.map(
-        (section, i) =>
-          !section.editHide && (
-            <DescriptionList
-              key={i}
-              title={section.title}
-              onSubmit={onSubmit}
-              loading={loading}
-              error={error}
-              isSaved={isSaved}
-            >
-              {section.fields.map(
-                (field, i) =>
-                  !field.editHide && (
-                    <DescriptionListItem
-                      key={i}
-                      field={field}
-                      first={i === 0 ? true : false}
-                    />
-                  )
-              )}
-            </DescriptionList>
-          )
-      )}
-    </div>
+    <EditFormContext.Provider value={value}>
+      <div className="space-y-12 max-w-[96rem] mx-auto">
+        {sections.map(
+          (section, i) =>
+            !section.editHide &&
+            section.authorized && (
+              <EditFormSection key={i} section={section} {...rest} />
+            )
+        )}
+      </div>
+    </EditFormContext.Provider>
   )
+}
+
+export const useEditFormContext = () => {
+  return React.useContext(EditFormContext)
 }
 
 export default EditForm

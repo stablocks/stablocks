@@ -4,6 +4,7 @@ import PageTitle from 'src/ui/PageTitle'
 import Popup from 'src/components/Elements/Popup'
 import NewInvoice from 'src/components/Finance/Invoice/NewInvoice'
 import InvoicesCell from 'src/components/Finance/Invoice/InvoicesCell'
+import { usePermissions } from 'src/utils/permissions'
 import { PlusSmIcon } from '@heroicons/react/outline'
 
 const InvoicesPage = () => {
@@ -21,6 +22,7 @@ const InvoicesPage = () => {
             icon: PlusSmIcon,
             onClick: () => setIsNewOpen(true),
             main: true,
+            authorized: usePermissions(['admin', 'financeAdmin']),
           },
         ]}
       />

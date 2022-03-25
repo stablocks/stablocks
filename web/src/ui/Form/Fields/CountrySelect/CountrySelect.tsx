@@ -30,7 +30,7 @@ const CountrySelect = forwardRef<HTMLSelectElement, CountrySelectProps>(
         ref={ref}
         {...rest}
       >
-        <option>-- Select --</option>
+        <option value="">-- Select --</option>
 
         {countries.map((option, i) => (
           <option key={i} value={option.name}>

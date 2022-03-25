@@ -6,6 +6,7 @@ import { navigate, routes, useParams } from '@redwoodjs/router'
 import Loader from 'src/ui/Loader'
 import InfoImage from 'src/ui/InfoImage'
 import PageTitle from 'src/ui/PageTitle'
+import { usePermissions } from 'src/utils/permissions'
 import { PencilAltIcon } from '@heroicons/react/outline'
 import { statuses } from 'src/utils/enums'
 
@@ -16,6 +17,7 @@ export const QUERY = gql`
       title
       description
       status
+      userId
     }
   }
 `
@@ -99,11 +101,13 @@ export const Success = ({ ticket }: CellSuccessProps<FindTicketQuery>) => {
             label: 'Edit',
             icon: PencilAltIcon,
             onClick: () => navigate(routes.editTicket({ id: ticket.id })),
+            authorized: usePermissions(['admin', 'helpdeskAdmin', 'helpdesk']),
           },
           {
             label,
             main: true,
             disabled: loading,
+            authorized: usePermissions(['admin', 'helpdeskAdmin', 'helpdesk']),
             children: [
               ...statuses.map((status) => {
                 return {

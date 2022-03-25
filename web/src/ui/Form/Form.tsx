@@ -22,6 +22,7 @@ export interface FormField {
   editHide?: boolean
   prepend?: string
   attributes?: FieldAttributes
+  authorized?: boolean
 }
 
 export interface Section {
@@ -30,6 +31,7 @@ export interface Section {
   fields: FormField[]
   newHide?: boolean
   editHide?: boolean
+  authorized?: boolean
 }
 
 export interface FormProps {

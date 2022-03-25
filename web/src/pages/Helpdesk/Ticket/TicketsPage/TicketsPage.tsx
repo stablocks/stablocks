@@ -21,6 +21,7 @@ const TicketsPage = () => {
             icon: PlusSmIcon,
             onClick: () => setIsNewOpen(true),
             main: true,
+            authorized: true,
           },
         ]}
       />

@@ -4,6 +4,7 @@ import PageTitle from 'src/ui/PageTitle'
 import Popup from 'src/components/Elements/Popup'
 import NewIncome from 'src/components/Finance/Income/NewIncome'
 import IncomesCell from 'src/components/Finance/Income/IncomesCell'
+import { usePermissions } from 'src/utils/permissions'
 import { PlusSmIcon } from '@heroicons/react/outline'
 
 const IncomesPage = () => {
@@ -21,6 +22,7 @@ const IncomesPage = () => {
             icon: PlusSmIcon,
             onClick: () => setIsNewOpen(true),
             main: true,
+            authorized: usePermissions(['admin', 'financeAdmin']),
           },
         ]}
       />

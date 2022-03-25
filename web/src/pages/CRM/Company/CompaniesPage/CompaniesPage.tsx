@@ -4,6 +4,7 @@ import PageTitle from 'src/ui/PageTitle'
 import Popup from 'src/components/Elements/Popup'
 import NewCompany from 'src/components/CRM/Company/NewCompany'
 import CompaniesCell from 'src/components/CRM/Company/CompaniesCell'
+import { usePermissions } from 'src/utils/permissions'
 import { PlusSmIcon } from '@heroicons/react/outline'
 
 const CompaniesPage = () => {
@@ -21,6 +22,7 @@ const CompaniesPage = () => {
             icon: PlusSmIcon,
             onClick: () => setIsNewOpen(true),
             main: true,
+            authorized: usePermissions(['admin', 'crmAdmin', 'crm']),
           },
         ]}
       />

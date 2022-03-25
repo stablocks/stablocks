@@ -6,6 +6,7 @@ import { navigate, routes, useParams } from '@redwoodjs/router'
 import Loader from 'src/ui/Loader'
 import InfoImage from 'src/ui/InfoImage'
 import PageTitle from 'src/ui/PageTitle'
+import { usePermissions } from 'src/utils/permissions'
 import { PencilAltIcon } from '@heroicons/react/outline'
 import { statuses } from 'src/utils/enums'
 
@@ -16,6 +17,7 @@ export const QUERY = gql`
       title
       description
       status
+      employeeId
       project {
         id
         title
@@ -104,11 +106,13 @@ export const Success = ({ task }: CellSuccessProps<FindTaskQuery>) => {
             label: 'Edit',
             icon: PencilAltIcon,
             onClick: () => navigate(routes.editTask({ id: task.id })),
+            authorized: usePermissions(['admin', 'projectsAdmin'], task.userId),
           },
           {
             label,
             main: true,
             disabled: loading,
+            authorized: usePermissions(['admin', 'projectsAdmin'], task.userId),
             children: [
               ...statuses.map((status) => {
                 return {

@@ -2,6 +2,7 @@ import type { CompaniesQuery } from 'types/graphql'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import { Link, routes } from '@redwoodjs/router'
 import Loader from 'src/ui/Loader'
+import InfoImage from 'src/ui/InfoImage'
 import Table from 'src/components/Layout/Table'
 
 export const QUERY = gql`
@@ -17,7 +18,7 @@ export const QUERY = gql`
 
 export const Loading = () => <Loader />
 
-export const Empty = () => <></>
+export const Empty = () => <InfoImage type="empty" message="No companies yet" />
 
 export const Failure = ({ error }: CellFailureProps) => (
   <div style={{ color: 'red' }}>Error: {error.message}</div>

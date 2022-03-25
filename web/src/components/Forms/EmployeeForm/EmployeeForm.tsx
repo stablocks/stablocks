@@ -3,6 +3,7 @@ import Form from 'src/ui/Form'
 import FileUpload from 'src/components/Elements/FileUpload'
 import SupervisorSelectCell from 'src/components/Basics/Employee/SupervisorSelectCell'
 import DepartmentSelectCell from 'src/components/Basics/Department/DepartmentSelectCell'
+import { usePermissions } from 'src/utils/permissions'
 
 const EmployeeForm = (props) => {
   const onSubmit = (data) => {
@@ -27,12 +28,14 @@ const EmployeeForm = (props) => {
       sections={[
         {
           title: 'General Information',
+          authorized: usePermissions('admin', props.employee?.id),
           fields: [
             {
               name: 'firstName',
               label: 'First Name',
               element: TextField,
               defaultValue: props.employee?.firstName,
+              authorized: usePermissions('admin', props.employee?.id),
               validation: {
                 required: true,
               },
@@ -42,12 +45,14 @@ const EmployeeForm = (props) => {
               label: 'Middle Name',
               element: TextField,
               defaultValue: props.employee?.middleName,
+              authorized: usePermissions('admin', props.employee?.id),
             },
             {
               name: 'lastName',
               label: 'Last Name',
               element: TextField,
               defaultValue: props.employee?.lastName,
+              authorized: usePermissions('admin', props.employee?.id),
               validation: {
                 required: true,
               },
@@ -57,6 +62,7 @@ const EmployeeForm = (props) => {
               label: 'Company Email Address',
               element: EmailField,
               defaultValue: props.employee?.email,
+              authorized: usePermissions('admin'),
               validation: {
                 required: true,
               },
@@ -70,11 +76,13 @@ const EmployeeForm = (props) => {
               attributes: {
                 type: 'image/png, image/jpg',
               },
+              authorized: usePermissions('admin', props.employee?.id),
             },
           ],
         },
         {
           title: 'Organization Information',
+          authorized: usePermissions('admin', props.employee?.id),
           fields: [
             {
               name: 'resume',
@@ -85,6 +93,7 @@ const EmployeeForm = (props) => {
               attributes: {
                 type: '.pdf',
               },
+              authorized: usePermissions('admin', props.employee?.id),
             },
           ],
         },

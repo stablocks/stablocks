@@ -4,6 +4,7 @@ import { toast } from '@redwoodjs/web/toast'
 import { routes, navigate } from '@redwoodjs/router'
 import UserHeader from 'src/components/Layout/UserHeader'
 import Popup from 'src/components/Elements/Popup'
+import { usePermissions } from 'src/utils/permissions'
 import { MailIcon, PencilAltIcon, XCircleIcon } from '@heroicons/react/outline'
 import EditUserCell from 'src/components/Essentials/User/EditUserCell'
 
@@ -60,12 +61,13 @@ const User = ({ user }) => {
             label: 'Delete',
             icon: XCircleIcon,
             onClick: () => onDeleteClick(user.id),
+            authorized: usePermissions(['admin']),
           },
           {
             label: 'Edit',
             icon: PencilAltIcon,
             onClick: () => navigate(routes.editEmployee({ id: user.id })),
-            roles: ['admin'],
+            authorized: usePermissions(['admin']),
           },
           {
             label: 'Email',
@@ -75,6 +77,7 @@ const User = ({ user }) => {
                 window.open(`mailto:${user.email}`, '_blank')
               }
             },
+            authorized: true,
           },
         ]}
         search={{ label: 'employees', type: 'employee' }}

@@ -24,7 +24,7 @@ export const Success = ({
 }: CellSuccessProps<FindSupervisorSelectQuery>) => {
   return (
     <>
-      <option>-- Select --</option>
+      <option value="">-- Select --</option>
       {availableSupervisors.map((option) => (
         <option
           key={option.id}

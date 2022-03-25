@@ -2,6 +2,7 @@ import PageTitle from 'src/ui/PageTitle'
 import Popup from 'src/components/Elements/Popup'
 import NewJob from 'src/components/Recruiting/Job/NewJob'
 import JobsCell from 'src/components/Recruiting/Job/JobsCell'
+import { usePermissions } from 'src/utils/permissions'
 import { PlusSmIcon } from '@heroicons/react/outline'
 
 const JobsPage = () => {
@@ -18,6 +19,7 @@ const JobsPage = () => {
             icon: PlusSmIcon,
             onClick: () => setIsNewOpen(true),
             main: true,
+            authorized: usePermissions(['admin', 'recruitingAdmin']),
           },
         ]}
       />

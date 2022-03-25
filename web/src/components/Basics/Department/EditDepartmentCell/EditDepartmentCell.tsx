@@ -60,8 +60,8 @@ export const Success = ({
     UPDATE_DEPARTMENT_MUTATION,
     {
       onCompleted: () => {
-        setIsSaved(true)
         toast.success('Department updated')
+        setIsSaved(true)
       },
       onError: (error) => {
         toast.error(error.message)
@@ -81,7 +81,10 @@ export const Success = ({
         breadcrumbs={[
           { title: 'Organization', to: routes.organization() },
           { title: 'Departments', to: routes.departments() },
-          { title: 'Department', to: routes.department({ id: department.id }) },
+          {
+            title: department.name,
+            to: routes.department({ id: department.id }),
+          },
         ]}
         search={{ label: 'departments', type: 'department' }}
       />

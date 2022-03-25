@@ -4,6 +4,7 @@ import PageTitle from 'src/ui/PageTitle'
 import Popup from 'src/components/Elements/Popup'
 import NewExpense from 'src/components/Finance/Expense/NewExpense'
 import ExpensesCell from 'src/components/Finance/Expense/ExpensesCell'
+import { usePermissions } from 'src/utils/permissions'
 import { PlusSmIcon } from '@heroicons/react/outline'
 
 const ExpensesPage = () => {
@@ -21,6 +22,7 @@ const ExpensesPage = () => {
             icon: PlusSmIcon,
             onClick: () => setIsNewOpen(true),
             main: true,
+            authorized: usePermissions(['admin', 'financeAdmin']),
           },
         ]}
       />

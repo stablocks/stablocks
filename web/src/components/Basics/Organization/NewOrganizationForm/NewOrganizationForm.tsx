@@ -1,4 +1,11 @@
-import { Form, FieldError, Label, TextField, Submit } from '@redwoodjs/forms'
+import {
+  Form,
+  FieldError,
+  Label,
+  TextField,
+  Submit,
+  UrlField,
+} from '@redwoodjs/forms'
 import FileUpload from 'src/components/Elements/FileUpload'
 
 const NewOrganizationForm = (props) => {
@@ -35,10 +42,10 @@ const NewOrganizationForm = (props) => {
             >
               Website
             </Label>
-            <TextField
+            <UrlField
               name="website"
               defaultValue={props.organization?.website}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              className="mt-1 block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
               placeholder="www.example.com"
             />
             <FieldError name="website" className="rw-field-error" />

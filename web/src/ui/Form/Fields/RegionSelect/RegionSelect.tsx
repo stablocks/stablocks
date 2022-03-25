@@ -25,7 +25,7 @@ const RegionSelect = forwardRef<HTMLSelectElement, RegionSelectProps>(
       >
         {regions && regions.length > 0 && (
           <>
-            <option>-- Select --</option>
+            <option value="">-- Select --</option>
 
             {regions.map((option, i) => (
               <option key={i} value={option.name}>

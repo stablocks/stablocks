@@ -1,5 +1,4 @@
 import {
-  CheckboxField,
   DateField,
   DatetimeLocalField,
   SelectField,
@@ -8,6 +7,7 @@ import {
 import { useAuth } from '@redwoodjs/auth'
 import Form from 'src/ui/Form'
 import { currencies } from 'src/utils/enums'
+import { usePermissions } from 'src/utils/permissions'
 
 const InvoiceForm = (props) => {
   const { currentUser } = useAuth()
@@ -27,12 +27,14 @@ const InvoiceForm = (props) => {
       isSaved={props.isSaved}
       sections={[
         {
+          authorized: usePermissions(['admin', 'financeAdmin']),
           fields: [
             {
               name: 'currency',
               label: 'Currency',
               element: SelectField,
               defaultValue: props.invoice?.currency,
+              authorized: usePermissions(['admin', 'financeAdmin']),
               validation: {
                 required: true,
               },
@@ -53,12 +55,14 @@ const InvoiceForm = (props) => {
               label: 'Issued At',
               element: DatetimeLocalField,
               defaultValue: props.invoice?.issued,
+              authorized: usePermissions(['admin', 'financeAdmin']),
             },
             {
               name: 'dueDate',
               label: 'Due Date',
               element: DateField,
               defaultValue: props.invoice?.dueDate,
+              authorized: usePermissions(['admin', 'financeAdmin']),
               validation: {
                 required: true,
               },
@@ -68,12 +72,14 @@ const InvoiceForm = (props) => {
               label: 'Paid',
               element: DateField,
               defaultValue: props.invoice?.paidDate,
+              authorized: usePermissions(['admin', 'financeAdmin']),
             },
             {
               name: 'description',
               label: 'Notes',
               element: TextAreaField,
               defaultValue: props.invoice?.description,
+              authorized: usePermissions(['admin', 'financeAdmin']),
             },
           ],
         },

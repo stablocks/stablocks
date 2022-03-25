@@ -12,12 +12,14 @@ const FileUpload = forwardRef<HTMLButtonElement, FileUploadProps>(
     const { name, defaultValue, type } = props
 
     const [localFile, setLocalFile] = useState('')
+    const [showPicker, setShowPicker] = useState(false)
     const [uploaded, setUploaded] = useState(false)
     const [showFileLarge, setShowFileLarge] = useState(false)
     const [fieldValue] = useState('')
     const fileButton = useRef(null)
 
     const onSelect = () => {
+      setShowPicker(true)
       fileButton.current.click()
     }
 
@@ -86,15 +88,20 @@ const FileUpload = forwardRef<HTMLButtonElement, FileUploadProps>(
         )}
 
         {!uploaded ? (
-          <FileField
-            name={name}
-            ref={fileButton}
-            className="hidden"
-            onChange={handleChange}
-            accept={type}
-          />
+          <>
+            {showPicker && (
+              <FileField
+                name={name}
+                ref={fileButton}
+                className="hidden"
+                onChange={handleChange}
+                value=""
+                accept={type}
+              />
+            )}
+          </>
         ) : (
-          <HiddenField name={name} value={fieldValue} />
+          <HiddenField name={name} value={fieldValue || defaultValue || ''} />
         )}
       </div>
     )

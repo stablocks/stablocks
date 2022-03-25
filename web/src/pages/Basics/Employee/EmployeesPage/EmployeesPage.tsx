@@ -3,6 +3,7 @@ import { routes } from '@redwoodjs/router'
 import PageTitle from 'src/ui/PageTitle'
 import EmployeesCell from 'src/components/Cells/Employee/EmployeesCell'
 import Popup from 'src/components/Elements/Popup'
+import { usePermissions } from 'src/utils/permissions'
 import { UserAddIcon } from '@heroicons/react/outline'
 import NewEmployee from 'src/components/NewComponents/NewEmployee'
 
@@ -22,7 +23,7 @@ const EmployeesPage = () => {
             icon: UserAddIcon,
             onClick: () => setNewEmployeeOpen(true),
             main: true,
-            roles: ['admin'],
+            authorized: usePermissions(['admin', 'hrAdmin', 'hr']),
             children: [
               {
                 label: 'New Employee from User',

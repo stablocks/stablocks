@@ -4,6 +4,7 @@ import { navigate, routes } from '@redwoodjs/router'
 import Loader from 'src/ui/Loader'
 import InfoImage from 'src/ui/InfoImage'
 import PageTitle from 'src/ui/PageTitle'
+import { usePermissions } from 'src/utils/permissions'
 import { PencilAltIcon } from '@heroicons/react/outline'
 
 export const QUERY = gql`
@@ -80,6 +81,12 @@ export const Success = ({
             icon: PencilAltIcon,
             onClick: () =>
               navigate(routes.editApplication({ id: application.id })),
+            authorized: usePermissions(
+              application.status === 'draft'
+                ? []
+                : ['admin', 'recruitingAdmin', 'recruiting'],
+              application.user.id
+            ),
           },
         ]}
       />

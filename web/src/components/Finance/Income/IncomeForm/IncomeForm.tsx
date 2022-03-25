@@ -2,6 +2,7 @@ import { DateField, SelectField, TextField } from '@redwoodjs/forms'
 import { useAuth } from '@redwoodjs/auth'
 import Form from 'src/ui/Form'
 import { currencies } from 'src/utils/enums'
+import { usePermissions } from 'src/utils/permissions'
 
 const IncomeForm = (props) => {
   const { currentUser } = useAuth()
@@ -21,12 +22,14 @@ const IncomeForm = (props) => {
       isSaved={props.isSaved}
       sections={[
         {
+          authorized: usePermissions(['admin', 'financeAdmin', 'finance']),
           fields: [
             {
               name: 'name',
               label: 'Name',
               element: TextField,
               defaultValue: props.income?.name,
+              authorized: usePermissions(['admin', 'financeAdmin', 'finance']),
               validation: {
                 required: true,
               },
@@ -36,6 +39,7 @@ const IncomeForm = (props) => {
               label: 'Amount',
               element: TextField,
               defaultValue: props.income?.amount,
+              authorized: usePermissions(['admin', 'financeAdmin', 'finance']),
               validation: {
                 required: true,
                 valueAsNumber: true,
@@ -46,6 +50,7 @@ const IncomeForm = (props) => {
               label: 'Date',
               element: DateField,
               defaultValue: props.income?.date,
+              authorized: usePermissions(['admin', 'financeAdmin', 'finance']),
               validation: {
                 required: true,
               },
@@ -55,6 +60,7 @@ const IncomeForm = (props) => {
               label: 'Currency',
               element: SelectField,
               defaultValue: props.income?.currency,
+              authorized: usePermissions(['admin', 'financeAdmin', 'finance']),
               attributes: {
                 children: (
                   <>

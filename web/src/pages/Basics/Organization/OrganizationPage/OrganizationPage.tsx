@@ -1,5 +1,6 @@
 import { navigate, routes } from '@redwoodjs/router'
 import PageTitle from 'src/ui/PageTitle'
+import { usePermissions } from 'src/utils/permissions'
 import { RiSettings3Line } from 'react-icons/ri'
 
 const OrganizationPage = () => {
@@ -12,7 +13,7 @@ const OrganizationPage = () => {
             label: 'Settings',
             icon: RiSettings3Line,
             onClick: () => navigate(routes.organizationSettings()),
-            roles: ['admin'],
+            authorized: usePermissions(['admin']),
           },
         ]}
         search={{ label: 'the organization', type: 'organization' }}

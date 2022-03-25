@@ -8,7 +8,7 @@ export interface ActionButton {
   main?: boolean
   icon?: (props: React.ComponentProps<'svg'>) => JSX.Element
   onClick?: () => void
-  roles?: string[]
+  authorized?: boolean
   disabled?: boolean
   children?: ActionButton[]
 }
@@ -24,7 +24,8 @@ const MenuButtonGroup = ({ buttons }: MenuButtonGroupProps) => {
     <>
       {buttons.map(
         (button, i) =>
-          (button.roles ? hasRole(button.roles) : true) && (
+          !button?.authorized ||
+          (button.authorized === true && (
             <span key={i} className="relative z-0 inline-flex rounded-md">
               {button.onClick && (
                 <button
@@ -96,7 +97,7 @@ const MenuButtonGroup = ({ buttons }: MenuButtonGroupProps) => {
                 </Menu>
               )}
             </span>
-          )
+          ))
       )}
     </>
   )

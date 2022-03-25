@@ -6,6 +6,7 @@ import InfoImage from 'src/ui/InfoImage'
 import PageTitle from 'src/ui/PageTitle'
 import Popup from 'src/components/Elements/Popup'
 import NewApplication from '../../Application/NewApplication'
+import { usePermissions } from 'src/utils/permissions'
 import { PencilAltIcon, PlusSmIcon } from '@heroicons/react/outline'
 
 export const QUERY = gql`
@@ -58,13 +59,14 @@ export const Success = ({ job }: CellSuccessProps<FindJobQuery>) => {
             label: 'Edit',
             icon: PencilAltIcon,
             onClick: () => navigate(routes.editJob({ id: job.id })),
-            roles: ['admin', 'recruitingAdmin'],
+            authorized: usePermissions(['admin', 'recruitingAdmin']),
           },
           {
             label: 'New Application',
             icon: PlusSmIcon,
             onClick: () => setIsNewOpen(true),
             main: true,
+            authorized: true,
           },
         ]}
       />

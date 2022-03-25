@@ -9,12 +9,16 @@ interface DescriptionListItemProps {
   first?: boolean
   field: FormField
   editAll?: boolean
+  isSaved?: boolean
+  loading?: boolean
 }
 
 const DescriptionListItem = ({
   first,
   field,
   editAll,
+  isSaved,
+  loading,
 }: DescriptionListItemProps) => {
   const [editing, setEditing] = useState(false)
 
@@ -27,15 +31,14 @@ const DescriptionListItem = ({
   }, [editAll, setEditing])
 
   useEffect(() => {
+    if (isSaved) setEditing(false)
+  }, [isSaved])
+
+  useEffect(() => {
     if ((editing && !editAll) || (editing && editAll && first)) {
       fieldRef.current.focus()
     }
   }, [editing, editAll, first])
-
-  const onSave = (e) => {
-    e.currentTarget.click()
-    setEditing(false)
-  }
 
   const onEditingClick = () => {
     setEditing(true)
@@ -111,12 +114,13 @@ const DescriptionListItem = ({
               >
                 <button
                   onClick={() => setEditing(false)}
+                  disabled={loading}
                   type="button"
                   className="rounded-sm text-indigo-600"
                 >
                   cancel
                 </button>
-                <Submit onClick={onSave} className="btn btn-primary">
+                <Submit disabled={loading} className="btn btn-primary">
                   Save
                 </Submit>
               </div>
