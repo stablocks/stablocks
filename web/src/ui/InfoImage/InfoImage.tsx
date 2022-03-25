@@ -19,8 +19,6 @@ const InfoImage = ({ type, message }: InfoImageProps) => {
     { slug: 'not_found', image: NotFound },
   ]
 
-  console.log(options)
-
   const selected = options.find((option) => option.slug === type)
 
   return (

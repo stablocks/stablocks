@@ -1,15 +1,28 @@
 import NewForm from './NewForm'
 import EditForm from './EditForm'
+import { RegisterOptions } from 'react-hook-form'
+
+export interface FieldAttributes {
+  [x: string]: any
+}
+
+interface RedwoodRegisterOptions extends RegisterOptions {
+  valueAsBoolean?: boolean
+  valueAsJSON?: boolean
+}
 
 export interface FormField {
   name: string
   label: string
-  element: React.ForwardRefExoticComponent<any>
+  element: React.ForwardRefExoticComponent<any> | ((props: any) => JSX.Element)
   defaultValue: string | boolean | number | undefined
-  required?: boolean
+  displayValue?: string
+  validation?: RedwoodRegisterOptions
   newHide?: boolean
   editHide?: boolean
   prepend?: string
+  attributes?: FieldAttributes
+  authorized?: boolean
 }
 
 export interface Section {
@@ -18,6 +31,7 @@ export interface Section {
   fields: FormField[]
   newHide?: boolean
   editHide?: boolean
+  authorized?: boolean
 }
 
 export interface FormProps {

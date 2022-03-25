@@ -3,6 +3,7 @@ import PageTitle from 'src/ui/PageTitle'
 import Popup from 'src/components/Elements/Popup'
 import NewContact from 'src/components/CRM/Contact/NewContact'
 import ContactsCell from 'src/components/CRM/Contact/ContactsCell'
+import { usePermissions } from 'src/utils/permissions'
 import { PlusSmIcon } from '@heroicons/react/outline'
 
 const ContactsPage = () => {
@@ -19,6 +20,7 @@ const ContactsPage = () => {
             icon: PlusSmIcon,
             onClick: () => setIsNewOpen(true),
             main: true,
+            authorized: usePermissions(['admin', 'crmAdmin', 'crm']),
           },
         ]}
       />

@@ -4,6 +4,7 @@ import PageTitle from 'src/ui/PageTitle'
 import Popup from 'src/components/Elements/Popup'
 import NewDepartment from 'src/components/Basics/Department/NewDepartment'
 import DepartmentsCell from 'src/components/Basics/Department/DepartmentsCell'
+import { usePermissions } from 'src/utils/permissions'
 import { PlusSmIcon } from '@heroicons/react/outline'
 
 const DepartmentsPage = () => {
@@ -21,6 +22,7 @@ const DepartmentsPage = () => {
             icon: PlusSmIcon,
             onClick: () => setIsNewOpen(true),
             main: true,
+            authorized: usePermissions(['admin', 'departmentsAdmin']),
           },
         ]}
       />

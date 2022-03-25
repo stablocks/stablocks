@@ -2,7 +2,9 @@ import type { FindCompanyQuery } from 'types/graphql'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import { navigate, routes } from '@redwoodjs/router'
 import Loader from 'src/ui/Loader'
+import InfoImage from 'src/ui/InfoImage'
 import PageTitle from 'src/ui/PageTitle'
+import { usePermissions } from 'src/utils/permissions'
 import { PencilAltIcon } from '@heroicons/react/outline'
 
 export const QUERY = gql`
@@ -16,21 +18,30 @@ export const QUERY = gql`
   }
 `
 
+const NonSuccessHeader = () => (
+  <PageTitle
+    title="Company"
+    breadcrumbs={[
+      { title: 'Contacts', to: routes.contacts() },
+      { title: 'Companies', to: routes.companies() },
+    ]}
+    search={{ label: 'companies', type: 'company' }}
+  />
+)
+
 export const Loading = () => (
   <>
-    <PageTitle
-      title="Company"
-      breadcrumbs={[
-        { title: 'Contacts', to: routes.contacts() },
-        { title: 'Companies', to: routes.companies() },
-      ]}
-      search={{ label: 'companies', type: 'company' }}
-    />
+    <NonSuccessHeader />
     <Loader />
   </>
 )
 
-export const Empty = () => <></>
+export const Empty = () => (
+  <>
+    <NonSuccessHeader />
+    <InfoImage type="error" message="This company could not be found" />
+  </>
+)
 
 export const Failure = ({ error }: CellFailureProps) => (
   <div style={{ color: 'red' }}>Error: {error.message}</div>
@@ -51,7 +62,7 @@ export const Success = ({ company }: CellSuccessProps<FindCompanyQuery>) => {
             label: 'Edit',
             icon: PencilAltIcon,
             onClick: () => navigate(routes.editCompany({ id: company.id })),
-            roles: ['admin', 'crmAdmin', 'crm'],
+            authorized: usePermissions(['admin', 'crmAdmin', 'crm']),
           },
         ]}
       />

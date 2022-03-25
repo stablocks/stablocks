@@ -11,6 +11,7 @@ import MenuButtonGroup, {
 
 interface PageTitleProps {
   title: string
+  metaTitle?: string
   breadcrumbs?: Breadcrumb[]
   currentCrumbLabel?: string
   buttons?: ActionButton[]
@@ -19,6 +20,7 @@ interface PageTitleProps {
 
 const PageTitle = ({
   title,
+  metaTitle,
   breadcrumbs,
   currentCrumbLabel,
   buttons,
@@ -31,16 +33,16 @@ const PageTitle = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const metaTitle =
+  const titleTag =
     breadcrumbs?.length > 0
-      ? `${title} | ${breadcrumbs[breadcrumbs.length - 1].title}`
-      : title
+      ? `${metaTitle || title} | ${breadcrumbs[breadcrumbs.length - 1].title}`
+      : metaTitle || title
 
   return (
     <>
-      <MetaTags title={metaTitle} />
+      <MetaTags title={titleTag} />
 
-      <div className="page-title mb-12">
+      <div className="page-title mb-12 max-w-[96rem] mx-auto">
         <Breadcrumbs
           breadcrumbs={breadcrumbs}
           currentCrumbLabel={currentCrumbLabel || title}

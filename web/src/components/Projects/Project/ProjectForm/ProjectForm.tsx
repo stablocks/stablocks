@@ -1,6 +1,7 @@
 import { TextAreaField, TextField } from '@redwoodjs/forms'
 import { useAuth } from '@redwoodjs/auth'
 import Form from 'src/ui/Form'
+import { usePermissions } from 'src/utils/permissions'
 
 const ProjectForm = (props) => {
   const { currentUser } = useAuth()
@@ -20,19 +21,33 @@ const ProjectForm = (props) => {
       isSaved={props.isSaved}
       sections={[
         {
+          authorized: usePermissions(
+            ['admin', 'projectsAdmin'],
+            props.project?.userId
+          ),
           fields: [
             {
               name: 'title',
               label: 'Title',
               element: TextField,
               defaultValue: props.project?.title,
-              required: true,
+              authorized: usePermissions(
+                ['admin', 'projectsAdmin'],
+                props.project?.userId
+              ),
+              validation: {
+                required: true,
+              },
             },
             {
               name: 'description',
               label: 'Description',
               element: TextAreaField,
               defaultValue: props.project?.description,
+              authorized: usePermissions(
+                ['admin', 'projectsAdmin'],
+                props.project?.userId
+              ),
             },
           ],
         },

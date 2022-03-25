@@ -29,7 +29,7 @@ const DescriptionList = ({
   }, [isSaved])
 
   return (
-    <Form onSubmit={onSubmit} error={error} className="max-w-3xl">
+    <div>
       <div className="items-center justify-between sm:flex">
         <div>
           <h3 className="text-lg font-medium leading-6 text-gray-900">
@@ -74,6 +74,8 @@ const DescriptionList = ({
             if (React.isValidElement(child)) {
               return React.cloneElement(child, {
                 editAll,
+                isSaved,
+                loading,
               })
             }
 
@@ -99,7 +101,7 @@ const DescriptionList = ({
           </div>
         </div>
       )}
-    </Form>
+    </div>
   )
 }
 

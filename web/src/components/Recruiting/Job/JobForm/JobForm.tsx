@@ -26,7 +26,9 @@ const JobForm = (props) => {
               label: 'Title',
               element: TextField,
               defaultValue: props.job?.title,
-              required: true,
+              validation: {
+                required: true,
+              },
             },
             {
               name: 'description',

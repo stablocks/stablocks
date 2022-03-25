@@ -2,7 +2,9 @@ import type { FindContactQuery } from 'types/graphql'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import { navigate, routes } from '@redwoodjs/router'
 import Loader from 'src/ui/Loader'
+import InfoImage from 'src/ui/InfoImage'
 import PageTitle from 'src/ui/PageTitle'
+import { usePermissions } from 'src/utils/permissions'
 import { PencilAltIcon } from '@heroicons/react/outline'
 
 export const QUERY = gql`
@@ -17,18 +19,27 @@ export const QUERY = gql`
   }
 `
 
+const NonSuccessHeader = () => (
+  <PageTitle
+    title="Contact"
+    breadcrumbs={[{ title: 'Contacts', to: routes.contacts() }]}
+    search={{ label: 'contacts', type: 'contact' }}
+  />
+)
+
 export const Loading = () => (
   <>
-    <PageTitle
-      title="Contact"
-      breadcrumbs={[{ title: 'Contacts', to: routes.contacts() }]}
-      search={{ label: 'contacts', type: 'contact' }}
-    />
+    <NonSuccessHeader />
     <Loader />
   </>
 )
 
-export const Empty = () => <></>
+export const Empty = () => (
+  <>
+    <NonSuccessHeader />
+    <InfoImage type="error" message="This contact could not be found" />
+  </>
+)
 
 export const Failure = ({ error }: CellFailureProps) => (
   <div style={{ color: 'red' }}>Error: {error.message}</div>
@@ -48,7 +59,7 @@ export const Success = ({ contact }: CellSuccessProps<FindContactQuery>) => {
             label: 'Edit',
             icon: PencilAltIcon,
             onClick: () => navigate(routes.editContact({ id: contact.id })),
-            roles: ['admin', 'crmAdmin', 'crm'],
+            authorized: usePermissions(['admin', 'crmAdmin', 'crm']),
           },
         ]}
       />

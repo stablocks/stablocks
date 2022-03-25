@@ -7,6 +7,7 @@ import InfoImage from 'src/ui/InfoImage'
 import PageTitle from 'src/ui/PageTitle'
 import Popup from 'src/components/Elements/Popup'
 import NewTask from '../../Task/NewTask'
+import { usePermissions } from 'src/utils/permissions'
 import { PencilAltIcon, PlusSmIcon } from '@heroicons/react/outline'
 
 export const QUERY = gql`
@@ -15,6 +16,7 @@ export const QUERY = gql`
       id
       title
       description
+      employeeId
       tasks {
         id
         title
@@ -65,13 +67,17 @@ export const Success = ({ project }: CellSuccessProps<FindProjectQuery>) => {
             label: 'Edit',
             icon: PencilAltIcon,
             onClick: () => navigate(routes.editProject({ id: project.id })),
-            roles: ['admin', 'projectsAdmin'],
+            authorized: usePermissions(
+              ['admin', 'projectsAdmin'],
+              project.userId
+            ),
           },
           {
             label: 'New Task',
             icon: PlusSmIcon,
             onClick: () => setIsNewOpen(true),
             main: true,
+            authorized: usePermissions(['admin', 'projectsAdmin', 'projects']),
           },
         ]}
       />

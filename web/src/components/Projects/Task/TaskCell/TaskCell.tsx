@@ -1,10 +1,14 @@
 import type { FindTaskQuery } from 'types/graphql'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
-import { navigate, routes } from '@redwoodjs/router'
+import { useMutation } from '@redwoodjs/web'
+import { toast } from '@redwoodjs/web/toast'
+import { navigate, routes, useParams } from '@redwoodjs/router'
 import Loader from 'src/ui/Loader'
 import InfoImage from 'src/ui/InfoImage'
 import PageTitle from 'src/ui/PageTitle'
+import { usePermissions } from 'src/utils/permissions'
 import { PencilAltIcon } from '@heroicons/react/outline'
+import { statuses } from 'src/utils/enums'
 
 export const QUERY = gql`
   query FindTaskQuery($id: String!) {
@@ -13,11 +17,21 @@ export const QUERY = gql`
       title
       description
       status
+      employeeId
       project {
         id
         title
         description
       }
+    }
+  }
+`
+
+const UPDATE_TASK_STATUS_MUTATION = gql`
+  mutation UpdateTaskStatusMutation($id: String!, $input: UpdateTaskInput!) {
+    updateTask(id: $id, input: $input) {
+      id
+      status
     }
   }
 `
@@ -56,6 +70,24 @@ export const Failure = ({ error }: CellFailureProps) => (
 )
 
 export const Success = ({ task }: CellSuccessProps<FindTaskQuery>) => {
+  const { id } = useParams()
+
+  const [updateTask, { loading }] = useMutation(UPDATE_TASK_STATUS_MUTATION, {
+    onCompleted: () => {
+      toast.success('Task status updated')
+    },
+    onError: (error) => {
+      toast.error(error.message)
+    },
+  })
+
+  const label = statuses.find((status) => status.value === task.status).label
+
+  const onStatusChange = (value: string) => {
+    if (value !== task.status) {
+      updateTask({ variables: { id, input: { status: value } } })
+    }
+  }
   return (
     <>
       <PageTitle
@@ -74,6 +106,21 @@ export const Success = ({ task }: CellSuccessProps<FindTaskQuery>) => {
             label: 'Edit',
             icon: PencilAltIcon,
             onClick: () => navigate(routes.editTask({ id: task.id })),
+            authorized: usePermissions(['admin', 'projectsAdmin'], task.userId),
+          },
+          {
+            label,
+            main: true,
+            disabled: loading,
+            authorized: usePermissions(['admin', 'projectsAdmin'], task.userId),
+            children: [
+              ...statuses.map((status) => {
+                return {
+                  label: status.label,
+                  onClick: () => onStatusChange(status.value),
+                }
+              }),
+            ],
           },
         ]}
       />

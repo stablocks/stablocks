@@ -1,12 +1,13 @@
 import {
-  CheckboxField,
   DateField,
   DatetimeLocalField,
-  TextField,
+  SelectField,
   TextAreaField,
 } from '@redwoodjs/forms'
 import { useAuth } from '@redwoodjs/auth'
 import Form from 'src/ui/Form'
+import { currencies } from 'src/utils/enums'
+import { usePermissions } from 'src/utils/permissions'
 
 const InvoiceForm = (props) => {
   const { currentUser } = useAuth()
@@ -26,38 +27,59 @@ const InvoiceForm = (props) => {
       isSaved={props.isSaved}
       sections={[
         {
+          authorized: usePermissions(['admin', 'financeAdmin']),
           fields: [
             {
               name: 'currency',
               label: 'Currency',
-              element: TextField,
+              element: SelectField,
               defaultValue: props.invoice?.currency,
-              required: true,
+              authorized: usePermissions(['admin', 'financeAdmin']),
+              validation: {
+                required: true,
+              },
+              attributes: {
+                children: (
+                  <>
+                    {currencies.map((option, i) => (
+                      <option key={i} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </>
+                ),
+              },
             },
             {
               name: 'issued',
               label: 'Issued At',
               element: DatetimeLocalField,
               defaultValue: props.invoice?.issued,
+              authorized: usePermissions(['admin', 'financeAdmin']),
             },
             {
               name: 'dueDate',
               label: 'Due Date',
               element: DateField,
               defaultValue: props.invoice?.dueDate,
-              required: true,
+              authorized: usePermissions(['admin', 'financeAdmin']),
+              validation: {
+                required: true,
+              },
             },
             {
               name: 'paidDate',
               label: 'Paid',
               element: DateField,
               defaultValue: props.invoice?.paidDate,
+              authorized: usePermissions(['admin', 'financeAdmin']),
             },
             {
               name: 'description',
               label: 'Notes',
               element: TextAreaField,
               defaultValue: props.invoice?.description,
+              authorized: usePermissions(['admin', 'financeAdmin']),
             },
           ],
         },

@@ -9,12 +9,16 @@ interface DescriptionListItemProps {
   first?: boolean
   field: FormField
   editAll?: boolean
+  isSaved?: boolean
+  loading?: boolean
 }
 
 const DescriptionListItem = ({
   first,
   field,
   editAll,
+  isSaved,
+  loading,
 }: DescriptionListItemProps) => {
   const [editing, setEditing] = useState(false)
 
@@ -27,15 +31,14 @@ const DescriptionListItem = ({
   }, [editAll, setEditing])
 
   useEffect(() => {
+    if (isSaved) setEditing(false)
+  }, [isSaved])
+
+  useEffect(() => {
     if ((editing && !editAll) || (editing && editAll && first)) {
       fieldRef.current.focus()
     }
   }, [editing, editAll, first])
-
-  const onSave = (e) => {
-    e.currentTarget.click()
-    setEditing(false)
-  }
 
   const onEditingClick = () => {
     setEditing(true)
@@ -45,7 +48,7 @@ const DescriptionListItem = ({
     <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
       <dt className="text-sm font-medium text-gray-500">
         {field.label}
-        {field.required && (
+        {field?.validation?.required && (
           <span className="font-base text-indigo-600">{' *'}</span>
         )}
       </dt>
@@ -60,7 +63,7 @@ const DescriptionListItem = ({
                   <XCircleIcon className="h-5 w-5 text-red-600" />
                 )
               ) : (
-                field?.defaultValue
+                field?.displayValue || field?.defaultValue
               )}
             </span>
             {!editAll && (
@@ -94,9 +97,10 @@ const DescriptionListItem = ({
                 <field.element
                   name={field.name}
                   defaultValue={field.defaultValue}
-                  validation={{ required: field.required }}
                   defaultChecked={field.defaultValue}
+                  validation={field.validation}
                   ref={fieldRef}
+                  {...field.attributes}
                 />
               </ConditionalWrapper>
 
@@ -110,12 +114,13 @@ const DescriptionListItem = ({
               >
                 <button
                   onClick={() => setEditing(false)}
+                  disabled={loading}
                   type="button"
                   className="rounded-sm text-indigo-600"
                 >
                   cancel
                 </button>
-                <Submit onClick={onSave} className="btn btn-primary">
+                <Submit disabled={loading} className="btn btn-primary">
                   Save
                 </Submit>
               </div>

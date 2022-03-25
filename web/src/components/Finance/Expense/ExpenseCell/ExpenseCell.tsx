@@ -3,6 +3,7 @@ import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import { navigate, routes } from '@redwoodjs/router'
 import Loader from 'src/ui/Loader'
 import PageTitle from 'src/ui/PageTitle'
+import { usePermissions } from 'src/utils/permissions'
 import { PencilAltIcon } from '@heroicons/react/outline'
 
 export const QUERY = gql`
@@ -57,6 +58,7 @@ export const Success = ({ expense }: CellSuccessProps<FindExpenseQuery>) => {
             label: 'Edit',
             icon: PencilAltIcon,
             onClick: () => navigate(routes.editExpense({ id: expense.id })),
+            authorized: usePermissions(['admin', 'financeAdmin', 'finance']),
           },
         ]}
       />

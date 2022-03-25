@@ -1,5 +1,9 @@
-import { TextField } from '@redwoodjs/forms'
+import { EmailField, SelectField, TextField } from '@redwoodjs/forms'
 import Form from 'src/ui/Form'
+import FileUpload from 'src/components/Elements/FileUpload'
+import SupervisorSelectCell from 'src/components/Basics/Employee/SupervisorSelectCell'
+import DepartmentSelectCell from 'src/components/Basics/Department/DepartmentSelectCell'
+import { usePermissions } from 'src/utils/permissions'
 
 const EmployeeForm = (props) => {
   const onSubmit = (data) => {
@@ -24,52 +28,72 @@ const EmployeeForm = (props) => {
       sections={[
         {
           title: 'General Information',
+          authorized: usePermissions('admin', props.employee?.id),
           fields: [
             {
               name: 'firstName',
               label: 'First Name',
               element: TextField,
               defaultValue: props.employee?.firstName,
-              required: true,
+              authorized: usePermissions('admin', props.employee?.id),
+              validation: {
+                required: true,
+              },
             },
             {
               name: 'middleName',
               label: 'Middle Name',
               element: TextField,
               defaultValue: props.employee?.middleName,
+              authorized: usePermissions('admin', props.employee?.id),
             },
             {
               name: 'lastName',
               label: 'Last Name',
               element: TextField,
               defaultValue: props.employee?.lastName,
-              required: true,
+              authorized: usePermissions('admin', props.employee?.id),
+              validation: {
+                required: true,
+              },
             },
             {
               name: 'email',
               label: 'Company Email Address',
-              element: TextField,
+              element: EmailField,
               defaultValue: props.employee?.email,
-              required: true,
+              authorized: usePermissions('admin'),
+              validation: {
+                required: true,
+              },
             },
             {
               name: 'profileImage',
               label: 'Profile Picture',
-              element: TextField,
+              element: FileUpload,
               defaultValue: props.employee?.profileImage,
               newHide: true,
+              attributes: {
+                type: 'image/png, image/jpg',
+              },
+              authorized: usePermissions('admin', props.employee?.id),
             },
           ],
         },
         {
           title: 'Organization Information',
+          authorized: usePermissions('admin', props.employee?.id),
           fields: [
             {
               name: 'resume',
               label: 'Résumé',
-              element: TextField,
+              element: FileUpload,
               defaultValue: props.employee?.resume,
               newHide: true,
+              attributes: {
+                type: '.pdf',
+              },
+              authorized: usePermissions('admin', props.employee?.id),
             },
           ],
         },

@@ -3,6 +3,7 @@ import PageTitle from 'src/ui/PageTitle'
 import Popup from 'src/components/Elements/Popup'
 import NewProject from 'src/components/Projects/Project/NewProject'
 import ProjectsCell from 'src/components/Projects/Project/ProjectsCell'
+import { usePermissions } from 'src/utils/permissions'
 import { PlusSmIcon } from '@heroicons/react/outline'
 
 const ProjectsPage = () => {
@@ -19,6 +20,7 @@ const ProjectsPage = () => {
             icon: PlusSmIcon,
             onClick: () => setIsNewOpen(true),
             main: true,
+            authorized: usePermissions(['admin', 'projectsAdmin', 'projects']),
           },
         ]}
       />

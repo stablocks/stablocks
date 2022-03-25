@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from 'react'
 import { routes, useLocation } from '@redwoodjs/router'
 import { useAuth } from '@redwoodjs/auth'
 import { AppContext } from 'src/components/Providers/AppProviderCell'
+import { usePermissions } from 'src/utils/permissions'
 import NavLink from './NavLink'
 import {
   BriefcaseIcon,
@@ -35,14 +36,6 @@ interface NavItem extends BaseNavItem {
   children?: BaseNavItem[]
 }
 
-const useAuthorization = (roles: string[]): boolean => {
-  const { hasRole } = useAuth()
-
-  if (!roles || roles.length === 0) return true
-
-  return hasRole(roles)
-}
-
 const SubMenuButton = ({ name, to, basePath }: SubMenuButtonProps) => {
   return (
     <NavLink
@@ -66,22 +59,22 @@ const Navigation = () => {
       name: 'Organization',
       to: routes.organization(),
       icon: OfficeBuildingIcon,
-      authorized: useAuthorization(['admin', 'employee']),
+      authorized: usePermissions(['admin', 'employee']),
       children: [
         {
           name: 'Employees',
           to: routes.employees(),
-          authorized: useAuthorization(['admin', 'employee']),
+          authorized: usePermissions(['admin', 'employee']),
         },
         {
           name: 'Departments',
           to: routes.departments(),
-          authorized: useAuthorization(['admin', 'employee']),
+          authorized: usePermissions(['admin', 'employee']),
         },
         {
           name: 'Settings',
           to: routes.organizationSettings(),
-          authorized: useAuthorization(['admin']),
+          authorized: usePermissions(['admin']),
         },
       ],
     },
@@ -89,13 +82,13 @@ const Navigation = () => {
       name: 'Contacts',
       to: routes.contacts(),
       icon: IdentificationIcon,
-      authorized: useAuthorization(['admin', 'crmAdmin', 'crm']),
+      authorized: usePermissions(['admin', 'crmAdmin', 'crm']),
       conditional: organization.crm,
       children: [
         {
           name: 'Companies',
           to: routes.companies(),
-          authorized: useAuthorization(['admin', 'crmAdmin', 'crm']),
+          authorized: usePermissions(['admin', 'crmAdmin', 'crm']),
         },
       ],
     },
@@ -103,25 +96,27 @@ const Navigation = () => {
       name: 'Marketing',
       to: '#',
       icon: SpeakerphoneIcon,
-      authorized: useAuthorization(['admin', 'marketingAdmin', 'marketing']),
+      authorized: usePermissions(['admin', 'marketingAdmin', 'marketing']),
+      conditional: organization.marketing,
     },
     {
       name: 'Sales',
       to: '#',
       icon: ChartSquareBarIcon,
-      authorized: useAuthorization(['admin', 'salesAdmin', 'sales']),
+      authorized: usePermissions(['admin', 'salesAdmin', 'sales']),
+      conditional: organization.sales,
     },
     {
       name: 'Finance',
       to: routes.finance(),
       icon: CashIcon,
-      authorized: useAuthorization(['admin']),
+      authorized: usePermissions(['admin']),
       conditional: organization.finance,
       children: [
         {
           name: 'Accounting',
           to: routes.accounting(),
-          authorized: useAuthorization(['admin', 'financeAdmin', 'finance']),
+          authorized: usePermissions(['admin', 'financeAdmin', 'finance']),
           conditional:
             !process.env.PLAID_CLIENT_ID || !process.env.PLAID_SECRET
               ? false
@@ -130,7 +125,7 @@ const Navigation = () => {
         {
           name: 'Invoices',
           to: routes.invoices(),
-          authorized: useAuthorization(['admin', 'financeAdmin', 'finance']),
+          authorized: usePermissions(['admin', 'financeAdmin', 'finance']),
           conditional:
             !process.env.PLAID_CLIENT_ID || !process.env.PLAID_SECRET
               ? false
@@ -139,7 +134,7 @@ const Navigation = () => {
         {
           name: 'Income',
           to: routes.incomes(),
-          authorized: useAuthorization(['admin', 'financeAdmin', 'finance']),
+          authorized: usePermissions(['admin', 'financeAdmin', 'finance']),
           conditional:
             !process.env.PLAID_CLIENT_ID || !process.env.PLAID_SECRET
               ? false
@@ -148,7 +143,7 @@ const Navigation = () => {
         {
           name: 'Expenses',
           to: routes.expenses(),
-          authorized: useAuthorization(['admin', 'financeAdmin', 'finance']),
+          authorized: usePermissions(['admin', 'financeAdmin', 'finance']),
           conditional:
             !process.env.PLAID_CLIENT_ID || !process.env.PLAID_SECRET
               ? false
@@ -160,12 +155,12 @@ const Navigation = () => {
       name: 'HR',
       to: '#',
       icon: UserGroupIcon,
-      authorized: useAuthorization(['admin', 'hrAdmin', 'hr']),
+      authorized: usePermissions(['admin', 'hrAdmin', 'hr']),
       children: [
         {
           name: 'Onboarding',
           to: '#',
-          authorized: useAuthorization(['admin', 'hrAdmin', 'hr']),
+          authorized: usePermissions(['admin', 'hrAdmin', 'hr']),
         },
       ],
     },
@@ -173,7 +168,7 @@ const Navigation = () => {
       name: 'Recruiting',
       to: routes.recruiting(),
       icon: BriefcaseIcon,
-      authorized: useAuthorization([
+      authorized: usePermissions([
         'admin',
         'recruitingAdmin',
         'recruiting',
@@ -184,7 +179,7 @@ const Navigation = () => {
         {
           name: 'Jobs',
           to: routes.jobs(),
-          authorized: useAuthorization([
+          authorized: usePermissions([
             'admin',
             'recruitingAdmin',
             'recruiting',
@@ -194,7 +189,7 @@ const Navigation = () => {
         {
           name: 'Applications',
           to: routes.applications(),
-          authorized: useAuthorization([
+          authorized: usePermissions([
             'admin',
             'recruitingAdmin',
             'recruiting',
@@ -207,28 +202,28 @@ const Navigation = () => {
       name: 'Helpdesk',
       to: routes.helpdesk(),
       icon: SupportIcon,
-      authorized: useAuthorization([]),
+      authorized: true,
       conditional: organization.helpdesk,
       children: [
         {
           name: 'Tickets',
           to: routes.tickets(),
-          authorized: useAuthorization([]),
+          authorized: true,
         },
-        { name: 'Chat', to: routes.chat(), authorized: useAuthorization([]) },
+        { name: 'Chat', to: routes.chat(), authorized: true },
       ],
     },
     {
       name: 'Projects',
       to: routes.projects(),
       icon: TemplateIcon,
-      authorized: useAuthorization(['admin', 'employee']),
+      authorized: usePermissions(['admin', 'employee']),
       conditional: organization.projects,
       children: [
         {
           name: 'Tasks',
           to: routes.tasks(),
-          authorized: useAuthorization(['admin', 'employee']),
+          authorized: usePermissions(['admin', 'employee']),
         },
       ],
     },
