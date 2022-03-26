@@ -18,8 +18,10 @@ export const supabaseClient = createClient(
 const App = () => (
   <FatalErrorBoundary page={FatalErrorPage}>
     <RedwoodProvider titleTemplate="%PageTitle | %AppTitle">
-      <AuthProvider client={supabaseClient} type="supabase">
-        <RedwoodApolloProvider>
+      <AuthProvider type="dbAuth" config={{ fetchConfig: { credentials: 'include' } }}>
+
+        <RedwoodApolloProvider graphQLClientConfig={{ httpLinkConfig: { credentials: 'include' }}} >
+
           <Toaster />
           <Routes />
         </RedwoodApolloProvider>
