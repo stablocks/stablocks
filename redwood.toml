@@ -9,7 +9,7 @@
   title = "Stablocks"
   port = 8910
   apiUrl = "/.netlify/functions"
-  includeEnvironmentVariables = ['SUPABASE_URL', 'SUPABASE_KEY', 'SUPABASE_JWT_SECRET', 'GOOGLE_AUTH', 'MICROSOFT_AUTH'] # any ENV vars that should be available to the web side, see https://redwoodjs.com/docs/environment-variables#web
+  includeEnvironmentVariables = ['SUPABASE_URL', 'SUPABASE_KEY', 'SUPABASE_JWT_SECRET', 'THIRD_PARTY_AUTH'] # any ENV vars that should be available to the web side, see https://redwoodjs.com/docs/environment-variables#web
 [api]
   port = 8911
 [browser]
