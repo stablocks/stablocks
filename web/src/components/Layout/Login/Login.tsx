@@ -89,6 +89,8 @@ const Login = ({ employee }: LoginProps) => {
                                       ? process.env.URL
                                       : 'http://localhost:8910'
                                   }`,
+                                  scopes:
+                                    'https://www.googleapis.com/auth/admin.directory.user https://www.googleapis.com/auth/admin.directory.group',
                                 })
                               }
                               className="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-500 hover:bg-gray-50"

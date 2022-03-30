@@ -3,8 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
+    "@googleapis/admin": "^5.0.1",
     "@redwoodjs/api": "^0.50.0",
     "@redwoodjs/graphql-server": "^0.50.0",
+    "googleapis": "^95.0.0",
+    "node-fetch": "2",
     "octokit": "^1.7.1"
   },
   "devDependencies": {

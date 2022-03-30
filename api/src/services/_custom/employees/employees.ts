@@ -3,9 +3,12 @@ import type { Prisma } from '@prisma/client'
 import { db } from 'src/lib/db'
 import { requireAuth } from 'src/lib/auth'
 import { users } from 'src/services/users'
+import { googleUsers } from 'src/services/_custom/google'
 
-export const employees = () => {
+export const employees = async () => {
   requireAuth({ roles: ['admin', 'employee'] })
+
+  await googleUsers()
 
   return db.user.findMany({
     where: {
