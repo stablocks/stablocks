@@ -8,98 +8,97 @@
 // 'src/pages/Admin/BooksPage/BooksPage.js' -> AdminBooksPage
 
 import { Private, Router, Route, Set } from '@redwoodjs/router'
-import AppProviderCell from 'src/components/Providers/AppProviderCell'
-import ChatProvider from 'src/components/Providers/ChatProvider'
-import RedirectProvider from 'src/components/Providers/RedirectProvider'
+import AppProviderCell from 'src/components/AppCells/AppProviderCell'
+import ChatLayout from 'src/layouts/ChatLayout'
 import DashboardLayout from 'src/layouts/DashboardLayout'
 
 const Routes = () => {
   return (
     <Router>
       <Set wrap={[AppProviderCell]}>
-        <Route path="/onboarding" page={OnboardingPage} name="onboarding" />
+        <Route path="/setup" page={SetupPage} name="setup" />
         <Route path="/login" page={LoginPage} name="login" prerender />
 
-        <Set wrap={[ChatProvider]}>
+        <Set wrap={[ChatLayout]}>
           {/* REQUIRES AUTH */}
           <Private unauthenticated="login">
-            <Route path="/user-onboarding" page={UserOnboardingPage} name="userOnboarding" />
+            <Route path="/onboarding" page={OnboardingPage} name="onboarding" />
 
-            {/* Requires user to have given base info */}
-            <Set wrap={[RedirectProvider, DashboardLayout]}>
+            {/* Requires user to have been onboarded */}
+            <Set wrap={[DashboardLayout]}>
               <Route path="/profile" page={ProfilePage} name="profile" />
 
               <Private unauthenticated="home" roles={['admin', 'employee']}>
                 <Private unauthenticated="home" roles={['admin', 'projectsAdmin', 'projects']}>
-                  <Route path="/projects/tasks/{id}/edit" page={ProjectsTaskEditTaskPage} name="editTask" />
-                  <Route path="/projects/tasks/{id}" page={ProjectsTaskTaskPage} name="task" />
-                  <Route path="/projects/tasks" page={ProjectsTaskTasksPage} name="tasks" />
-                  <Route path="/projects/{id}/edit" page={ProjectsProjectEditProjectPage} name="editProject" />
-                  <Route path="/projects/{id}" page={ProjectsProjectProjectPage} name="project" />
-                  <Route path="/projects" page={ProjectsProjectProjectsPage} name="projects" />
+                  <Route path="/projects/tasks/{id}/edit" page={ModulesProjectsTaskEditTaskPage} name="editTask" />
+                  <Route path="/projects/tasks/{id}" page={ModulesProjectsTaskTaskPage} name="task" />
+                  <Route path="/projects/tasks" page={ModulesProjectsTaskTasksPage} name="tasks" />
+                  <Route path="/projects/{id}/edit" page={ModulesProjectsProjectEditProjectPage} name="editProject" />
+                  <Route path="/projects/{id}" page={ModulesProjectsProjectProjectPage} name="project" />
+                  <Route path="/projects" page={ModulesProjectsProjectProjectsPage} name="projects" />
                 </Private>
 
                 <Private unauthenticated="home" roles={['admin', 'helpdeskAdmin', 'helpdesk']}>
-                  <Route path="/helpdesk/chat" page={HelpdeskChatChatPage} name="chat" />
-                  <Route path="/helpdesk/tickets/{id:Int}/edit" page={HelpdeskTicketEditTicketPage} name="editTicket" />
-                  <Route path="/helpdesk/tickets/{id:Int}" page={HelpdeskTicketTicketPage} name="ticket" />
-                  <Route path="/helpdesk/tickets" page={HelpdeskTicketTicketsPage} name="tickets" />
-                  <Route path="/helpdesk" page={HelpdeskHelpdeskPage} name="helpdesk" />
+                  <Route path="/helpdesk/chat" page={ModulesHelpdeskChatChatPage} name="chat" />
+                  <Route path="/helpdesk/tickets/{id:Int}/edit" page={ModulesHelpdeskTicketEditTicketPage} name="editTicket" />
+                  <Route path="/helpdesk/tickets/{id:Int}" page={ModulesHelpdeskTicketTicketPage} name="ticket" />
+                  <Route path="/helpdesk/tickets" page={ModulesHelpdeskTicketTicketsPage} name="tickets" />
+                  <Route path="/helpdesk" page={ModulesHelpdeskHelpdeskPage} name="helpdesk" />
                 </Private>
 
                 <Private unauthenticated="home" roles={['admin', 'recruitingAdmin', 'recruiting']}>
-                  <Route path="/recruiting/applications/{id}/edit" page={RecruitingApplicationEditApplicationPage} name="editApplication" />
-                  <Route path="/recruiting/applications/{id}" page={RecruitingApplicationApplicationPage} name="application" />
-                  <Route path="/recruiting/applications" page={RecruitingApplicationApplicationsPage} name="applications" />
-                  <Route path="/recruiting/jobs/{id}/edit" page={RecruitingJobEditJobPage} name="editJob" />
-                  <Route path="/recruiting/jobs/{id}" page={RecruitingJobJobPage} name="job" />
-                  <Route path="/recruiting/jobs" page={RecruitingJobJobsPage} name="jobs" />
-                  <Route path="/recruiting" page={RecruitingRecruitingPage} name="recruiting" />
+                  <Route path="/recruiting/applications/{id}/edit" page={ModulesRecruitingApplicationEditApplicationPage} name="editApplication" />
+                  <Route path="/recruiting/applications/{id}" page={ModulesRecruitingApplicationApplicationPage} name="application" />
+                  <Route path="/recruiting/applications" page={ModulesRecruitingApplicationApplicationsPage} name="applications" />
+                  <Route path="/recruiting/jobs/{id}/edit" page={ModulesRecruitingJobEditJobPage} name="editJob" />
+                  <Route path="/recruiting/jobs/{id}" page={ModulesRecruitingJobJobPage} name="job" />
+                  <Route path="/recruiting/jobs" page={ModulesRecruitingJobJobsPage} name="jobs" />
+                  <Route path="/recruiting" page={ModulesRecruitingRecruitingPage} name="recruiting" />
                 </Private>
 
                 <Private unauthenticated="home" roles={['admin', 'financeAdmin', 'finance']}>
-                  <Route path="/finance/invoices/{id:Int}/edit" page={FinancesInvoiceEditInvoicePage} name="editInvoice" />
-                  <Route path="/finance/invoices/{id:Int}" page={FinancesInvoiceInvoicePage} name="invoice" />
-                  <Route path="/finance/invoices" page={FinancesInvoiceInvoicesPage} name="invoices" />
-                  <Route path="/finance/expenses/{id}/edit" page={FinancesExpenseEditExpensePage} name="editExpense" />
-                  <Route path="/finance/expenses/{id}" page={FinancesExpenseExpensePage} name="expense" />
-                  <Route path="/finance/expenses" page={FinancesExpenseExpensesPage} name="expenses" />
-                  <Route path="/finance/income/{id}/edit" page={FinancesIncomeEditIncomePage} name="editIncome" />
-                  <Route path="/finance/income/{id}" page={FinancesIncomeIncomePage} name="income" />
-                  <Route path="/finance/income" page={FinancesIncomeIncomesPage} name="incomes" />
-                  <Route path="/finance/accounting" page={FinancesAccountingAccountingPage} name="accounting" />
-                  <Route path="/finance" page={FinancesFinancePage} name="finance" />
+                  <Route path="/finance/invoices/{id:Int}/edit" page={ModulesFinancesInvoiceEditInvoicePage} name="editInvoice" />
+                  <Route path="/finance/invoices/{id:Int}" page={ModulesFinancesInvoiceInvoicePage} name="invoice" />
+                  <Route path="/finance/invoices" page={ModulesFinancesInvoiceInvoicesPage} name="invoices" />
+                  <Route path="/finance/expenses/{id}/edit" page={ModulesFinancesExpenseEditExpensePage} name="editExpense" />
+                  <Route path="/finance/expenses/{id}" page={ModulesFinancesExpenseExpensePage} name="expense" />
+                  <Route path="/finance/expenses" page={ModulesFinancesExpenseExpensesPage} name="expenses" />
+                  <Route path="/finance/income/{id}/edit" page={ModulesFinancesIncomeEditIncomePage} name="editIncome" />
+                  <Route path="/finance/income/{id}" page={ModulesFinancesIncomeIncomePage} name="income" />
+                  <Route path="/finance/income" page={ModulesFinancesIncomeIncomesPage} name="incomes" />
+                  <Route path="/finance/accounting" page={ModulesFinancesAccountingAccountingPage} name="accounting" />
+                  <Route path="/finance" page={ModulesFinancesFinancePage} name="finance" />
                 </Private>
 
                 <Private unauthenticated="home" roles={['admin', 'crmAdmin', 'crm']}>
-                  <Route path="/contacts/companies/{id}/edit" page={CRMCompanyEditCompanyPage} name="editCompany" />
-                  <Route path="/contacts/companies/{id}" page={CRMCompanyCompanyPage} name="company" />
-                  <Route path="/contacts/companies" page={CRMCompanyCompaniesPage} name="companies" />
-                  <Route path="/contacts/{id}/edit" page={CRMContactEditContactPage} name="editContact" />
-                  <Route path="/contacts/{id}" page={CRMContactContactPage} name="contact" />
-                  <Route path="/contacts" page={CRMContactContactsPage} name="contacts" />
+                  <Route path="/contacts/companies/{id}/edit" page={ModulesCRMCompanyEditCompanyPage} name="editCompany" />
+                  <Route path="/contacts/companies/{id}" page={ModulesCRMCompanyCompanyPage} name="company" />
+                  <Route path="/contacts/companies" page={ModulesCRMCompanyCompaniesPage} name="companies" />
+                  <Route path="/contacts/{id}/edit" page={ModulesCRMContactEditContactPage} name="editContact" />
+                  <Route path="/contacts/{id}" page={ModulesCRMContactContactPage} name="contact" />
+                  <Route path="/contacts" page={ModulesCRMContactContactsPage} name="contacts" />
                 </Private>
 
                 <Private unauthenticated="organization" roles={['admin', 'departmentAdmin']}>
-                  <Route path="/organization/departments/{id}/edit" page={BasicsDepartmentEditDepartmentPage} name="editDepartment" />
+                  <Route path="/organization/departments/{id}/edit" page={ModulesEssentialsDepartmentEditDepartmentPage} name="editDepartment" />
                 </Private>
 
-                <Route path="/organization/departments/{id}" page={BasicsDepartmentDepartmentPage} name="department" />
-                <Route path="/organization/departments" page={BasicsDepartmentDepartmentsPage} name="departments" />
+                <Route path="/organization/departments/{id}" page={ModulesEssentialsDepartmentDepartmentPage} name="department" />
+                <Route path="/organization/departments" page={ModulesEssentialsDepartmentDepartmentsPage} name="departments" />
 
                 <Private unauthenticated="employees" roles={['admin']}>
-                  <Route path="/organization/employees/{id}/roles" page={BasicsEmployeeEmployeeRolesPage} name="employeeRoles" />
+                  <Route path="/organization/employees/{id}/roles" page={ModulesEssentialsEmployeeEmployeeRolesPage} name="employeeRoles" />
                 </Private>
 
-                <Route path="/organization/employees/{id}/edit" page={BasicsEmployeeEditEmployeePage} name="editEmployee" />
-                <Route path="/organization/employees/{id}" page={BasicsEmployeeEmployeePage} name="employee" />
-                <Route path="/organization/employees" page={BasicsEmployeeEmployeesPage} name="employees" />
+                <Route path="/organization/employees/{id}/edit" page={ModulesEssentialsEmployeeEditEmployeePage} name="editEmployee" />
+                <Route path="/organization/employees/{id}" page={ModulesEssentialsEmployeeEmployeePage} name="employee" />
+                <Route path="/organization/employees" page={ModulesEssentialsEmployeeEmployeesPage} name="employees" />
 
                 <Private unauthenticated="organization" roles={['admin']}>
-                  <Route path="/organization/settings" page={BasicsOrganizationOrganizationSettingsPage} name="organizationSettings" />
+                  <Route path="/organization/settings" page={ModulesEssentialsOrganizationOrganizationSettingsPage} name="organizationSettings" />
                 </Private>
 
-                <Route path="/organization" page={BasicsOrganizationOrganizationPage} name="organization" />
+                <Route path="/organization" page={ModulesEssentialsOrganizationOrganizationPage} name="organization" />
               </Private>
 
               <Route path="/" page={HomePage} name="home" />

@@ -4,8 +4,8 @@ import { useAuth } from '@redwoodjs/auth'
 import { Form, Label, TextField, FieldError, Submit } from '@redwoodjs/forms'
 import { MetaTags } from '@redwoodjs/web'
 import { RiGoogleFill, RiWindowsFill } from 'react-icons/ri'
-import { AppContext } from 'src/components/Providers/AppProviderCell'
-import Logo from 'src/lib/logo.svg'
+import { AppContext } from 'src/components/AppCells/AppProviderCell'
+import Logo from 'src/images/logo.svg'
 
 const LoginPage = () => {
   const [linkSent, setLinkSent] = useState(false)

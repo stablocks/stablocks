@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
 import { routes, useLocation } from '@redwoodjs/router'
 import { useAuth } from '@redwoodjs/auth'
-import { AppContext } from 'src/components/Providers/AppProviderCell'
+import { AppContext } from 'src/components/AppCells/AppProviderCell'
 import NavLink from './NavLink'
 import {
   BriefcaseIcon,

@@ -1,4 +1,4 @@
-import { AppContext } from 'src/components/Providers/AppProviderCell'
+import { AppContext } from 'src/components/AppCells/AppProviderCell'
 import config from 'src/../package.json'
 
 const Footer = () => {

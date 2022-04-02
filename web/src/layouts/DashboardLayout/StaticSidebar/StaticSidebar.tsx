@@ -1,6 +1,6 @@
 import { Link, routes } from '@redwoodjs/router'
 import Navigation from '../Navigation'
-import Logo from 'src/lib/logo.svg'
+import Logo from 'src/images/logo.svg'
 
 const StaticSidebar = () => {
   return (

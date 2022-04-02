@@ -1,5 +1,5 @@
 import { Link, routes } from '@redwoodjs/router'
-import PageTitle from 'src/ui/PageTitle'
+import PageTitle from 'src/components/UI/PageTitle'
 
 const HomePage = () => {
   return (
