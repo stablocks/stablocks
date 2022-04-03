@@ -1,5 +1,5 @@
 import { Redirect, routes } from '@redwoodjs/router'
-import Login from 'src/components/Layout/Login'
+import Login from 'src/components/UI/Login'
 
 const EmployeeLoginPage = () => {
   if (!process.env.THIRD_PARTY_AUTH) {
