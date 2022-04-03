@@ -9,8 +9,8 @@ import {
 import { Form, Label, TextField } from '@redwoodjs/forms'
 import { useLocation } from '@redwoodjs/router'
 import { Dialog, Transition } from '@headlessui/react'
-import { AppContext } from 'src/components/Providers/AppProviderCell'
-import SearchCell from 'src/components/Cells/SearchCell'
+import { AppContext } from 'src/components/AppCells/AppProviderCell'
+import SearchCell from 'src/components/AppCells/SearchCell'
 import { SearchIcon } from '@heroicons/react/solid'
 
 type SearchPopupProps = {

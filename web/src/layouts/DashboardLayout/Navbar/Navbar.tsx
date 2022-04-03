@@ -1,9 +1,9 @@
 import { Link, routes } from '@redwoodjs/router'
 import { useAuth } from '@redwoodjs/auth'
 import { Menu, Transition } from '@headlessui/react'
-import { AppContext } from 'src/components/Providers/AppProviderCell'
-import ReleasesCell from 'src/components/Cells/ReleasesCell'
-import Popup from 'src/components/Elements/Popup'
+import { AppContext } from 'src/components/AppCells/AppProviderCell'
+import ReleasesCell from 'src/components/AppCells/ReleasesCell'
+import Popup from 'src/components/UI/Popup'
 import SearchPopup from './SearchPopup'
 import { classNames } from 'src/utils/base'
 import {
