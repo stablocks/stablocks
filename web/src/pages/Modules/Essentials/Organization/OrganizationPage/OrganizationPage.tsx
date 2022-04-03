@@ -1,5 +1,5 @@
 import { navigate, routes } from '@redwoodjs/router'
-import { AppContext } from 'src/components/Providers/AppProviderCell'
+import { AppContext } from 'src/components/AppCells/AppProviderCell'
 import PageTitle from 'src/components/UI/PageTitle'
 import { RiSettings3Line } from 'react-icons/ri'
 

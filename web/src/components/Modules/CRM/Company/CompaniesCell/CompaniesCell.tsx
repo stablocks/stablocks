@@ -1,7 +1,7 @@
 import type { CompaniesQuery } from 'types/graphql'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import { Link, routes } from '@redwoodjs/router'
-import TableLoader from 'src/ui/TableLoader'
+import TableLoader from 'src/components/UI/TableLoader'
 import Table from 'src/components/UI/Table'
 
 export const QUERY = gql`

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import PlaidLinkCell from 'src/components/Cells/Plaid/PlaidLinkCell'
+import PlaidLinkCell from 'src/components/Modules/Finance/Plaid/PlaidLinkCell'
 import { RiAddLine } from 'react-icons/ri'
 import PageTitle from 'src/components/UI/PageTitle'
 

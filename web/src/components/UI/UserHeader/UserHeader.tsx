@@ -4,7 +4,7 @@ import { MetaTags } from '@redwoodjs/web'
 import {
   AppContext,
   SearchItem,
-} from 'src/components/Providers/AppProviderCell'
+} from 'src/components/AppCells/AppProviderCell'
 import Breadcrumbs, { Breadcrumb } from 'src/components/UI/Breadcrumbs'
 import MenuButtonGroup, {
   ActionButton,

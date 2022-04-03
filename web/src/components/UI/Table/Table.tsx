@@ -1,4 +1,4 @@
-import Pagination from 'src/ui/Pagination'
+import Pagination from 'src/components/UI/Pagination'
 
 export type TableColumn = {
   label: string

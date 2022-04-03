@@ -1,4 +1,4 @@
-import Popup from 'src/components/Elements/Popup'
+import Popup from 'src/components/UI/Popup'
 import { classNames } from 'src/utils/base'
 import EditForm from '../EditForm'
 

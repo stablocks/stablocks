@@ -1,7 +1,7 @@
 import { Transition } from '@headlessui/react'
-import Table, { TableColumn } from 'src/components/Layout/Table'
-import LoadingBlock from 'src/ui/LoadingBlock'
-import { perPage } from 'src/ui/Pagination'
+import Table, { TableColumn } from 'src/components/UI/Table'
+import LoadingBlock from 'src/components/UI/LoadingBlock'
+import { perPage } from 'src/components/UI/Pagination'
 
 type TableLoaderProps = {
   cols: TableColumn[]

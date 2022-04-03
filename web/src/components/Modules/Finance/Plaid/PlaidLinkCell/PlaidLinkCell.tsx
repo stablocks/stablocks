@@ -4,7 +4,7 @@ import type { FindPlaidLinkQuery } from 'types/graphql'
 import type { CellSuccessProps } from '@redwoodjs/web'
 
 import { usePlaidLink, PlaidLinkOptions } from 'react-plaid-link'
-import PlaidTokenExchangeCell from 'src/components/Cells/Plaid/PlaidTokenExchangeCell'
+import PlaidTokenExchangeCell from 'src/components/Modules/Finance/Plaid/PlaidTokenExchangeCell'
 
 export const QUERY = gql`
   query GetPlaidLinkTokenQuery {
