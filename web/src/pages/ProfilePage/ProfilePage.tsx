@@ -1,7 +1,7 @@
 import { useAuth } from '@redwoodjs/auth'
 import { Redirect, routes } from '@redwoodjs/router'
-import PageTitle from 'src/ui/PageTitle'
-import TabMenu from 'src/components/Elements/TabMenu'
+import PageTitle from 'src/components/UI/PageTitle'
+import TabMenu from 'src/components/UI/TabMenu'
 
 const ProfilePage = () => {
   const { currentUser, hasRole } = useAuth()

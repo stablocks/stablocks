@@ -2,7 +2,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import { Link, routes } from '@redwoodjs/router'
 import { XIcon } from '@heroicons/react/outline'
 import Navigation from '../Navigation'
-import Logo from 'src/lib/logo.svg'
+import Logo from 'src/images/logo.svg'
 
 type MobileSidebarProps = {
   isOpen: boolean

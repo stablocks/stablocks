@@ -7,7 +7,6 @@ import { Toaster } from '@redwoodjs/web/toast'
 import FatalErrorPage from 'src/pages/FatalErrorPage'
 import Routes from 'src/Routes'
 
-import './scaffold.css'
 import './index.scss'
 
 export const supabaseClient = createClient(

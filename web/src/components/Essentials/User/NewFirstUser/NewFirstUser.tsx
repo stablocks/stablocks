@@ -2,7 +2,7 @@ import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 import FirstUserForm from 'src/components/Essentials/User/FirstUserForm'
 
-import { QUERY as USERS_QUERY } from 'src/components/Providers/AppProviderCell'
+import { QUERY as USERS_QUERY } from 'src/components/AppCells/AppProviderCell'
 
 const CREATE_USER_MUTATION = gql`
   mutation CreateFirstUserMutation($input: CreateFirstUserInput!) {
