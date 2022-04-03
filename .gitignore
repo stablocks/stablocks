@@ -19,3 +19,7 @@ api/zipballs
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+
+# Deployment
+.serverless
