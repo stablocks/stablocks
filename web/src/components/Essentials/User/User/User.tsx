@@ -3,7 +3,7 @@ import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 import { routes, navigate } from '@redwoodjs/router'
 import UserHeader from 'src/components/Layout/UserHeader'
-import Popup from 'src/components/Elements/Popup'
+import Popup from 'src/components/UI/Popup'
 import { MailIcon, PencilAltIcon, XCircleIcon } from '@heroicons/react/outline'
 import EditUserCell from 'src/components/Essentials/User/EditUserCell'
 
