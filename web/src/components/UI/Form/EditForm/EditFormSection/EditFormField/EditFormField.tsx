@@ -1,9 +1,9 @@
 import { FieldError, Label } from '@redwoodjs/forms'
-import ConditionalWrapper from 'src/components/Elements/ConditionalWrapper'
+import ConditionalWrapper from 'src/components/UI/ConditionalWrapper'
 import { CheckCircleIcon, XCircleIcon } from '@heroicons/react/solid'
 import { useEditFormSectionContext } from '../EditFormSection'
 
-import type { FormField } from 'src/ui/Form'
+import type { FormField } from 'src/components/UI/Form'
 
 type EditFormFieldProps = {
   field: FormField

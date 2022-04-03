@@ -1,5 +1,5 @@
 import { Form, FormError, Submit } from '@redwoodjs/forms'
-import { Section } from 'src/ui/Form'
+import { Section } from 'src/components/UI/Form'
 import EditFormField from './EditFormField'
 
 type EditFormSectionProps = {

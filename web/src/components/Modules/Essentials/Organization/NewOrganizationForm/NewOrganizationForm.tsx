@@ -6,7 +6,7 @@ import {
   Submit,
   UrlField,
 } from '@redwoodjs/forms'
-import FileUpload from 'src/components/Elements/FileUpload'
+import FileUpload from 'src/components/UI/FileUpload'
 
 const NewOrganizationForm = (props) => {
   const onSubmit = (data) => {

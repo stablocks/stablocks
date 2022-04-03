@@ -2,7 +2,7 @@ import type { FindEmployeeQuery } from 'types/graphql'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import { Link, navigate, routes } from '@redwoodjs/router'
 import PageContentLayout from 'src/layouts/PageContentLayout'
-import ContentBlock from 'src/ui/ContentBlock'
+import ContentBlock from 'src/components/UI/ContentBlock'
 import { usePermissions } from 'src/utils/permissions'
 import {
   IdentificationIcon,
