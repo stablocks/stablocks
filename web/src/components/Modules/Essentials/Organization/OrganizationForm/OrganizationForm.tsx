@@ -5,7 +5,7 @@ import {
   TextAreaField,
   UrlField,
 } from '@redwoodjs/forms'
-import FileUpload from 'src/components/Elements/FileUpload'
+import FileUpload from 'src/components/UI/FileUpload'
 import CountryContext from 'src/components/UI/Form/Fields/CountryContext'
 import { usePermissions } from 'src/utils/permissions'
 import Form from 'src/components/UI/Form'

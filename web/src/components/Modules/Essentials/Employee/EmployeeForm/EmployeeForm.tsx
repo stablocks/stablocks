@@ -1,5 +1,5 @@
 import { EmailField, TextField } from '@redwoodjs/forms'
-import FileUpload from 'src/components/Elements/FileUpload'
+import FileUpload from 'src/components/UI/FileUpload'
 import SupervisorSelectCell from 'src/components/Basics/Employee/SupervisorSelectCell'
 import DepartmentSelectCell from 'src/components/Basics/Department/DepartmentSelectCell'
 import { usePermissions } from 'src/utils/permissions'
