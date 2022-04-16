@@ -1,0 +1,80 @@
+---
+sidebar_position: 2
+---
+
+# Organization
+
+## Properties
+
+### `id` <small>required</small>
+
+Automatically generated integer that increments based on the last organization. The way Stablocks is set up there is only ever one organization so this should have a value of `1`.
+
+- type: `int`
+- default: `autoincrement()`
+
+### `name` <small>required</small>
+
+User inputted name of the organization which is used and displayed both internally and externally.
+
+- type: `string`
+
+### `website`
+
+User inputted website of the organization which is used and displayed both internally and externally.
+
+- type: `string`
+
+### `logo`
+
+User uploaded logo image for the organization which is used and displayed both internally and externally.
+
+- type: `string`
+
+### `recruiting`
+
+Toggles the Recruiting module on and off for entire application. This does not affect permissions and roles for Recruiting, but is rather a global shutoff for all aspects of the Recruiting module.
+
+- type: `boolean`
+- default: `true`
+
+### `crm`
+
+Toggles the CRM module on and off for entire application. This does not affect permissions and roles for CRM, but is rather a global shutoff for all aspects of the CRM module.
+
+- type: `boolean`
+- default: `true`
+
+### `helpdesk`
+
+Toggles the Helpdesk module on and off for entire application. This does not affect permissions and roles for Helpdesk, but is rather a global shutoff for all aspects of the Helpdesk module.
+
+- type: `boolean`
+- default: `true`
+
+### `projects`
+
+Toggles the Projects module on and off for entire application. This does not affect permissions and roles for Projects, but is rather a global shutoff for all aspects of the Projects module.
+
+- type: `boolean`
+- default: `true`
+
+### `chatGreeting`
+
+Enables and displays a default first message that displays when a user initiates a chat.
+
+- type: `string`
+
+### `updatedAt` <small>required</small>
+
+Automatically records the date and time the organization entry was last updated.
+
+- type: `datetime`
+- default: `updatedAt(now())`
+
+### `createdAt` <small>required</small>
+
+Automatically records the date and time the organization entry was created.
+
+- type: `datetime`
+- default: `now()`

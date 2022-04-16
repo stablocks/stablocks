@@ -1,0 +1,209 @@
+---
+sidebar_position: 0
+---
+
+# User
+
+## Properties
+
+### `id` <small>required</small>
+
+Automatically generated cuid.
+
+- type: `string`
+- default: `cuid()`
+
+### `firstName` <small>required</small>
+
+User inputted first name used in many places internally for all users and externally for certain employees, for example in the chat box.
+
+- type: `string`
+
+### `middleName`
+
+User inputted middle name used for employees only.
+
+- type: `string`
+
+### `lastName` <small>required</small>
+
+User inputted last name used in many places internally for all users.
+
+- type: `string`
+
+### `email` <small>required & unique</small>
+
+User inputted email for the user. Depending on the user type this can be input or created automatically if the user is logged in during user onboarding. This is a unique value meaning no two users can have the same email value.
+
+- type: `string`
+
+### `otherEmails`
+
+Array of other emails associated with the user. Mainly used for personal email addresses for employees as the main email field is used for the work email.
+
+- type: `string[]`
+
+### `profileImage`
+
+User uploaded profile image URL used internally for all users and externally for some employees, for example in the chat box.
+
+- type: `string`
+
+### `roles`
+
+Linked user role object. This is automatically created and linked when a new user is created. The `external` value is the only one set to `true` by default.
+
+- type: [`Role`](/docs/data/role)
+
+### `position`
+
+Position of the user in the company. Can only be set by an admin.
+
+- type: `string`
+
+### `departments`
+
+Array of linked department objects that an employee is a part of. This is part of the [Essentials module](/docs/modules/essentials).
+
+- type: [`Department[]`](/docs/data/department)
+
+### `supervisorId`
+
+ID of a linked supervising employee User.
+
+- type: `User.id`
+
+### `supervisor`
+
+Linked supervisor object for the employee's supervisor. This is identified by the `supervisorId` property.
+
+- type: `User`
+
+### `employees`
+
+Array of linked employee User objects.
+
+- type: `User[]`
+
+### `payAmount`
+
+Amount the employee is paid. 
+
+- type `int`
+
+### `payType`
+
+The type or frquency the employee is paid.
+
+- type: `enum`
+- options: `'salary' | 'hourly' | 'contract'`
+
+### `jobs`
+
+Array of linked Job objects that an employee has created. This is part of the [Recruiting module](/docs/modules/recruiting).
+
+- type: [`Job[]`](/docs/data/job)
+
+### `applications`
+
+Array of linked Application objects that a user has applied for. This is part of the [Recruiting module](/docs/modules/recruiting).
+
+- type: [`Application[]`](/docs/data/application)
+
+### `resume`
+
+User uploaded résumé document URL used for job applications.
+
+- type: `string`
+
+### `contacts`
+
+Array of linked Contact objects that the employee has created. This is part of the [CRM module](/docs/modules/crm).
+
+- type: [`Contact[]`](/docs/data/contact)
+
+### `contactNotes`
+
+Array of linked Contact Note objects that the employee has created. This is part of the [CRM module](/docs/modules/crm).
+
+- type: [`ContactNote[]`](/docs/data/contactnote)
+
+### `companies`
+
+Array of linked Company objects that the employee has created. This is part of the [CRM module](/docs/modules/crm).
+
+- type: [`Company[]`](/docs/data/company)
+
+### `ticketsCreated`
+
+Array of linked Ticket objects that the user has created. This is part of the [Helpdesk module](/docs/modules/helpdesk).
+
+- type: [`Ticket[]`](/docs/data/ticket)
+
+### `ticketsAssigned`
+
+Array of linked Ticket objects that the employee has been assigned to. This is part of the [Helpdesk module](/docs/modules/helpdesk).
+
+- type: [`Ticket[]`](/docs/data/ticket)
+
+### `ticketsComments`
+
+Array of linked Ticket Comment objects that the user created by commenting on a ticket. This is part of the [Helpdesk module](/docs/modules/helpdesk).
+
+- type: [`TicketComment[]`](/docs/data/ticketcomment)
+
+### `chatsCreated`
+
+Array of linked Chat objects that the non-employee user has created. This is part of the [Helpdesk module](/docs/modules/helpdesk).
+
+- type: [`Chat[]`](/docs/data/chat)
+
+### `chatsAssigned`
+
+Array of linked Chat objects that the employee has been assigned to. This is part of the [Helpdesk module](/docs/modules/helpdesk).
+
+- type: [`Chat[]`](/docs/data/chat)
+
+### `chatMessages`
+
+Array of linked Chat Message objects that the user created by messaging in a chat. This is part of the [Helpdesk module](/docs/modules/helpdesk).
+
+- type: [`TicketComment[]`](/docs/data/ticketcomment)
+
+### `projects`
+
+Array of linked Project objects that the employee has created. This is part of the [Projects module](/docs/modules/projects).
+
+- type: [`Project[]`](/docs/data/project)
+
+### `tasksCreated`
+
+Array of linked Task objects that the employee has created. This is part of the [Projects module](/docs/modules/projects).
+
+- type: [`Task[]`](/docs/data/project)
+
+### `tasksAssigned`
+
+Array of linked Task objects that the employee has been assigned to. This is part of the [Projects module](/docs/modules/projects).
+
+- type: [`Task[]`](/docs/data/project)
+
+### `taskComments`
+
+Array of linked Task Comment objects that the user created by commenting on a task. This is part of the [Projects module](/docs/modules/projects).
+
+- type: [`TaskComment[]`](/docs/data/taskcomment)
+
+### `updatedAt` <small>required</small>
+
+Automatically records the date and time the organization entry was last updated.
+
+- type: `datetime`
+- default: `updatedAt(now())`
+
+### `createdAt` <small>required</small>
+
+Automatically records the date and time the organization entry was created.
+
+- type: `datetime`
+- default: `now()`
