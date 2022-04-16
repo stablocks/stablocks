@@ -3,7 +3,6 @@
   "workspaces": {
     "packages": [
       "api",
-      "docs",
       "web",
       "packages/*"
     ]
@@ -17,7 +16,7 @@
     "dev": "yarn postgres:up && yarn rw dev",
     "test": "yarn postgres:down && yarn postgres:up && yarn rw test",
     "migrate": "yarn rw prisma migrate dev",
-    "docs": "yarn workspace docs start",
+    "docs": "cd docs && yarn start",
     "cleanup": "rm -rf api/node_modules && rm -rf web/node_modules && rm -rf node_modules",
     "regenerate-lock": "npm run cleanup && rm -rf yarn.lock && yarn install"
   },
