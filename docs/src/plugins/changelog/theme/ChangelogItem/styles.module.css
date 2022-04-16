@@ -1,0 +1,15 @@
+.blogPostTitle {
+  font-size: 2rem;
+}
+
+.blogPostPageTitle {
+  font-size: 3rem;
+}
+
+.blogPostData {
+  font-size: 0.9rem;
+}
+
+.blogPostDetailsFull {
+  flex-direction: column;
+}
